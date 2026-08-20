@@ -7,3 +7,9 @@ pydantic
 python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
+alembic
+pytest
+pytest-asyncio
+httpx
+cryptography
+email-validator
