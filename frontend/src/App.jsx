@@ -8,6 +8,7 @@ import StudentOnboarding from "./pages/StudentOnboarding";
 import TutorOnboarding from "./pages/TutorOnboarding";
 import StudentDashboard from "./pages/StudentDashboard";
 import TutorDashboard from "./pages/TutorDashboard";
+import TutorVerificationPage from "./pages/TutorVerificationPage";
 import { isAuthenticated } from "./services/auth";
 
 // Route protection wrapper for authenticated pages
@@ -66,6 +67,14 @@ export default function App() {
           element={
             <ProtectedRoute requiredRole="TUTOR">
               <TutorDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/tutor/verify"
+          element={
+            <ProtectedRoute requiredRole="TUTOR">
+              <TutorVerificationPage />
             </ProtectedRoute>
           }
         />

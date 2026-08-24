@@ -18,6 +18,44 @@ export default function TutorDashboard() {
   const [success, setSuccess] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
+  const fileInputRef = React.useRef(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handlePhotoUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!allowedExtensions.exec(file.name)) {
+      setError("Only JPG, JPEG, and PNG images are allowed.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    setUploading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const res = await api.post("/api/onboarding/tutor/me/profile-picture", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const updatedProfile = res.data;
+      setProfile(updatedProfile);
+      if (updatedProfile.profile_picture_path) {
+        setAvatarUrl(`${API_BASE_URL}/uploads/${updatedProfile.profile_picture_path}?t=${Date.now()}`);
+      }
+      setSuccess("Profile picture updated successfully!");
+    } catch (err) {
+      setError(err.response?.data?.detail || "Failed to upload profile picture.");
+    } finally {
+      setUploading(false);
+    }
+  };
 
   // Editable fields
   const [location, setLocation] = useState("");
@@ -62,7 +100,7 @@ export default function TutorDashboard() {
         setSelectedLanguages(d.languages_spoken || []);
         setTeachMode(d.preferred_teaching_mode || "Online");
         if (d.profile_picture_path) {
-          setAvatarUrl(`${API_BASE_URL}/uploads/${d.profile_picture_path}`);
+          setAvatarUrl(`${API_BASE_URL}/uploads/${d.profile_picture_path}?t=${Date.now()}`);
         }
 
         if (d.education && d.education.length > 0) {
@@ -263,6 +301,29 @@ export default function TutorDashboard() {
           <div className="sidebar-avatar">
             {avatarUrl ? <img src={avatarUrl} alt="Avatar" /> : "👨‍🏫"}
           </div>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handlePhotoUpload}
+            accept=".jpg,.jpeg,.png"
+            style={{ display: "none" }}
+          />
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="btn btn-primary"
+            disabled={uploading}
+            style={{
+              fontSize: "11px",
+              padding: "6px 12px",
+              margin: "-5px auto 15px",
+              display: "block",
+              width: "100%",
+              maxWidth: "140px",
+              cursor: "pointer"
+            }}
+          >
+            {uploading ? "Uploading..." : avatarUrl ? "Change Photo" : "Upload Photo"}
+          </button>
           <div className="sidebar-name">{user.full_name}</div>
           <div className="sidebar-role">Tutor</div>
           
@@ -283,9 +344,60 @@ export default function TutorDashboard() {
             )}
           </div>
 
+          {profile.verification_status === "VERIFIED" && (
+            <div className="alert alert-success" style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 15px", marginBottom: "20px" }}>
+              <span style={{ fontSize: "20px", fontWeight: "bold" }}>✓</span>
+              <div>
+                <strong>Tutor Verified</strong>
+                <p style={{ margin: "2px 0 0 0", fontSize: "12px" }}>
+                  Your identity and credentials have been successfully verified.
+                </p>
+              </div>
+            </div>
+          )}
+
           {profile.verification_status === "PENDING" && (
-            <div className="alert alert-warning">
-              <strong>Verification Pending</strong> — Your uploaded degree certificate has been saved. We are currently verifying your credentials. You will be notified once the process is complete.
+            <div className="alert alert-warning" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <strong>Verification Pending</strong> — Your degree certificate is uploaded. Please run the automated consistency validation.
+              </div>
+              <button 
+                onClick={() => navigate("/dashboard/tutor/verify")} 
+                className="btn btn-secondary" 
+                style={{ margin: 0, padding: "4px 10px", fontSize: "12px", borderStyle: "solid", color: "#92400e", background: "transparent" }}
+              >
+                Validate Certificate
+              </button>
+            </div>
+          )}
+
+          {profile.verification_status === "MANUAL_REVIEW" && (
+            <div className="alert alert-warning" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <strong>Manual Review In Progress</strong> — Minor profile discrepancies are being manually audited by our administration team.
+              </div>
+              <button 
+                onClick={() => navigate("/dashboard/tutor/verify")} 
+                className="btn btn-secondary" 
+                style={{ margin: 0, padding: "4px 10px", fontSize: "12px", borderStyle: "solid", color: "#92400e", background: "transparent" }}
+              >
+                View Pipeline Details
+              </button>
+            </div>
+          )}
+
+          {profile.verification_status === "FAILED" && (
+            <div className="alert alert-error" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <strong>Verification Failed</strong> — An automated mismatch occurred. Please inspect discrepancy details.
+              </div>
+              <button 
+                onClick={() => navigate("/dashboard/tutor/verify")} 
+                className="btn btn-primary" 
+                style={{ margin: 0, padding: "4px 10px", fontSize: "12px", color: "#fff" }}
+              >
+                View Fail Reason
+              </button>
             </div>
           )}
 
@@ -388,7 +500,7 @@ export default function TutorDashboard() {
                 <h3>Availability & Pricing</h3>
                 <div className="review-item">
                   <div className="review-label">Hourly Rate:</div>
-                  <div className="review-value">${hourlyRate} / Hr</div>
+                  <div className="review-value">₹{hourlyRate} / Hr</div>
                 </div>
                 <div className="review-item">
                   <div className="review-label">Duration:</div>
@@ -626,7 +738,7 @@ export default function TutorDashboard() {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label className="form-label">Hourly Rate ($) *</label>
+                  <label className="form-label">Hourly Rate (₹) *</label>
                   <input
                     type="number"
                     className="form-input"

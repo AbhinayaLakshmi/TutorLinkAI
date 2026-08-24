@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from backend.app.core.config import settings
 from backend.app.modules.onboarding.routes import auth_router, onboarding_router
+from backend.app.modules.verification.routes import router as verification_router
 
 app = FastAPI(
     title="TutorLinkAI Onboarding API",
@@ -21,6 +24,9 @@ app.add_middleware(
 # Mount Routers
 app.include_router(auth_router)
 app.include_router(onboarding_router)
+app.include_router(verification_router)
+
+app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 
 @app.get("/")
 def read_root():

@@ -13,3 +13,6 @@ pytest-asyncio
 httpx
 cryptography
 email-validator
+paddleocr>=3.7.0
+paddlepaddle>=3.3.1
+rapidfuzz>=3.14.5

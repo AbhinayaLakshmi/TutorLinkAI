@@ -1,3 +1,7 @@
+import os
+# Configure testing environment variable before any modules load
+os.environ["TESTING"] = "true"
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
