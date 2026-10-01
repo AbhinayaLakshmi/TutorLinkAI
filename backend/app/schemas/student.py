@@ -1,12 +1,76 @@
+from datetime import datetime
 from typing import List, Optional
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 class StudentRequirementsSchema(BaseModel):
-    subjects: List[str] = Field(default_factory=list)
-    topics: List[str] = Field(default_factory=list)
+    subjects: Optional[List[str]] = Field(default_factory=list)
+    topics: Optional[List[str]] = Field(default_factory=list)
     learning_goals: Optional[str] = None
     preferred_tutor_characteristics: Optional[str] = None
     preferred_availability: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+        orm_mode = True
+
+class LearningNeedCreate(BaseModel):
+    title: str = Field(..., min_length=1)
+    subjects: List[str] = Field(..., min_length=1)
+    topics: Optional[List[str]] = Field(default_factory=list)
+    learning_goals: Optional[str] = None
+    preferred_tutor_characteristics: Optional[str] = None
+    preferred_availability: Optional[str] = None
+    budget_min: Optional[float] = Field(None, ge=0, description="Minimum hourly budget")
+    budget_max: Optional[float] = Field(None, ge=0, description="Maximum hourly budget")
+    is_active: Optional[bool] = False
+
+    @model_validator(mode="after")
+    def validate_budget_range(self):
+        if self.budget_min is not None and self.budget_min < 0:
+            raise ValueError("budget_min cannot be negative")
+        if self.budget_max is not None and self.budget_max < 0:
+            raise ValueError("budget_max cannot be negative")
+        if self.budget_min is not None and self.budget_max is not None and self.budget_max < self.budget_min:
+            raise ValueError("budget_max cannot be less than budget_min")
+        return self
+
+
+class LearningNeedUpdate(BaseModel):
+    title: Optional[str] = None
+    subjects: Optional[List[str]] = None
+    topics: Optional[List[str]] = None
+    learning_goals: Optional[str] = None
+    preferred_tutor_characteristics: Optional[str] = None
+    preferred_availability: Optional[str] = None
+    budget_min: Optional[float] = Field(None, ge=0, description="Minimum hourly budget")
+    budget_max: Optional[float] = Field(None, ge=0, description="Maximum hourly budget")
+    is_active: Optional[bool] = None
+
+    @model_validator(mode="after")
+    def validate_budget_range(self):
+        if self.budget_min is not None and self.budget_min < 0:
+            raise ValueError("budget_min cannot be negative")
+        if self.budget_max is not None and self.budget_max < 0:
+            raise ValueError("budget_max cannot be negative")
+        if self.budget_min is not None and self.budget_max is not None and self.budget_max < self.budget_min:
+            raise ValueError("budget_max cannot be less than budget_min")
+        return self
+
+
+class LearningNeedOut(BaseModel):
+    id: str
+    student_profile_id: str
+    title: str
+    subjects: List[str]
+    topics: Optional[List[str]] = None
+    learning_goals: Optional[str] = None
+    preferred_tutor_characteristics: Optional[str] = None
+    preferred_availability: Optional[str] = None
+    budget_min: Optional[float] = None
+    budget_max: Optional[float] = None
+    is_active: bool
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
     class Config:
         from_attributes = True
@@ -64,7 +128,9 @@ class StudentProfileOut(BaseModel):
     preferred_learning_mode: Optional[str] = None
     preferred_tutor_languages: Optional[List[str]] = None
     requirements: Optional[StudentRequirementsSchema] = None
+    learning_needs: Optional[List[LearningNeedOut]] = None
 
     class Config:
         from_attributes = True
         orm_mode = True
+

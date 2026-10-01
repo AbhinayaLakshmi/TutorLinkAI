@@ -1,0 +1,160 @@
+[
+  {
+    "query_id": "q1_physics_rotational",
+    "subject": "Physics",
+    "subjects_needed": "Physics",
+    "topics": ["Rotational Motion", "Mechanics", "Angular Momentum"],
+    "learning_goals": "Master rotational dynamics and problem solving for competitive entrance exam",
+    "preferred_tutor_characteristics": "Patient, step-by-step mathematical derivations",
+    "student_level": "High School (Class 12)",
+    "preferred_learning_mode": "Online",
+    "preferred_tutor_languages": ["English"],
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "budget_min": 400.0,
+    "budget_max": 800.0,
+    "preferred_slots": [
+      {
+        "day": "Monday",
+        "start_time": "16:00",
+        "end_time": "18:00"
+      }
+    ]
+  },
+  {
+    "query_id": "q2_cs_deep_learning",
+    "subject": "Computer Science",
+    "subjects_needed": "Computer Science",
+    "topics": ["Deep Learning", "Neural Networks", "PyTorch"],
+    "learning_goals": "Implement backpropagation, convolutional networks, and transformer architectures",
+    "preferred_tutor_characteristics": "Hands-on coding mentor with practical debugging experience",
+    "student_level": "Undergraduate (Computer Science)",
+    "preferred_learning_mode": "Online",
+    "preferred_tutor_languages": ["English"],
+    "latitude": 13.0012,
+    "longitude": 80.2565,
+    "budget_min": 500.0,
+    "budget_max": 1200.0,
+    "preferred_slots": [
+      {
+        "day": "Saturday",
+        "start_time": "10:00",
+        "end_time": "13:00"
+      }
+    ]
+  },
+  {
+    "query_id": "q3_math_linear_algebra",
+    "subject": "Mathematics",
+    "subjects_needed": "Mathematics",
+    "topics": ["Linear Algebra", "Matrix Decompositions", "Eigenvalues"],
+    "learning_goals": "Understand linear transformations, vector spaces, and theoretical proofs",
+    "preferred_tutor_characteristics": "Proof-based teaching with clear geometric visualization",
+    "student_level": "Undergraduate (Engineering)",
+    "preferred_learning_mode": "Online",
+    "preferred_tutor_languages": ["English"],
+    "latitude": 13.0850,
+    "longitude": 80.2101,
+    "budget_min": 400.0,
+    "budget_max": 900.0,
+    "preferred_slots": [
+      {
+        "day": "Wednesday",
+        "start_time": "18:00",
+        "end_time": "20:00"
+      }
+    ]
+  },
+  {
+    "query_id": "q4_chemistry_organic",
+    "subject": "Chemistry",
+    "subjects_needed": "Chemistry",
+    "topics": ["Organic Reaction Mechanisms", "Stereochemistry", "Name Reactions"],
+    "learning_goals": "Master reaction mechanisms, synthesis pathways, and resonance structures",
+    "preferred_tutor_characteristics": "Visual reaction mapping and memory mnemonics",
+    "student_level": "High School (Class 11)",
+    "preferred_learning_mode": "Offline",
+    "preferred_tutor_languages": ["English", "Tamil"],
+    "latitude": 12.9796,
+    "longitude": 80.2196,
+    "budget_min": 350.0,
+    "budget_max": 750.0,
+    "preferred_slots": [
+      {
+        "day": "Sunday",
+        "start_time": "09:00",
+        "end_time": "11:00"
+      }
+    ]
+  },
+  {
+    "query_id": "q5_biology_genetics",
+    "subject": "Biology",
+    "subjects_needed": "Biology",
+    "topics": ["Molecular Genetics", "DNA Replication", "Mendelian Genetics"],
+    "learning_goals": "Master genetic inheritance patterns and molecular biology for medical entrance",
+    "preferred_tutor_characteristics": "Structured diagrammatic explanations and test series revision",
+    "student_level": "High School (Class 12)",
+    "preferred_learning_mode": "Online",
+    "preferred_tutor_languages": ["English"],
+    "latitude": 13.0418,
+    "longitude": 80.2337,
+    "budget_min": 400.0,
+    "budget_max": 800.0,
+    "preferred_slots": [
+      {
+        "day": "Friday",
+        "start_time": "17:00",
+        "end_time": "19:00"
+      }
+    ]
+  },
+  {
+    "query_id": "q6_physics_quantum_paraphrased",
+    "subject": "Physics",
+    "subjects_needed": "Physics",
+    "topics": ["wave mechanics", "Schrodinger equation", "quantum state transitions"],
+    "learning_goals": "Conceptual understanding of foundational quantum principles and operator algebra",
+    "preferred_tutor_characteristics": "Concept-focused theoretical physicist",
+    "student_level": "Undergraduate",
+    "preferred_learning_mode": "Online",
+    "preferred_tutor_languages": ["English"],
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "budget_min": 500.0,
+    "budget_max": 1000.0,
+    "preferred_slots": []
+  },
+  {
+    "query_id": "q7_cs_web_dev",
+    "subject": "Computer Science",
+    "subjects_needed": "Computer Science",
+    "topics": ["React", "JavaScript", "Frontend Development"],
+    "learning_goals": "Build interactive responsive web applications and state management",
+    "preferred_tutor_characteristics": "Interactive project-based live coding mentor",
+    "student_level": "Beginner",
+    "preferred_learning_mode": "Online",
+    "preferred_tutor_languages": ["English"],
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "budget_min": 300.0,
+    "budget_max": 650.0,
+    "preferred_slots": []
+  },
+  {
+    "query_id": "q8_math_calculus_no_topics",
+    "subject": "Mathematics",
+    "subjects_needed": "Mathematics",
+    "topics": [],
+    "learning_goals": "Score top marks in high school board calculus exam",
+    "preferred_tutor_characteristics": "Exam techniques and past paper practice",
+    "student_level": "High School",
+    "preferred_learning_mode": "Online",
+    "preferred_tutor_languages": ["English"],
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "budget_min": 400.0,
+    "budget_max": 800.0,
+    "preferred_slots": []
+  }
+]

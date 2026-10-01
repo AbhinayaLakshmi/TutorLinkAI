@@ -45,6 +45,7 @@ def test_live_face_no_face():
     
     assert res["face_detected"] is False
     assert res["face_count"] == 0
+    assert res["face_crop"] is None
     assert "No face detected" in res["reason"]
 
 
@@ -60,6 +61,7 @@ def test_live_face_multiple_faces():
     
     assert res["face_detected"] is True
     assert res["face_count"] == 2
+    assert res["face_crop"] is None
     assert "Multiple faces" in res["reason"]
 
 
@@ -75,6 +77,7 @@ def test_live_face_too_small():
     
     assert res["face_detected"] is True
     assert res["face_count"] == 1
+    assert res["face_crop"] is None
     assert "too far/small" in res["reason"]
 
 
@@ -90,6 +93,7 @@ def test_live_face_blurry():
     
     assert res["face_detected"] is True
     assert res["face_quality"] == "POOR"
+    assert res["face_crop"] is None
     assert "too blurry" in res["reason"]
 
 
@@ -105,6 +109,7 @@ def test_live_face_static_spoof():
     
     assert res["face_detected"] is True
     assert res["liveness_status"] == "MANUAL_REVIEW"
+    assert res["face_crop"] is None
     assert "No movement detected" in res["reason"]
 
 
@@ -123,6 +128,9 @@ def test_live_face_valid_left_passed():
     assert res["face_detected"] is True
     assert res["liveness_status"] == "PASSED"
     assert res["suitable_for_matching"] is True
+    assert res["face_crop"] is not None
+    assert isinstance(res["face_crop"], np.ndarray)
+    assert res["face_crop"].shape == (150, 150, 3)
 
 
 def test_live_face_valid_right_passed():
@@ -140,6 +148,9 @@ def test_live_face_valid_right_passed():
     assert res["face_detected"] is True
     assert res["liveness_status"] == "PASSED"
     assert res["suitable_for_matching"] is True
+    assert res["face_crop"] is not None
+    assert isinstance(res["face_crop"], np.ndarray)
+    assert res["face_crop"].shape == (150, 150, 3)
 
 
 def test_live_face_left_challenge_right_movement_fail():
@@ -156,6 +167,7 @@ def test_live_face_left_challenge_right_movement_fail():
     
     assert res["face_detected"] is True
     assert res["liveness_status"] == "FAILED"
+    assert res["face_crop"] is None
     assert "Unexpected movement detected" in res["reason"]
 
 
@@ -173,6 +185,7 @@ def test_live_face_right_challenge_left_movement_fail():
     
     assert res["face_detected"] is True
     assert res["liveness_status"] == "FAILED"
+    assert res["face_crop"] is None
     assert "Unexpected movement detected" in res["reason"]
 
 

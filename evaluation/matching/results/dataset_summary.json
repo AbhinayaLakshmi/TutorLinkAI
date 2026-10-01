@@ -1,0 +1,52 @@
+{
+  "dataset_version": "1.0.0",
+  "schema_version": "1.0.0",
+  "status": "VALID",
+  "error_count": 0,
+  "checksums": {
+    "queries_sha256": "6e75682ccceb79db650a91dd8b18cfc8d54558579e2695659120858737f724cb",
+    "tutors_sha256": "cced0bd63d15f5863f6ac9108d0fe2e47478559ad6d4b8dd04d4c3afcea61bee",
+    "qrels_sha256": "878dafedcbf1651b886a16020efe63e55c0e4d6a57f0a6c669e5c394e5825b01",
+    "feedback_scenarios_sha256": "fe9c79bc8040ad074f2175b5ed249665f650ca11b6ae4e57283f8a06525c67fb"
+  },
+  "record_counts": {
+    "queries": 8,
+    "tutors": 12,
+    "relevance_judgments": 96,
+    "subjects_count": 5,
+    "unique_topics_count": 52,
+    "verified_tutors_count": 12
+  },
+  "subjects": [
+    "Biology",
+    "Chemistry",
+    "Computer Science",
+    "Mathematics",
+    "Physics"
+  ],
+  "relevance_distribution": {
+    "grade_0_irrelevant": 78,
+    "grade_1_subject_matched": 9,
+    "grade_2_partial_match": 1,
+    "grade_3_strong_match": 8
+  },
+  "tutor_metrics": {
+    "rating_min": 4.5,
+    "rating_max": 4.9,
+    "rating_mean": 4.7917,
+    "review_count_min": 0,
+    "review_count_max": 45,
+    "review_count_mean": 16.8333,
+    "hourly_rate_min": 350.0,
+    "hourly_rate_max": 800.0,
+    "hourly_rate_mean": 545.8333
+  },
+  "student_budget_metrics": {
+    "budget_min_range_min": 300.0,
+    "budget_min_range_max": 500.0,
+    "budget_min_mean": 406.25,
+    "budget_max_range_min": 650.0,
+    "budget_max_range_max": 1200.0,
+    "budget_max_mean": 862.5
+  }
+}

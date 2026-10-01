@@ -85,6 +85,7 @@ def test_no_face_case():
         assert res["face_detected"] is False
         assert res["face_count"] == 0
         assert res["quality"] == "NOT_AVAILABLE"
+        assert res["face_crop"] is None
     finally:
         if os.path.exists(temp_path):
             os.remove(temp_path)
@@ -111,8 +112,59 @@ def test_multiple_faces_case():
         assert res["face_detected"] is True
         assert res["face_count"] == 2
         assert res["quality"] == "REQUIRES_REVIEW"
+        assert res["face_crop"] is None
         assert "candidates" in res
         assert len(res["candidates"]) == 2
+    finally:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+
+
+def test_single_face_returns_crop():
+    temp_path = "temp_mock_cert_single.png"
+    # Create smooth image with simulated skin region
+    img = np.full((500, 500, 3), 180, dtype=np.uint8)
+    cv2.imwrite(temp_path, img)
+    
+    try:
+        service = CertificateFaceService(
+            detector=MockFaceDetector([(60, 80, 140, 150)]),
+            max_laplacian_var=100.0,
+            min_face_dim=100
+        )
+        res = service.process_certificate(temp_path)
+        
+        assert res["face_detected"] is True
+        assert res["face_count"] == 1
+        assert res["bounding_box"] == [60, 80, 140, 150]
+        assert res["face_width"] == 140
+        assert res["face_height"] == 150
+        assert res["face_crop"] is not None
+        assert isinstance(res["face_crop"], np.ndarray)
+        assert res["face_crop"].shape == (150, 140, 3)
+    finally:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+
+
+def test_extract_certificate_face_wrapper():
+    temp_path = "temp_mock_cert_wrapper.png"
+    img = np.full((400, 400, 3), 160, dtype=np.uint8)
+    cv2.imwrite(temp_path, img)
+    
+    try:
+        service = CertificateFaceService(
+            detector=MockFaceDetector([(40, 50, 120, 130)]),
+            max_laplacian_var=100.0,
+            min_face_dim=100
+        )
+        res = service.extract_certificate_face(temp_path)
+        
+        assert res["face_detected"] is True
+        assert res["face_count"] == 1
+        assert res["face_crop"] is not None
+        assert isinstance(res["face_crop"], np.ndarray)
+        assert res["face_crop"].shape == (130, 120, 3)
     finally:
         if os.path.exists(temp_path):
             os.remove(temp_path)
@@ -140,3 +192,9 @@ def test_real_ashwin_certificate_e2e():
     assert res["quality"] == "GOOD"
     assert res["suitable_for_matching"] is True
     assert "emblem" not in res["reason"]
+    assert res["face_crop"] is not None
+    assert isinstance(res["face_crop"], np.ndarray)
+    assert res["face_crop"].shape[0] == res["face_height"]
+    assert res["face_crop"].shape[1] == res["face_width"]
+    assert res["face_crop"].shape[2] == 3
+

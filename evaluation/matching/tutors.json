@@ -1,0 +1,314 @@
+[
+  {
+    "tutor_id": "t_phys_rotational_expert",
+    "name": "Dr. Subhash (Physics)",
+    "subjects": ["Physics"],
+    "subjects_taught": ["Physics"],
+    "topics_expertise": ["Rotational Motion", "Mechanics", "Angular Momentum", "Rigid Body Dynamics"],
+    "skills": ["Mathematical derivations", "Step-by-step problem solving", "Exam preparation"],
+    "student_levels": ["High School (Class 12)", "Undergraduate"],
+    "languages_can_teach_in": ["English"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 550.0,
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "location": "Chennai Central",
+    "availability": [
+      {
+        "day": "Monday",
+        "start_time": "15:00",
+        "end_time": "19:00"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 28,
+    "years_of_experience": 8,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_phys_astrophysics_specialist",
+    "name": "Prof. Chandrasekhar (Astrophysics)",
+    "subjects": ["Physics"],
+    "subjects_taught": ["Physics"],
+    "topics_expertise": ["Astrophysics", "General Relativity", "Cosmology", "Stellar Evolution"],
+    "skills": ["Astronomical data analysis", "Theoretical physics research"],
+    "student_levels": ["Postgraduate", "Research Scholars"],
+    "languages_can_teach_in": ["English"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 600.0,
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "location": "Chennai Central",
+    "availability": [
+      {
+        "day": "Monday",
+        "start_time": "16:00",
+        "end_time": "18:00"
+      }
+    ],
+    "rating": 4.8,
+    "review_count": 14,
+    "years_of_experience": 12,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_phys_quantum_theorist",
+    "name": "Dr. Paul (Quantum Physics)",
+    "subjects": ["Physics"],
+    "subjects_taught": ["Physics"],
+    "topics_expertise": ["Quantum Mechanics", "Wave Mechanics", "Schrodinger Equation", "Operator Algebra"],
+    "skills": ["Thought experiments", "Conceptual physics foundations", "Quantum formalism"],
+    "student_levels": ["Undergraduate", "Postgraduate"],
+    "languages_can_teach_in": ["English"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 700.0,
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "location": "Adyar",
+    "availability": [
+      {
+        "day": "Monday",
+        "start_time": "10:00",
+        "end_time": "14:00"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 5,
+    "years_of_experience": 10,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_cs_deep_learning_expert",
+    "name": "Arun Kumar (AI/ML Engineer)",
+    "subjects": ["Computer Science"],
+    "subjects_taught": ["Computer Science"],
+    "topics_expertise": ["Deep Learning", "Neural Networks", "PyTorch", "Transformers", "Computer Vision"],
+    "skills": ["Hands-on coding", "GPU optimization", "PyTorch model debugging", "Architecture design"],
+    "student_levels": ["Undergraduate (Computer Science)", "Working Professionals"],
+    "languages_can_teach_in": ["English"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 800.0,
+    "latitude": 13.0012,
+    "longitude": 80.2565,
+    "location": "Adyar",
+    "availability": [
+      {
+        "day": "Saturday",
+        "start_time": "09:00",
+        "end_time": "14:00"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 32,
+    "years_of_experience": 6,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_cs_frontend_web",
+    "name": "Kavitha R (Web Developer)",
+    "subjects": ["Computer Science"],
+    "subjects_taught": ["Computer Science"],
+    "topics_expertise": ["React", "JavaScript", "HTML/CSS", "Frontend Development", "Redux"],
+    "skills": ["Live coding", "Portfolio building", "UI/UX component design"],
+    "student_levels": ["Beginner", "High School", "Undergraduate"],
+    "languages_can_teach_in": ["English"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 450.0,
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "location": "Chennai Central",
+    "availability": [
+      {
+        "day": "Saturday",
+        "start_time": "10:00",
+        "end_time": "13:00"
+      }
+    ],
+    "rating": 4.7,
+    "review_count": 3,
+    "years_of_experience": 4,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_math_linear_algebra_specialist",
+    "name": "Prof. Strang (Linear Algebra)",
+    "subjects": ["Mathematics"],
+    "subjects_taught": ["Mathematics"],
+    "topics_expertise": ["Linear Algebra", "Matrix Decompositions", "Eigenvalues", "Vector Spaces"],
+    "skills": ["Proof-based rigor", "Geometric visualization", "Applied mathematics"],
+    "student_levels": ["Undergraduate (Engineering)", "Postgraduate"],
+    "languages_can_teach_in": ["English"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 650.0,
+    "latitude": 13.0850,
+    "longitude": 80.2101,
+    "location": "Anna Nagar",
+    "availability": [
+      {
+        "day": "Wednesday",
+        "start_time": "17:00",
+        "end_time": "21:00"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 45,
+    "years_of_experience": 15,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_math_calculus_exam_coach",
+    "name": "Suresh Raman (Calculus Specialist)",
+    "subjects": ["Mathematics"],
+    "subjects_taught": ["Mathematics"],
+    "topics_expertise": ["Calculus", "Differentiation", "Integration", "Board Exam Preparation"],
+    "skills": ["Exam techniques", "Fast problem solving", "Past paper revision"],
+    "student_levels": ["High School", "High School (Class 12)"],
+    "languages_can_teach_in": ["English", "Tamil"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 500.0,
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "location": "Chennai Central",
+    "availability": [
+      {
+        "day": "Wednesday",
+        "start_time": "18:00",
+        "end_time": "20:00"
+      }
+    ],
+    "rating": 4.8,
+    "review_count": 19,
+    "years_of_experience": 7,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_chem_organic_specialist",
+    "name": "Dr. Ananya (Organic Chemist)",
+    "subjects": ["Chemistry"],
+    "subjects_taught": ["Chemistry"],
+    "topics_expertise": ["Organic Reaction Mechanisms", "Stereochemistry", "Name Reactions", "Synthesis"],
+    "skills": ["Reaction maps", "Memory mnemonics", "Entrance exam coaching"],
+    "student_levels": ["High School (Class 11)", "High School (Class 12)"],
+    "languages_can_teach_in": ["English", "Tamil"],
+    "preferred_teaching_mode": "Offline",
+    "hourly_rate": 500.0,
+    "latitude": 12.9796,
+    "longitude": 80.2196,
+    "location": "Velachery",
+    "availability": [
+      {
+        "day": "Sunday",
+        "start_time": "08:30",
+        "end_time": "12:00"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 22,
+    "years_of_experience": 9,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_chem_physical_inorganic",
+    "name": "Rajesh V (Inorganic Chemistry)",
+    "subjects": ["Chemistry"],
+    "subjects_taught": ["Chemistry"],
+    "topics_expertise": ["Inorganic Chemistry", "Coordination Compounds", "Periodic Trends", "Thermodynamics"],
+    "skills": ["Formula practice", "Periodic table memorization"],
+    "student_levels": ["High School (Class 11)", "High School (Class 12)"],
+    "languages_can_teach_in": ["English"],
+    "preferred_teaching_mode": "Offline",
+    "hourly_rate": 450.0,
+    "latitude": 12.9796,
+    "longitude": 80.2196,
+    "location": "Velachery",
+    "availability": [
+      {
+        "day": "Sunday",
+        "start_time": "09:00",
+        "end_time": "11:00"
+      }
+    ],
+    "rating": 4.6,
+    "review_count": 1,
+    "years_of_experience": 5,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_bio_genetics_specialist",
+    "name": "Dr. Meenakshi (Genetics)",
+    "subjects": ["Biology"],
+    "subjects_taught": ["Biology"],
+    "topics_expertise": ["Molecular Genetics", "DNA Replication", "Mendelian Genetics", "Biotechnology"],
+    "skills": ["Diagrammatic explanations", "NEET question banks", "Active recall quizzes"],
+    "student_levels": ["High School (Class 12)", "Medical Aspirants"],
+    "languages_can_teach_in": ["English"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 600.0,
+    "latitude": 13.0418,
+    "longitude": 80.2337,
+    "location": "T Nagar",
+    "availability": [
+      {
+        "day": "Friday",
+        "start_time": "16:00",
+        "end_time": "20:00"
+      }
+    ],
+    "rating": 4.9,
+    "review_count": 25,
+    "years_of_experience": 11,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_bio_botany_plant_phys",
+    "name": "Geetha M (Plant Biology)",
+    "subjects": ["Biology"],
+    "subjects_taught": ["Biology"],
+    "topics_expertise": ["Plant Physiology", "Morphology", "Photosynthesis", "Ecology"],
+    "skills": ["Plant anatomy sketches", "Ecology case studies"],
+    "student_levels": ["High School (Class 11)", "High School (Class 12)"],
+    "languages_can_teach_in": ["English"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 400.0,
+    "latitude": 13.0418,
+    "longitude": 80.2337,
+    "location": "T Nagar",
+    "availability": [
+      {
+        "day": "Friday",
+        "start_time": "17:00",
+        "end_time": "19:00"
+      }
+    ],
+    "rating": 4.5,
+    "review_count": 0,
+    "years_of_experience": 4,
+    "is_verified": true
+  },
+  {
+    "tutor_id": "t_hist_cross_subject_irrelevant",
+    "name": "Venkatesh S (History & Civics)",
+    "subjects": ["History", "Social Studies"],
+    "subjects_taught": ["History", "Social Studies"],
+    "topics_expertise": ["Indian National Movement", "World History", "Civics"],
+    "skills": ["Storytelling", "Historical timelines", "Essay writing"],
+    "student_levels": ["High School", "Middle School"],
+    "languages_can_teach_in": ["English", "Tamil"],
+    "preferred_teaching_mode": "Online",
+    "hourly_rate": 350.0,
+    "latitude": 13.0827,
+    "longitude": 80.2707,
+    "location": "Chennai Central",
+    "availability": [
+      {
+        "day": "Monday",
+        "start_time": "16:00",
+        "end_time": "18:00"
+      }
+    ],
+    "rating": 4.7,
+    "review_count": 8,
+    "years_of_experience": 6,
+    "is_verified": true
+  }
+]

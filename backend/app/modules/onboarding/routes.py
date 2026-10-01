@@ -14,8 +14,9 @@ from backend.app.database.session import get_db
 from backend.app.models.user import User, OTPVerification
 from backend.app.models.tutor import Certificate
 from backend.app.schemas.auth import UserRegister, UserLogin, Token, UserOut, OtpVerify, OtpResend
-from backend.app.schemas.student import StudentProfileUpdate, StudentProfileOut
+from backend.app.schemas.student import StudentProfileUpdate, StudentProfileOut, LearningNeedCreate, LearningNeedUpdate, LearningNeedOut
 from backend.app.schemas.tutor import TutorProfileUpdate, TutorProfileOut, CertificateOutSchema
+
 from backend.app.services.auth import get_current_user, require_role
 from backend.app.services.upload import save_uploaded_file
 from backend.app.services.email import send_otp_email
@@ -238,7 +239,86 @@ def submit_student_onboarding(
     return onboarding_service.complete_student_onboarding(db, current_user.id)
 
 
+
+# --- ONBOARDING STUDENT LEARNING NEEDS ROUTES ---
+
+@onboarding_router.get(
+    "/student/me/learning-needs",
+    response_model=List[LearningNeedOut],
+    dependencies=[Depends(require_role("STUDENT"))]
+)
+def list_student_learning_needs(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    return onboarding_service.get_learning_needs(db, current_user.id)
+
+@onboarding_router.post(
+    "/student/me/learning-needs",
+    response_model=LearningNeedOut,
+    status_code=status.HTTP_201_CREATED,
+    dependencies=[Depends(require_role("STUDENT"))]
+)
+def create_student_learning_need(
+    need_in: LearningNeedCreate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    return onboarding_service.create_learning_need(db, current_user.id, need_in)
+
+@onboarding_router.get(
+    "/student/me/learning-needs/{learning_need_id}",
+    response_model=LearningNeedOut,
+    dependencies=[Depends(require_role("STUDENT"))]
+)
+def get_student_learning_need(
+    learning_need_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    return onboarding_service.get_learning_need(db, current_user.id, learning_need_id)
+
+@onboarding_router.put(
+    "/student/me/learning-needs/{learning_need_id}",
+    response_model=LearningNeedOut,
+    dependencies=[Depends(require_role("STUDENT"))]
+)
+def update_student_learning_need(
+    learning_need_id: str,
+    need_in: LearningNeedUpdate,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    return onboarding_service.update_learning_need(db, current_user.id, learning_need_id, need_in)
+
+@onboarding_router.post(
+    "/student/me/learning-needs/{learning_need_id}/activate",
+    response_model=LearningNeedOut,
+    dependencies=[Depends(require_role("STUDENT"))]
+)
+def activate_student_learning_need(
+    learning_need_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    return onboarding_service.activate_learning_need(db, current_user.id, learning_need_id)
+
+@onboarding_router.delete(
+    "/student/me/learning-needs/{learning_need_id}",
+    status_code=status.HTTP_204_NO_CONTENT,
+    dependencies=[Depends(require_role("STUDENT"))]
+)
+def delete_student_learning_need(
+    learning_need_id: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    onboarding_service.delete_learning_need(db, current_user.id, learning_need_id)
+    return None
+
+
 # --- ONBOARDING TUTOR ROUTES ---
+
 
 @onboarding_router.get(
     "/tutor/me", 

@@ -571,9 +571,13 @@ export default function TutorVerificationPage() {
             type="button" 
             onClick={handleStartVerification} 
             className="btn btn-primary"
-            disabled={processing || !hasCertificate || overallState === "PROCESSING"}
+            disabled={processing || !hasCertificate}
           >
-            {processing ? "Evaluating..." : "Start Validation Pipeline"}
+            {processing
+              ? "Evaluating..."
+              : verificationRecord
+              ? "Re-run Validation"
+              : "Start Validation Pipeline"}
           </button>
         </div>
 

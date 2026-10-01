@@ -24,8 +24,8 @@ def _get_headers(client, email):
 
 def test_unauthorized_access(client):
     res = client.get("/api/verification/tutor/me/status")
-    # OAuth2 reusable Bearer scheme returns 403 on missing authorization headers
-    assert res.status_code == status.HTTP_403_FORBIDDEN
+    # OAuth2 reusable Bearer scheme returns 401 or 403 on missing authorization headers depending on FastAPI version
+    assert res.status_code in (status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN)
 
 def test_student_forbidden_access(client):
     # Register student
@@ -347,3 +347,103 @@ def test_start_verification_security_demotion(client):
     assert data["manual_review_required"] is True
     assert "security_analysis_metadata" in data
     assert data["security_analysis_metadata"]["risk_score"] == 15
+
+def test_start_verification_stale_processing_recovery(client, db):
+    # Test that an old/stale PROCESSING record (>10m ago) does not block re-running verification
+    from datetime import datetime, timedelta
+    headers = _get_headers(client, "stale_tutor@example.com")
+    
+    # Save education info
+    client.put(
+        "/api/onboarding/tutor/me",
+        headers=headers,
+        json={
+            "location": "Boston",
+            "education": [
+                {
+                    "highest_degree": "Bachelor",
+                    "degree_name": "Bachelor of Science in Physics",
+                    "university": "Massachusetts Institute of Technology",
+                    "graduation_year": 2019
+                }
+            ]
+        }
+    )
+    
+    # Upload mock MIT certificate
+    file_payload = {"file": ("mit_certificate.png", io.BytesIO(b"image bytes"), "image/png")}
+    client.post("/api/onboarding/tutor/me/certificate", headers=headers, files=file_payload)
+
+    # Fetch tutor profile from DB to inject a stale PROCESSING record
+    profile = db.query(TutorProfile).join(TutorProfile.user).filter(TutorProfile.user.has(email="stale_tutor@example.com")).first()
+    cert = profile.certificates[0]
+
+    stale_record = VerificationRecord(
+        tutor_profile_id=profile.id,
+        certificate_id=cert.id,
+        verification_status="PROCESSING",
+        ocr_status="PROCESSING",
+        certificate_validation_status="PENDING",
+        security_analysis_status="NOT_AVAILABLE",
+        overall_result="PENDING",
+        created_at=datetime.utcnow() - timedelta(minutes=30),
+        updated_at=datetime.utcnow() - timedelta(minutes=30)
+    )
+    db.add(stale_record)
+    db.commit()
+
+    # Now attempt to start verification again - should successfully reset and run rather than 400 error
+    res = client.post("/api/verification/tutor/me/start", headers=headers)
+    assert res.status_code == status.HTTP_200_OK
+    data = res.json()
+    assert data["ocr_status"] == "COMPLETED"
+    assert data["certificate_validation_status"] == "MATCH"
+    assert data["verification_status"] == "PENDING"
+    assert data["overall_result"] == "PENDING"
+
+def test_start_verification_recent_processing_protected(client, db):
+    # Test that a recent PROCESSING record (<10m ago) is protected against concurrent runs
+    from datetime import datetime, timedelta
+    headers = _get_headers(client, "recent_tutor@example.com")
+    
+    client.put(
+        "/api/onboarding/tutor/me",
+        headers=headers,
+        json={
+            "location": "Boston",
+            "education": [
+                {
+                    "highest_degree": "Bachelor",
+                    "degree_name": "Bachelor of Science in Physics",
+                    "university": "Massachusetts Institute of Technology",
+                    "graduation_year": 2019
+                }
+            ]
+        }
+    )
+    
+    file_payload = {"file": ("mit_certificate.png", io.BytesIO(b"image bytes"), "image/png")}
+    client.post("/api/onboarding/tutor/me/certificate", headers=headers, files=file_payload)
+
+    profile = db.query(TutorProfile).join(TutorProfile.user).filter(TutorProfile.user.has(email="recent_tutor@example.com")).first()
+    cert = profile.certificates[0]
+
+    recent_record = VerificationRecord(
+        tutor_profile_id=profile.id,
+        certificate_id=cert.id,
+        verification_status="PROCESSING",
+        ocr_status="PROCESSING",
+        certificate_validation_status="PENDING",
+        security_analysis_status="NOT_AVAILABLE",
+        overall_result="PENDING",
+        created_at=datetime.utcnow() - timedelta(minutes=2),
+        updated_at=datetime.utcnow() - timedelta(minutes=2)
+    )
+    db.add(recent_record)
+    db.commit()
+
+    # Attempt to start verification again - should be rejected as already in progress
+    res = client.post("/api/verification/tutor/me/start", headers=headers)
+    assert res.status_code == status.HTTP_400_BAD_REQUEST
+    assert "already in progress" in res.json()["detail"].lower()
+

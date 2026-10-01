@@ -1,0 +1,522 @@
+{
+  "config": {
+    "pipeline_version": "1.0.0",
+    "dataset_version": "1.0.0",
+    "metrics_version": "1.0.0",
+    "feedback_weight": 0.1,
+    "smoothing_m": 5.0,
+    "global_prior": 3.5,
+    "relevance_threshold": 2,
+    "models_evaluated": [
+      "legacy_baseline",
+      "dense_semantic",
+      "topic_overlap",
+      "full_hybrid",
+      "full_hybrid_feedback"
+    ]
+  },
+  "aggregated_metrics": {
+    "legacy_baseline": {
+      "precision@1": 0.875,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 0.9375,
+      "ndcg@3": 0.967,
+      "ndcg@5": 0.967,
+      "pairwise_accuracy": 0.9856
+    },
+    "dense_semantic": {
+      "precision@1": 1.0,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "ndcg@3": 1.0,
+      "ndcg@5": 1.0,
+      "pairwise_accuracy": 1.0
+    },
+    "topic_overlap": {
+      "precision@1": 1.0,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "ndcg@3": 0.9965,
+      "ndcg@5": 0.9965,
+      "pairwise_accuracy": 0.9958
+    },
+    "full_hybrid": {
+      "precision@1": 1.0,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "ndcg@3": 0.9965,
+      "ndcg@5": 0.9965,
+      "pairwise_accuracy": 0.9958
+    },
+    "full_hybrid_feedback": {
+      "precision@1": 1.0,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "ndcg@3": 0.9965,
+      "ndcg@5": 0.9965,
+      "pairwise_accuracy": 0.9958
+    }
+  },
+  "per_query_metrics": {
+    "legacy_baseline": [
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 0.9827586206896551,
+        "query_id": "q1_physics_rotational"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q2_cs_deep_learning"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q3_math_linear_algebra"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 0.9761904761904762,
+        "query_id": "q4_chemistry_organic"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 0.9761904761904762,
+        "query_id": "q5_biology_genetics"
+      },
+      {
+        "precision@1": 0.0,
+        "precision@3": 0.6666666666666666,
+        "precision@5": 0.4,
+        "recall@5": 1.0,
+        "mrr": 0.5,
+        "ndcg@3": 0.7363636171343382,
+        "ndcg@5": 0.7363636171343382,
+        "pairwise_accuracy": 0.95,
+        "query_id": "q6_physics_quantum_paraphrased"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q7_cs_web_dev"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q8_math_calculus_no_topics"
+      }
+    ],
+    "dense_semantic": [
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q1_physics_rotational"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q2_cs_deep_learning"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q3_math_linear_algebra"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q4_chemistry_organic"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q5_biology_genetics"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.6666666666666666,
+        "precision@5": 0.4,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q6_physics_quantum_paraphrased"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q7_cs_web_dev"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q8_math_calculus_no_topics"
+      }
+    ],
+    "topic_overlap": [
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q1_physics_rotational"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q2_cs_deep_learning"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q3_math_linear_algebra"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q4_chemistry_organic"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q5_biology_genetics"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.6666666666666666,
+        "precision@5": 0.4,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 0.9721212198129313,
+        "ndcg@5": 0.9721212198129313,
+        "pairwise_accuracy": 0.9666666666666667,
+        "query_id": "q6_physics_quantum_paraphrased"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q7_cs_web_dev"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q8_math_calculus_no_topics"
+      }
+    ],
+    "full_hybrid": [
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q1_physics_rotational"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q2_cs_deep_learning"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q3_math_linear_algebra"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q4_chemistry_organic"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q5_biology_genetics"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.6666666666666666,
+        "precision@5": 0.4,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 0.9721212198129313,
+        "ndcg@5": 0.9721212198129313,
+        "pairwise_accuracy": 0.9666666666666667,
+        "query_id": "q6_physics_quantum_paraphrased"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q7_cs_web_dev"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q8_math_calculus_no_topics"
+      }
+    ],
+    "full_hybrid_feedback": [
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q1_physics_rotational"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q2_cs_deep_learning"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q3_math_linear_algebra"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q4_chemistry_organic"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q5_biology_genetics"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.6666666666666666,
+        "precision@5": 0.4,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 0.9721212198129313,
+        "ndcg@5": 0.9721212198129313,
+        "pairwise_accuracy": 0.9666666666666667,
+        "query_id": "q6_physics_quantum_paraphrased"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q7_cs_web_dev"
+      },
+      {
+        "precision@1": 1.0,
+        "precision@3": 0.3333333333333333,
+        "precision@5": 0.2,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0,
+        "query_id": "q8_math_calculus_no_topics"
+      }
+    ]
+  }
+}

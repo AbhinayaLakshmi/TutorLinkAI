@@ -29,11 +29,15 @@ def get_current_user(
     
     return user
 
-def require_role(required_role: str):
+from typing import Union, List
+
+def require_role(required_roles: Union[str, List[str]]):
     def role_dependency(current_user: User = Depends(get_current_user)) -> User:
-        if current_user.role.upper() != required_role.upper():
+        allowed = [required_roles.upper()] if isinstance(required_roles, str) else [r.upper() for r in required_roles]
+        if current_user.role.upper() not in allowed:
+            roles_str = required_roles if isinstance(required_roles, str) else ", ".join(required_roles)
             raise RoleForbiddenException(
-                detail=f"Access denied: role {required_role} required"
+                detail=f"Access denied: role {roles_str} required"
             )
         return current_user
     return role_dependency

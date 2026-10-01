@@ -1,0 +1,134 @@
+[
+  {
+    "scenario_id": "scenario_1_quality_vs_compatibility",
+    "title": "Scenario 1: Quality vs Compatibility",
+    "category": "Quality vs Compatibility Trade-off",
+    "purpose": "Test whether a small compatibility advantage (0.96 vs 0.94) competes with a substantial feedback-quality difference (3.2 vs 4.8 stars with 30 reviews).",
+    "candidates": [
+      {
+        "tutor_id": "tutor_1a",
+        "name": "Tutor A (High Quality, High Rating)",
+        "hybrid_score": 0.94,
+        "rating": 4.8,
+        "review_count": 30
+      },
+      {
+        "tutor_id": "tutor_1b",
+        "name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+        "hybrid_score": 0.96,
+        "rating": 3.2,
+        "review_count": 30
+      }
+    ]
+  },
+  {
+    "scenario_id": "scenario_2_cold_start_vs_established",
+    "title": "Scenario 2: Cold Start vs Established Tutor",
+    "category": "Cold Start vs Established Evidence",
+    "purpose": "Test whether a single 5.0 rating (n=1) is appropriately shrunk toward the prior rather than overpowering established 4.7 evidence (n=40).",
+    "candidates": [
+      {
+        "tutor_id": "tutor_2a",
+        "name": "Tutor A (Cold Start, 1 Perfect Review)",
+        "hybrid_score": 0.94,
+        "rating": 5.0,
+        "review_count": 1
+      },
+      {
+        "tutor_id": "tutor_2b",
+        "name": "Tutor B (Established, 40 High Reviews)",
+        "hybrid_score": 0.93,
+        "rating": 4.7,
+        "review_count": 40
+      }
+    ]
+  },
+  {
+    "scenario_id": "scenario_3_new_tutor_no_reviews",
+    "title": "Scenario 3: New Tutor With No Reviews",
+    "category": "Zero-Review Cold Start Behavior",
+    "purpose": "Test cold-start behavior when no feedback exists. The new tutor must receive neutral prior treatment and not suffer an unfair penalty.",
+    "candidates": [
+      {
+        "tutor_id": "tutor_3a",
+        "name": "Tutor A (New Candidate, 0 Reviews)",
+        "hybrid_score": 0.94,
+        "rating": null,
+        "review_count": 0
+      },
+      {
+        "tutor_id": "tutor_3b",
+        "name": "Tutor B (Established Candidate, 30 Reviews)",
+        "hybrid_score": 0.92,
+        "rating": 4.8,
+        "review_count": 30
+      }
+    ]
+  },
+  {
+    "scenario_id": "scenario_4_strong_compat_vs_strong_feedback",
+    "title": "Scenario 4: Strong Compatibility vs Strong Feedback",
+    "category": "Large Compatibility Discrepancy",
+    "purpose": "Test whether feedback can overwhelm a large compatibility advantage (0.98 vs 0.88) when feedback weight increases from moderate to aggressive levels.",
+    "candidates": [
+      {
+        "tutor_id": "tutor_4a",
+        "name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+        "hybrid_score": 0.98,
+        "rating": 3.5,
+        "review_count": 30
+      },
+      {
+        "tutor_id": "tutor_4b",
+        "name": "Tutor B (Lower Compatibility, Near-Perfect Rating)",
+        "hybrid_score": 0.88,
+        "rating": 4.9,
+        "review_count": 30
+      }
+    ]
+  },
+  {
+    "scenario_id": "scenario_5_similar_compat_different_feedback",
+    "title": "Scenario 5: Similar Compatibility, Different Feedback",
+    "category": "Tie-Breaking Under Similar Compatibility",
+    "purpose": "Test whether feedback meaningfully distinguishes candidates when recommendation compatibility is nearly identical (0.91 vs 0.90).",
+    "candidates": [
+      {
+        "tutor_id": "tutor_5a",
+        "name": "Tutor A (Top Feedback, High Volume)",
+        "hybrid_score": 0.91,
+        "rating": 4.9,
+        "review_count": 50
+      },
+      {
+        "tutor_id": "tutor_5b",
+        "name": "Tutor B (Mediocre Feedback, High Volume)",
+        "hybrid_score": 0.90,
+        "rating": 3.8,
+        "review_count": 50
+      }
+    ]
+  },
+  {
+    "scenario_id": "scenario_6_same_rating_different_evidence",
+    "title": "Scenario 6: Same Rating, Different Evidence Strength",
+    "category": "Bayesian Evidence Volume Differentiation",
+    "purpose": "Demonstrate Bayesian shrinkage and evidence confidence when empirical ratings are identical (5.0 stars) but review counts differ vastly (n=1 vs n=40).",
+    "candidates": [
+      {
+        "tutor_id": "tutor_6a",
+        "name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+        "hybrid_score": 0.93,
+        "rating": 5.0,
+        "review_count": 1
+      },
+      {
+        "tutor_id": "tutor_6b",
+        "name": "Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",
+        "hybrid_score": 0.92,
+        "rating": 5.0,
+        "review_count": 40
+      }
+    ]
+  }
+]

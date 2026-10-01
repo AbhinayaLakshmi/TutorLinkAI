@@ -8,6 +8,31 @@ logger = logging.getLogger("ocr_service")
 # Try to import PaddleOCR. Handle failure gracefully if the library is not installed or missing platform builds.
 PADDLE_AVAILABLE = False
 try:
+    # Patch PaddleX static runner predictor configuration to prevent NotImplementedError in PIR oneDNN instruction executor on CPU
+    try:
+        import paddlex.inference.models.runners.paddle_static.runner as _paddlex_runner
+        if hasattr(_paddlex_runner, "PaddleStaticRunner"):
+            _orig_create = getattr(_paddlex_runner.PaddleStaticRunner, "_create", None)
+            if _orig_create and not getattr(_paddlex_runner.PaddleStaticRunner, "_is_pir_patched", False):
+                def _patched_create(self):
+                    paddle_inference = _paddlex_runner.import_paddle_module("paddle.inference")
+                    model_paths = _paddlex_runner.get_model_paths(self.model_dir, self.model_file_prefix)
+                    model_file, params_file = model_paths["paddle"]
+                    config = paddle_inference.Config(str(model_file), str(params_file))
+                    config.disable_gpu()
+                    config.disable_mkldnn()
+                    if hasattr(config, "enable_new_ir"):
+                        config.enable_new_ir(False)
+                    if hasattr(config, "enable_new_executor"):
+                        config.enable_new_executor()
+                    config.enable_memory_optim()
+                    config.disable_glog_info()
+                    return paddle_inference.create_predictor(config)
+                _paddlex_runner.PaddleStaticRunner._create = _patched_create
+                _paddlex_runner.PaddleStaticRunner._is_pir_patched = True
+    except Exception as _patch_err:
+        logger.warning(f"PaddleStaticRunner patch skipped or failed: {_patch_err}")
+
     from paddleocr import PaddleOCR
     PADDLE_AVAILABLE = True
 except ImportError:
@@ -26,14 +51,44 @@ class CertificateOCR:
             try:
                 # Initialize PaddleOCR (downloads models on demand first time)
                 # use_textline_orientation is the current parameter replacing use_angle_cls
-                # show_log parameter is removed as it's unsupported in newer versions
-                self.ocr_instance = PaddleOCR(use_textline_orientation=True, lang="en")
+                # Disabling heavy 3D doc unwarping and doc orientation classifier for fast CPU inference
+                self.ocr_instance = PaddleOCR(
+                    use_doc_orientation_classify=False,
+                    use_doc_unwarping=False,
+                    use_textline_orientation=True,
+                    lang="en"
+                )
                 self._initialized = True
             except Exception as e:
                 logger.error(f"Failed to initialize PaddleOCR engine: {str(e)}")
                 self.ocr_instance = None
         else:
             logger.info("PaddleOCR engine not loaded (library unavailable).")
+
+    def _collect_results(self, results, text_lines: List[str]):
+        if not results:
+            return
+        for page in results:
+            if isinstance(page, dict) and "rec_texts" in page:
+                texts = page["rec_texts"]
+                scores = page.get("rec_scores", [1.0] * len(texts))
+                for text, score in zip(texts, scores):
+                    text_lines.append(text)
+                    self.line_confidences[text.strip()] = float(score)
+            elif hasattr(page, "__getitem__") and hasattr(page, "get") and "rec_texts" in page:
+                texts = page["rec_texts"]
+                scores = page.get("rec_scores", [1.0] * len(texts))
+                for text, score in zip(texts, scores):
+                    text_lines.append(text)
+                    self.line_confidences[text.strip()] = float(score)
+            elif isinstance(page, list):
+                for line in page:
+                    if line:
+                        for word_info in line:
+                            text = word_info[1][0]
+                            score = word_info[1][1]
+                            text_lines.append(text)
+                            self.line_confidences[text.strip()] = float(score)
 
     def extract_text_from_file(self, file_path: str) -> List[str]:
         """
@@ -51,28 +106,32 @@ class CertificateOCR:
             return []
 
         try:
-            # Clear previous confidences cache
             self.line_confidences = {}
-            # Newer paddleocr version: results is list of dicts (one per page) containing 'rec_texts' and 'rec_scores'
-            # Older paddleocr version: results is [[ [box, (text, confidence)], ... ]]
-            results = self.ocr_instance.ocr(file_path)
             text_lines = []
-            if results:
-                for page in results:
-                    if isinstance(page, dict) and "rec_texts" in page:
-                        texts = page["rec_texts"]
-                        scores = page.get("rec_scores", [1.0] * len(texts))
-                        for text, score in zip(texts, scores):
-                            text_lines.append(text)
-                            self.line_confidences[text.strip()] = float(score)
-                    elif isinstance(page, list):
-                        for line in page:
-                            if line:
-                                for word_info in line:
-                                    text = word_info[1][0]
-                                    score = word_info[1][1]
-                                    text_lines.append(text)
-                                    self.line_confidences[text.strip()] = float(score)
+
+            # If PDF, render pages using pypdfium2 and process each page
+            if file_path.lower().endswith(".pdf"):
+                try:
+                    import pypdfium2 as pdfium
+                    import numpy as np
+                    pdf = pdfium.PdfDocument(file_path)
+                    try:
+                        for page in pdf:
+                            pil_img = page.render(scale=1.5).to_pil()
+                            img_np = np.array(pil_img)
+                            page_results = list(self.ocr_instance.predict(img_np))
+                            self._collect_results(page_results, text_lines)
+                    finally:
+                        pdf.close()
+                except Exception as pdf_err:
+                    logger.warning(f"PDF rendering failed ({pdf_err}), attempting direct predict on file: {file_path}")
+                    results = list(self.ocr_instance.predict(file_path))
+                    self._collect_results(results, text_lines)
+            else:
+                # Direct image OCR
+                results = list(self.ocr_instance.predict(file_path))
+                self._collect_results(results, text_lines)
+
             return text_lines
         except Exception as e:
             logger.error(f"Error executing PaddleOCR on file {file_path}: {str(e)}")

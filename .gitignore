@@ -1,8 +1,8 @@
 # Environment
+
 .env
 .env.*
 !.env.example
-
 # Python
 __pycache__/
 *.py[cod]
@@ -38,9 +38,17 @@ Thumbs.db
 *.h5
 *.pt
 *.pth
+*.onnx
+backend/models/*.onnx
 
 # Jupyter
 .ipynb_checkpoints/
 
 # Uploaded files
 uploads/
+
+# Evaluation datasets and private benchmark artifacts
+evaluation/data/
+evaluation/results/
+backend/evaluation/data/
+backend/evaluation/results/

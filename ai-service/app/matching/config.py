@@ -5,10 +5,14 @@ All weights and scoring thresholds are defined here as named constants.
 import os
 
 # Default Matching Weights for Stage 2 Ranking (must sum to 1.0)
-DEFAULT_WEIGHT_SUBJECT: float = float(os.getenv("WEIGHT_SUBJECT", 0.40))
+# Note: These weights are heuristic research-prototype weights for multi-criteria ranking (not learned/trained weights).
+DEFAULT_WEIGHT_LEARNING_NEED: float = float(os.getenv("WEIGHT_LEARNING_NEED", 0.45))
 DEFAULT_WEIGHT_LOCATION: float = float(os.getenv("WEIGHT_LOCATION", 0.20))
 DEFAULT_WEIGHT_FEE: float = float(os.getenv("WEIGHT_FEE", 0.20))
-DEFAULT_WEIGHT_TIME: float = float(os.getenv("WEIGHT_TIME", 0.20))
+DEFAULT_WEIGHT_TIME: float = float(os.getenv("WEIGHT_TIME", 0.15))
+
+# Backward compatibility alias
+DEFAULT_WEIGHT_SUBJECT: float = DEFAULT_WEIGHT_LEARNING_NEED
 
 # Scoring Parameters & Thresholds
 DEFAULT_MAX_RADIUS_KM: float = float(os.getenv("MAX_LOCATION_RADIUS_KM", 15.0))

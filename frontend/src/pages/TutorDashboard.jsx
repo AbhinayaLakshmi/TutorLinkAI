@@ -14,12 +14,26 @@ export default function TutorDashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [activeTab, setActiveTab] = useState("profile"); // "profile" | "requests" | "sessions"
+  const [bookingRequests, setBookingRequests] = useState([]);
+  const [loadingRequests, setLoadingRequests] = useState(false);
+  const [decisionLoadingId, setDecisionLoadingId] = useState(null);
+  const [sessions, setSessions] = useState([]);
+  const [loadingSessions, setLoadingSessions] = useState(false);
+  const [sessionActionLoadingId, setSessionActionLoadingId] = useState(null);
+  const [completeModalSession, setCompleteModalSession] = useState(null);
+  const [completionNote, setCompletionNote] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
   const fileInputRef = React.useRef(null);
   const [uploading, setUploading] = useState(false);
+
+  // Reviews and Rating Summary state
+  const [reviews, setReviews] = useState([]);
+  const [reviewSummary, setReviewSummary] = useState({ average_rating: 0, total_reviews: 0, rating_distribution: {} });
+  const [loadingReviews, setLoadingReviews] = useState(false);
 
   const handlePhotoUpload = async (e) => {
     const file = e.target.files[0];
@@ -102,6 +116,9 @@ export default function TutorDashboard() {
         if (d.profile_picture_path) {
           setAvatarUrl(`${API_BASE_URL}/uploads/${d.profile_picture_path}?t=${Date.now()}`);
         }
+        if (d.id) {
+          loadReviews(d.id);
+        }
 
         if (d.education && d.education.length > 0) {
           const edu = d.education[0];
@@ -148,8 +165,128 @@ export default function TutorDashboard() {
       });
   };
 
+  const loadBookingRequests = () => {
+    setLoadingRequests(true);
+    api.get("/api/booking/tutor/requests")
+      .then((res) => {
+        setBookingRequests(res.data || []);
+        setLoadingRequests(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load tutor booking requests:", err);
+        setLoadingRequests(false);
+      });
+  };
+
+  const handleDecision = async (bookingId, decision) => {
+    setDecisionLoadingId(bookingId);
+    setError("");
+    setSuccess("");
+    try {
+      const res = await api.post(`/api/booking/${bookingId}/decision`, {
+        decision: decision // "ACCEPTED" or "REJECTED"
+      });
+      setSuccess(`Booking successfully ${decision === "ACCEPTED" ? "confirmed" : "declined"}!`);
+      loadBookingRequests();
+      loadSessions();
+      setTimeout(() => setSuccess(""), 3500);
+    } catch (err) {
+      setError(err.response?.data?.detail || `Failed to ${decision.toLowerCase()} booking.`);
+    } finally {
+      setDecisionLoadingId(null);
+    }
+  };
+
+  const loadSessions = () => {
+    setLoadingSessions(true);
+    api.get("/api/session/tutor")
+      .then((res) => {
+        setSessions(res.data || []);
+        setLoadingSessions(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load tutor sessions:", err);
+        setLoadingSessions(false);
+      });
+  };
+
+  const loadReviews = (tutorProfileId) => {
+    if (!tutorProfileId) return;
+    setLoadingReviews(true);
+    Promise.all([
+      api.get(`/api/reviews/tutor/${tutorProfileId}`),
+      api.get(`/api/reviews/tutor/${tutorProfileId}/summary`),
+    ])
+      .then(([revRes, sumRes]) => {
+        setReviews(revRes.data || []);
+        setReviewSummary(sumRes.data || { average_rating: 0, total_reviews: 0, rating_distribution: {} });
+        setLoadingReviews(false);
+      })
+      .catch((err) => {
+        console.error("Failed to load tutor reviews:", err);
+        setLoadingReviews(false);
+      });
+  };
+
+  const handleStartSession = async (sessionId) => {
+    setSessionActionLoadingId(sessionId);
+    setError("");
+    setSuccess("");
+    try {
+      await api.post(`/api/session/${sessionId}/start`);
+      setSuccess("Session started! Status is now In-Progress.");
+      loadSessions();
+      setTimeout(() => setSuccess(""), 3500);
+    } catch (err) {
+      setError(err.response?.data?.detail || "Failed to start session.");
+    } finally {
+      setSessionActionLoadingId(null);
+    }
+  };
+
+  const handleCompleteSession = async (sessionId, note) => {
+    setSessionActionLoadingId(sessionId);
+    setError("");
+    setSuccess("");
+    try {
+      await api.post(`/api/session/${sessionId}/complete`, {
+        completion_note: note || null,
+      });
+      setSuccess("Session successfully completed! Duration and summary logged.");
+      setCompleteModalSession(null);
+      setCompletionNote("");
+      loadSessions();
+      setTimeout(() => setSuccess(""), 3500);
+    } catch (err) {
+      setError(err.response?.data?.detail || "Failed to complete session.");
+    } finally {
+      setSessionActionLoadingId(null);
+    }
+  };
+
+  const handleCancelSession = async (sessionId) => {
+    if (!window.confirm("Are you sure you want to cancel this scheduled session?")) return;
+    setSessionActionLoadingId(sessionId);
+    setError("");
+    setSuccess("");
+    try {
+      await api.post(`/api/session/${sessionId}/cancel`, {
+        reason: "Cancelled by tutor",
+      });
+      setSuccess("Session cancelled successfully.");
+      loadSessions();
+      setTimeout(() => setSuccess(""), 3500);
+    } catch (err) {
+      setError(err.response?.data?.detail || "Failed to cancel session.");
+    } finally {
+      setSessionActionLoadingId(null);
+    }
+  };
+
   useEffect(() => {
     loadData();
+    loadBookingRequests();
+    loadSessions();
   }, [navigate]);
 
   const toggleLanguage = (lang) => {
@@ -328,15 +465,52 @@ export default function TutorDashboard() {
           <div className="sidebar-role">Tutor</div>
           
           <ul className="sidebar-menu">
-            <li className="sidebar-menu-item active" onClick={() => setIsEditing(false)}>My Profile</li>
+            <li
+              className={`sidebar-menu-item ${activeTab === "profile" ? "active" : ""}`}
+              onClick={() => { setActiveTab("profile"); setIsEditing(false); }}
+            >
+              👤 My Profile
+            </li>
+            <li
+              className={`sidebar-menu-item ${activeTab === "requests" ? "active" : ""}`}
+              onClick={() => { setActiveTab("requests"); setIsEditing(false); loadBookingRequests(); }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+                <span>📅 Booking Requests</span>
+                {bookingRequests.filter(r => r.status === "PENDING").length > 0 && (
+                  <span style={{ background: "var(--primary-color)", color: "#fff", padding: "1px 6px", borderRadius: "10px", fontSize: "11px", fontWeight: "bold" }}>
+                    {bookingRequests.filter(r => r.status === "PENDING").length}
+                  </span>
+                )}
+              </div>
+            </li>
+            <li
+              className={`sidebar-menu-item ${activeTab === "sessions" ? "active" : ""}`}
+              onClick={() => { setActiveTab("sessions"); setIsEditing(false); loadSessions(); }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+                <span>🎯 My Sessions</span>
+                {sessions.filter(s => s.status === "SCHEDULED" || s.status === "IN_PROGRESS").length > 0 && (
+                  <span style={{ background: "var(--primary-color)", color: "#fff", padding: "1px 6px", borderRadius: "10px", fontSize: "11px", fontWeight: "bold" }}>
+                    {sessions.filter(s => s.status === "SCHEDULED" || s.status === "IN_PROGRESS").length}
+                  </span>
+                )}
+              </div>
+            </li>
             <li className="sidebar-menu-item" style={{ color: "var(--error-color)" }} onClick={handleLogout}>Log Out</li>
           </ul>
         </div>
 
         {/* Content area */}
         <div className="dashboard-content">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-            <h2 style={{ margin: 0 }}>Tutor Dashboard</h2>
+          {error && <div className="alert alert-error">{error}</div>}
+          {success && <div className="alert alert-success">{success}</div>}
+
+          {/* TAB 1: PROFILE */}
+          {activeTab === "profile" && (
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+                <h2 style={{ margin: 0 }}>Tutor Dashboard</h2>
             {!isEditing && (
               <button onClick={() => setIsEditing(true)} className="btn btn-primary" style={{ padding: "8px 16px" }}>
                 Edit Profile
@@ -400,9 +574,6 @@ export default function TutorDashboard() {
               </button>
             </div>
           )}
-
-          {error && <div className="alert alert-error">{error}</div>}
-          {success && <div className="alert alert-success">{success}</div>}
 
           {!isEditing ? (
             <div>
@@ -759,8 +930,666 @@ export default function TutorDashboard() {
               </div>
             </form>
           )}
+            </div>
+          )}
+
+          {/* TAB 2: INCOMING BOOKING REQUESTS */}
+          {activeTab === "requests" && (
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", flexWrap: "wrap", gap: "10px" }}>
+                <div>
+                  <h2 style={{ margin: "0 0 4px 0", fontSize: "22px" }}>Incoming Booking Requests</h2>
+                  <p style={{ margin: 0, fontSize: "14px", color: "var(--text-muted)" }}>
+                    Review students requesting tutoring sessions and accept or decline requests.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={loadBookingRequests}
+                  className="btn btn-secondary"
+                  disabled={loadingRequests}
+                  style={{ padding: "6px 14px", fontSize: "13px" }}
+                >
+                  {loadingRequests ? "Refreshing..." : "🔄 Refresh"}
+                </button>
+              </div>
+
+              {loadingRequests && (
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "40px 20px",
+                    background: "var(--bg-color)",
+                    border: "1px dashed var(--border-color)",
+                    borderRadius: "8px",
+                    color: "var(--text-muted)",
+                    fontSize: "14px"
+                  }}
+                >
+                  Loading incoming booking requests...
+                </div>
+              )}
+
+              {!loadingRequests && bookingRequests.length === 0 && (
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "48px 20px",
+                    background: "var(--bg-color)",
+                    border: "1px dashed var(--border-color)",
+                    borderRadius: "8px"
+                  }}
+                >
+                  <div style={{ fontSize: "36px", marginBottom: "12px" }}>📬</div>
+                  <h3 style={{ margin: "0 0 8px 0", fontSize: "18px" }}>No Booking Requests</h3>
+                  <p style={{ margin: "0", fontSize: "14px", color: "var(--text-muted)" }}>
+                    You have no incoming session booking requests at this time.
+                  </p>
+                </div>
+              )}
+
+              {!loadingRequests && bookingRequests.length > 0 && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  {bookingRequests.map((req) => {
+                    const statusConfig = {
+                      PENDING: {
+                        label: "Action Required",
+                        bg: "rgba(245, 158, 11, 0.15)",
+                        color: "#d97706",
+                        border: "1px solid rgba(245, 158, 11, 0.35)"
+                      },
+                      CONFIRMED: {
+                        label: "Accepted / Confirmed",
+                        bg: "rgba(16, 185, 129, 0.15)",
+                        color: "var(--success-color)",
+                        border: "1px solid rgba(16, 185, 129, 0.35)"
+                      },
+                      REJECTED: {
+                        label: "Declined",
+                        bg: "rgba(239, 68, 68, 0.12)",
+                        color: "var(--error-color)",
+                        border: "1px solid rgba(239, 68, 68, 0.3)"
+                      },
+                      CANCELLED: {
+                        label: "Cancelled by Student",
+                        bg: "var(--border-color)",
+                        color: "var(--text-muted)",
+                        border: "1px solid var(--border-color)"
+                      }
+                    }[req.status] || {
+                      label: req.status,
+                      bg: "var(--border-color)",
+                      color: "var(--text-color)",
+                      border: "1px solid var(--border-color)"
+                    };
+
+                    const isPending = req.status === "PENDING";
+                    const isProcessing = decisionLoadingId === req.id;
+
+                    return (
+                      <div
+                        key={req.id}
+                        style={{
+                          background: "var(--card-bg)",
+                          border: isPending ? "1px solid rgba(245, 158, 11, 0.5)" : "1px solid var(--border-color)",
+                          borderRadius: "10px",
+                          padding: "20px",
+                          boxShadow: isPending ? "0 2px 10px rgba(245, 158, 11, 0.08)" : "0 2px 6px rgba(0,0,0,0.02)"
+                        }}
+                      >
+                        {/* Header: Student Info + Status Badge */}
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px", flexWrap: "wrap", gap: "8px" }}>
+                          <div>
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                              <span style={{ fontSize: "22px" }}>🎓</span>
+                              <div>
+                                <h4 style={{ margin: 0, fontSize: "16px", fontWeight: "700" }}>
+                                  {req.student_name || "Student"}
+                                </h4>
+                                {req.learning_need_title && (
+                                  <div style={{ fontSize: "12px", color: "var(--primary-color)", marginTop: "2px", fontWeight: "500" }}>
+                                    🎯 Target: {req.learning_need_title}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+
+                          <span
+                            style={{
+                              background: statusConfig.bg,
+                              color: statusConfig.color,
+                              border: statusConfig.border,
+                              padding: "4px 12px",
+                              borderRadius: "16px",
+                              fontSize: "12px",
+                              fontWeight: "700"
+                            }}
+                          >
+                            {statusConfig.label}
+                          </span>
+                        </div>
+
+                        {/* Booking Details Grid */}
+                        <div
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+                            gap: "12px",
+                            background: "var(--bg-color)",
+                            padding: "12px 14px",
+                            borderRadius: "6px",
+                            fontSize: "13px",
+                            marginBottom: "12px"
+                          }}
+                        >
+                          <div>
+                            <div style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "2px" }}>
+                              Scheduled Date
+                            </div>
+                            <div style={{ fontWeight: "600", color: "var(--text-h)" }}>
+                              📅 {req.scheduled_date}
+                            </div>
+                          </div>
+
+                          <div>
+                            <div style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "2px" }}>
+                              Time & Duration
+                            </div>
+                            <div style={{ fontWeight: "600", color: "var(--text-h)" }}>
+                              ⏰ {req.start_time} ({req.duration_minutes} mins)
+                            </div>
+                          </div>
+
+                          <div>
+                            <div style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "2px" }}>
+                              Hourly Rate
+                            </div>
+                            <div style={{ fontWeight: "600", color: "var(--text-h)" }}>
+                              ₹{req.hourly_rate} / hr
+                            </div>
+                          </div>
+
+                          <div>
+                            <div style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "2px" }}>
+                              Total Booking Value
+                            </div>
+                            <div style={{ fontWeight: "700", color: "var(--success-color)" }}>
+                              ₹{req.total_amount ? Number(req.total_amount).toFixed(2) : (req.hourly_rate * (req.duration_minutes / 60)).toFixed(2)}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Student Message / Notes */}
+                        {req.student_message && (
+                          <div style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "14px", background: "rgba(0,0,0,0.02)", padding: "10px 14px", borderRadius: "6px", borderLeft: "3px solid var(--primary-color)" }}>
+                            <strong style={{ color: "var(--text-h)" }}>Student Note:</strong> {req.student_message}
+                          </div>
+                        )}
+
+                        {/* Accept / Reject Action Buttons for PENDING */}
+                        {isPending && (
+                          <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", borderTop: "1px solid var(--border-color)", paddingTop: "14px", marginTop: "6px" }}>
+                            <button
+                              type="button"
+                              onClick={() => handleDecision(req.id, "REJECTED")}
+                              className="btn btn-secondary"
+                              disabled={isProcessing}
+                              style={{ padding: "8px 18px", fontSize: "13px", color: "var(--error-color)", borderColor: "rgba(239, 68, 68, 0.4)" }}
+                            >
+                              {isProcessing ? "Processing..." : "✕ Reject"}
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => handleDecision(req.id, "ACCEPTED")}
+                              className="btn btn-primary"
+                              disabled={isProcessing}
+                              style={{ padding: "8px 20px", fontSize: "13px", background: "var(--success-color)", borderColor: "var(--success-color)" }}
+                            >
+                              {isProcessing ? "Processing..." : "✓ Accept Request"}
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB 3: TUTOR SESSIONS */}
+          {activeTab === "sessions" && (
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px", flexWrap: "wrap", gap: "10px" }}>
+                <div>
+                  <h2 style={{ margin: "0 0 4px 0", fontSize: "22px" }}>My Tutoring Sessions</h2>
+                  <p style={{ margin: 0, fontSize: "14px", color: "var(--text-muted)" }}>
+                    Manage your scheduled teaching sessions, track active classes, and record completion notes.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    loadSessions();
+                    if (profile?.id) loadReviews(profile.id);
+                  }}
+                  className="btn btn-secondary"
+                  disabled={loadingSessions || loadingReviews}
+                  style={{ padding: "6px 14px", fontSize: "13px" }}
+                >
+                  {loadingSessions ? "Refreshing..." : "🔄 Refresh"}
+                </button>
+              </div>
+
+              {/* RATINGS & REVIEWS SUMMARY CARD */}
+              <div
+                style={{
+                  background: "var(--card-bg)",
+                  border: "1px solid var(--border-color)",
+                  borderRadius: "10px",
+                  padding: "20px",
+                  marginBottom: "24px",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.02)",
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "10px",
+                        background: "rgba(245, 158, 11, 0.12)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "22px",
+                      }}
+                    >
+                      ⭐
+                    </div>
+                    <div>
+                      <h3 style={{ margin: "0 0 2px 0", fontSize: "16px", fontWeight: "700", color: "var(--text-h)" }}>
+                        Student Ratings & Feedback
+                      </h3>
+                      <p style={{ margin: 0, fontSize: "12px", color: "var(--text-muted)" }}>
+                        Post-session evaluations submitted by verified students.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    {reviewSummary.total_reviews > 0 ? (
+                      <div style={{ textAlign: "right" }}>
+                        <div style={{ fontSize: "20px", fontWeight: "800", color: "#d97706" }}>
+                          ⭐ {reviewSummary.average_rating.toFixed(1)}{" "}
+                          <span style={{ fontSize: "13px", fontWeight: "500", color: "var(--text-muted)" }}>/ 5.0</span>
+                        </div>
+                        <div style={{ fontSize: "12px", color: "var(--text-muted)" }}>
+                          Based on {reviewSummary.total_reviews} review{reviewSummary.total_reviews > 1 ? "s" : ""}
+                        </div>
+                      </div>
+                    ) : (
+                      <div style={{ fontSize: "13px", color: "var(--text-muted)", fontStyle: "italic", background: "var(--bg-color)", padding: "6px 12px", borderRadius: "6px", border: "1px solid var(--border-color)" }}>
+                        No reviews yet
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Recent Reviews List */}
+                {reviews.length > 0 && (
+                  <div style={{ borderTop: "1px solid var(--border-color)", paddingTop: "14px", marginTop: "14px" }}>
+                    <div style={{ fontSize: "13px", fontWeight: "600", color: "var(--text-h)", marginBottom: "10px" }}>
+                      Recent Student Reviews:
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                      {reviews.slice(0, 3).map((rev) => (
+                        <div
+                          key={rev.id}
+                          style={{
+                            background: "var(--bg-color)",
+                            padding: "10px 14px",
+                            borderRadius: "8px",
+                            border: "1px solid var(--border-color)",
+                          }}
+                        >
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px", flexWrap: "wrap", gap: "6px" }}>
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                              <span style={{ color: "#d97706", fontSize: "13px", fontWeight: "700" }}>
+                                {"★".repeat(rev.rating)}{"☆".repeat(5 - rev.rating)}
+                              </span>
+                              <span style={{ fontSize: "12px", fontWeight: "600", color: "var(--text-h)" }}>
+                                {rev.student_name || "Verified Student"}
+                              </span>
+                            </div>
+                            <span style={{ fontSize: "11px", color: "var(--text-muted)" }}>
+                              {new Date(rev.created_at).toLocaleDateString()}
+                            </span>
+                          </div>
+                          {rev.review_text && (
+                            <p style={{ margin: "4px 0 0 0", fontSize: "12px", color: "var(--text-muted)", lineHeight: "1.4" }}>
+                              "{rev.review_text}"
+                            </p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {loadingSessions && (
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "40px 20px",
+                    background: "var(--bg-color)",
+                    border: "1px dashed var(--border-color)",
+                    borderRadius: "8px",
+                    color: "var(--text-muted)",
+                    fontSize: "14px"
+                  }}
+                >
+                  Loading sessions...
+                </div>
+              )}
+
+              {!loadingSessions && sessions.length === 0 && (
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "48px 20px",
+                    background: "var(--bg-color)",
+                    border: "1px dashed var(--border-color)",
+                    borderRadius: "8px"
+                  }}
+                >
+                  <div style={{ fontSize: "36px", marginBottom: "12px" }}>🎯</div>
+                  <h3 style={{ margin: "0 0 8px 0", fontSize: "18px" }}>No Sessions Yet</h3>
+                  <p style={{ margin: "0", fontSize: "14px", color: "var(--text-muted)" }}>
+                    When you accept incoming booking requests, your scheduled sessions will appear here.
+                  </p>
+                </div>
+              )}
+
+              {!loadingSessions && sessions.length > 0 && (
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                  {sessions.map((session) => {
+                    const statusConfig = {
+                      SCHEDULED: {
+                        label: "Scheduled",
+                        bg: "rgba(59, 130, 246, 0.12)",
+                        color: "#2563eb",
+                        border: "1px solid rgba(59, 130, 246, 0.3)"
+                      },
+                      IN_PROGRESS: {
+                        label: "🟢 In Progress / Active",
+                        bg: "rgba(16, 185, 129, 0.15)",
+                        color: "var(--success-color)",
+                        border: "1px solid rgba(16, 185, 129, 0.35)"
+                      },
+                      COMPLETED: {
+                        label: "Completed",
+                        bg: "rgba(99, 102, 241, 0.12)",
+                        color: "#4f46e5",
+                        border: "1px solid rgba(99, 102, 241, 0.3)"
+                      },
+                      CANCELLED: {
+                        label: "Cancelled",
+                        bg: "var(--border-color)",
+                        color: "var(--text-muted)",
+                        border: "1px solid var(--border-color)"
+                      }
+                    }[session.status] || {
+                      label: session.status,
+                      bg: "var(--border-color)",
+                      color: "var(--text-color)",
+                      border: "1px solid var(--border-color)"
+                    };
+
+                    const isScheduled = session.status === "SCHEDULED";
+                    const isInProgress = session.status === "IN_PROGRESS";
+                    const isCompleted = session.status === "COMPLETED";
+                    const isActionLoading = sessionActionLoadingId === session.id;
+
+                    return (
+                      <div
+                        key={session.id}
+                        style={{
+                          background: "var(--card-bg)",
+                          border: isInProgress ? "1px solid var(--success-color)" : isScheduled ? "1px solid rgba(59, 130, 246, 0.4)" : "1px solid var(--border-color)",
+                          borderRadius: "10px",
+                          padding: "20px",
+                          boxShadow: isInProgress ? "0 2px 10px rgba(16, 185, 129, 0.12)" : "0 2px 6px rgba(0,0,0,0.02)"
+                        }}
+                      >
+                        {/* Header: Student Info + Status Badge */}
+                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px", flexWrap: "wrap", gap: "8px" }}>
+                          <div>
+                            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                              <span style={{ fontSize: "22px" }}>🎓</span>
+                              <div>
+                                <h4 style={{ margin: 0, fontSize: "16px", fontWeight: "700" }}>
+                                  {session.student_name || "Student"}
+                                </h4>
+                                {session.learning_need_title && (
+                                  <div style={{ fontSize: "12px", color: "var(--primary-color)", marginTop: "2px", fontWeight: "500" }}>
+                                    🎯 Focus: {session.learning_need_title}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+
+                          <span
+                            style={{
+                              background: statusConfig.bg,
+                              color: statusConfig.color,
+                              border: statusConfig.border,
+                              padding: "4px 12px",
+                              borderRadius: "16px",
+                              fontSize: "12px",
+                              fontWeight: "700"
+                            }}
+                          >
+                            {statusConfig.label}
+                          </span>
+                        </div>
+
+                        {/* Session Details Grid */}
+                        <div
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+                            gap: "12px",
+                            background: "var(--bg-color)",
+                            padding: "12px 14px",
+                            borderRadius: "6px",
+                            fontSize: "13px",
+                            marginBottom: "12px"
+                          }}
+                        >
+                          <div>
+                            <div style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "2px" }}>
+                              Scheduled Date
+                            </div>
+                            <div style={{ fontWeight: "600", color: "var(--text-h)" }}>
+                              📅 {session.scheduled_date}
+                            </div>
+                          </div>
+
+                          <div>
+                            <div style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "2px" }}>
+                              Start Time & Duration
+                            </div>
+                            <div style={{ fontWeight: "600", color: "var(--text-h)" }}>
+                              ⏰ {session.start_time} ({session.duration_minutes} mins)
+                            </div>
+                          </div>
+
+                          {session.started_at && (
+                            <div>
+                              <div style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "2px" }}>
+                                Started Time
+                              </div>
+                              <div style={{ fontWeight: "600", color: "var(--success-color)" }}>
+                                {new Date(session.started_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                              </div>
+                            </div>
+                          )}
+
+                          {isCompleted && (
+                            <div>
+                              <div style={{ fontSize: "11px", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "2px" }}>
+                                Actual Duration
+                              </div>
+                              <div style={{ fontWeight: "700", color: "#4f46e5" }}>
+                                {session.actual_duration_minutes || session.duration_minutes} mins
+                              </div>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Completion Note */}
+                        {isCompleted && session.completion_note && (
+                          <div style={{ fontSize: "13px", color: "var(--text-muted)", marginBottom: "12px", background: "rgba(99, 102, 241, 0.05)", padding: "10px 14px", borderRadius: "6px", borderLeft: "3px solid #6366f1" }}>
+                            <strong style={{ color: "var(--text-h)" }}>Your Summary Note:</strong> {session.completion_note}
+                          </div>
+                        )}
+
+                        {/* Cancellation Reason */}
+                        {session.status === "CANCELLED" && session.cancellation_reason && (
+                          <div style={{ fontSize: "12px", color: "var(--text-muted)", marginBottom: "10px", background: "rgba(239, 68, 68, 0.05)", padding: "8px 12px", borderRadius: "4px" }}>
+                            <strong>Cancellation Reason:</strong> {session.cancellation_reason}
+                          </div>
+                        )}
+
+                        {/* Action Buttons */}
+                        {isScheduled && (
+                          <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px", borderTop: "1px solid var(--border-color)", paddingTop: "14px", marginTop: "6px" }}>
+                            <button
+                              type="button"
+                              onClick={() => handleCancelSession(session.id)}
+                              className="btn btn-secondary"
+                              disabled={isActionLoading}
+                              style={{ padding: "6px 14px", fontSize: "12px", color: "var(--error-color)", borderColor: "rgba(239, 68, 68, 0.3)" }}
+                            >
+                              {isActionLoading ? "Processing..." : "Cancel Session"}
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => handleStartSession(session.id)}
+                              className="btn btn-primary"
+                              disabled={isActionLoading}
+                              style={{ padding: "6px 18px", fontSize: "12px", background: "var(--primary-color)" }}
+                            >
+                              {isActionLoading ? "Processing..." : "🚀 Start Session"}
+                            </button>
+                          </div>
+                        )}
+
+                        {isInProgress && (
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid var(--border-color)", paddingTop: "14px", marginTop: "6px", flexWrap: "wrap", gap: "10px" }}>
+                            <span style={{ fontSize: "12px", color: "var(--success-color)", fontWeight: "600" }}>
+                              Session currently in progress...
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setCompleteModalSession(session);
+                                setCompletionNote("");
+                              }}
+                              className="btn btn-primary"
+                              disabled={isActionLoading}
+                              style={{ padding: "6px 18px", fontSize: "12px", background: "var(--success-color)", borderColor: "var(--success-color)" }}
+                            >
+                              ✓ Complete Session
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
+
+      {/* COMPLETE SESSION MODAL */}
+      {completeModalSession && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+            padding: "20px"
+          }}
+        >
+          <div
+            style={{
+              background: "var(--card-bg, #ffffff)",
+              borderRadius: "12px",
+              width: "100%",
+              maxWidth: "500px",
+              padding: "24px",
+              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+            }}
+          >
+            <h3 style={{ margin: "0 0 8px 0", fontSize: "18px" }}>Complete Session</h3>
+            <p style={{ margin: "0 0 16px 0", fontSize: "13px", color: "var(--text-muted)" }}>
+              Completing session with <strong>{completeModalSession.student_name || "Student"}</strong> ({completeModalSession.learning_need_title || "Tutoring"}). Actual duration will be logged.
+            </p>
+
+            <div style={{ marginBottom: "16px" }}>
+              <label style={{ display: "block", fontSize: "13px", fontWeight: "600", marginBottom: "6px" }}>
+                Session Summary / Completion Note (Optional)
+              </label>
+              <textarea
+                rows={4}
+                className="form-input"
+                value={completionNote}
+                onChange={(e) => setCompletionNote(e.target.value)}
+                placeholder="Topics covered, student progress, homework assigned..."
+                style={{ width: "100%", fontSize: "13px", resize: "vertical" }}
+              />
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => setCompleteModalSession(null)}
+                disabled={sessionActionLoadingId === completeModalSession.id}
+                style={{ padding: "8px 16px", fontSize: "13px" }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => handleCompleteSession(completeModalSession.id, completionNote)}
+                disabled={sessionActionLoadingId === completeModalSession.id}
+                style={{ padding: "8px 18px", fontSize: "13px", background: "var(--success-color)", borderColor: "var(--success-color)" }}
+              >
+                {sessionActionLoadingId === completeModalSession.id ? "Completing..." : "Confirm Completion"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

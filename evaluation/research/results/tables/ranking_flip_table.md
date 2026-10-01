@@ -1,0 +1,46 @@
+# Ranking Flip Sensitivity Analysis Table ($m=5.0, \mu=3.5$)
+
+| Scenario | Weight ($w$) | Baseline Top Tutor | Feedback Top Tutor | Base Margin | Exp Margin | Flipped? |
+| :--- | :--- | :--- | :--- | :--- | :--- | :---: |
+| Scenario 1: Quality vs Compatibility | `0.00` | Tutor B (Slightly Higher Compatibility, Lower Rating) (`tutor_1b`) | Tutor B (Slightly Higher Compatibility, Lower Rating) (`tutor_1b`) | `+0.0200` | `+0.0200` | No |
+| Scenario 1: Quality vs Compatibility | `0.05` | Tutor B (Slightly Higher Compatibility, Lower Rating) (`tutor_1b`) | Tutor B (Slightly Higher Compatibility, Lower Rating) (`tutor_1b`) | `+0.0200` | `+0.0019` | No |
+| Scenario 1: Quality vs Compatibility | `0.10` | Tutor B (Slightly Higher Compatibility, Lower Rating) (`tutor_1b`) | Tutor A (High Quality, High Rating) (`tutor_1a`) | `+0.0200` | `+0.0163` | **YES [FLIP]** |
+| Scenario 1: Quality vs Compatibility | `0.15` | Tutor B (Slightly Higher Compatibility, Lower Rating) (`tutor_1b`) | Tutor A (High Quality, High Rating) (`tutor_1a`) | `+0.0200` | `+0.0344` | **YES [FLIP]** |
+| Scenario 1: Quality vs Compatibility | `0.20` | Tutor B (Slightly Higher Compatibility, Lower Rating) (`tutor_1b`) | Tutor A (High Quality, High Rating) (`tutor_1a`) | `+0.0200` | `+0.0526` | **YES [FLIP]** |
+| Scenario 1: Quality vs Compatibility | `0.30` | Tutor B (Slightly Higher Compatibility, Lower Rating) (`tutor_1b`) | Tutor A (High Quality, High Rating) (`tutor_1a`) | `+0.0200` | `+0.0889` | **YES [FLIP]** |
+| Scenario 1: Quality vs Compatibility | `0.40` | Tutor B (Slightly Higher Compatibility, Lower Rating) (`tutor_1b`) | Tutor A (High Quality, High Rating) (`tutor_1a`) | `+0.0200` | `+0.1252` | **YES [FLIP]** |
+| Scenario 2: Cold Start vs Established Tutor | `0.00` | Tutor A (Cold Start, 1 Perfect Review) (`tutor_2a`) | Tutor A (Cold Start, 1 Perfect Review) (`tutor_2a`) | `+0.0100` | `+0.0100` | No |
+| Scenario 2: Cold Start vs Established Tutor | `0.05` | Tutor A (Cold Start, 1 Perfect Review) (`tutor_2a`) | Tutor B (Established, 40 High Reviews) (`tutor_2b`) | `+0.0100` | `+0.0007` | **YES [FLIP]** |
+| Scenario 2: Cold Start vs Established Tutor | `0.10` | Tutor A (Cold Start, 1 Perfect Review) (`tutor_2a`) | Tutor B (Established, 40 High Reviews) (`tutor_2b`) | `+0.0100` | `+0.0114` | **YES [FLIP]** |
+| Scenario 2: Cold Start vs Established Tutor | `0.15` | Tutor A (Cold Start, 1 Perfect Review) (`tutor_2a`) | Tutor B (Established, 40 High Reviews) (`tutor_2b`) | `+0.0100` | `+0.0221` | **YES [FLIP]** |
+| Scenario 2: Cold Start vs Established Tutor | `0.20` | Tutor A (Cold Start, 1 Perfect Review) (`tutor_2a`) | Tutor B (Established, 40 High Reviews) (`tutor_2b`) | `+0.0100` | `+0.0328` | **YES [FLIP]** |
+| Scenario 2: Cold Start vs Established Tutor | `0.30` | Tutor A (Cold Start, 1 Perfect Review) (`tutor_2a`) | Tutor B (Established, 40 High Reviews) (`tutor_2b`) | `+0.0100` | `+0.0543` | **YES [FLIP]** |
+| Scenario 2: Cold Start vs Established Tutor | `0.40` | Tutor A (Cold Start, 1 Perfect Review) (`tutor_2a`) | Tutor B (Established, 40 High Reviews) (`tutor_2b`) | `+0.0100` | `+0.0757` | **YES [FLIP]** |
+| Scenario 3: New Tutor With No Reviews | `0.00` | Tutor A (New Candidate, 0 Reviews) (`tutor_3a`) | Tutor A (New Candidate, 0 Reviews) (`tutor_3a`) | `+0.0200` | `+0.0200` | No |
+| Scenario 3: New Tutor With No Reviews | `0.05` | Tutor A (New Candidate, 0 Reviews) (`tutor_3a`) | Tutor A (New Candidate, 0 Reviews) (`tutor_3a`) | `+0.0200` | `+0.0051` | No |
+| Scenario 3: New Tutor With No Reviews | `0.10` | Tutor A (New Candidate, 0 Reviews) (`tutor_3a`) | Tutor B (Established Candidate, 30 Reviews) (`tutor_3b`) | `+0.0200` | `+0.0099` | **YES [FLIP]** |
+| Scenario 3: New Tutor With No Reviews | `0.15` | Tutor A (New Candidate, 0 Reviews) (`tutor_3a`) | Tutor B (Established Candidate, 30 Reviews) (`tutor_3b`) | `+0.0200` | `+0.0248` | **YES [FLIP]** |
+| Scenario 3: New Tutor With No Reviews | `0.20` | Tutor A (New Candidate, 0 Reviews) (`tutor_3a`) | Tutor B (Established Candidate, 30 Reviews) (`tutor_3b`) | `+0.0200` | `+0.0397` | **YES [FLIP]** |
+| Scenario 3: New Tutor With No Reviews | `0.30` | Tutor A (New Candidate, 0 Reviews) (`tutor_3a`) | Tutor B (Established Candidate, 30 Reviews) (`tutor_3b`) | `+0.0200` | `+0.0696` | **YES [FLIP]** |
+| Scenario 3: New Tutor With No Reviews | `0.40` | Tutor A (New Candidate, 0 Reviews) (`tutor_3a`) | Tutor B (Established Candidate, 30 Reviews) (`tutor_3b`) | `+0.0200` | `+0.0994` | **YES [FLIP]** |
+| Scenario 4: Strong Compatibility vs Strong Feedback | `0.00` | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | `+0.1000` | `+0.1000` | No |
+| Scenario 4: Strong Compatibility vs Strong Feedback | `0.05` | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | `+0.1000` | `+0.0800` | No |
+| Scenario 4: Strong Compatibility vs Strong Feedback | `0.10` | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | `+0.1000` | `+0.0600` | No |
+| Scenario 4: Strong Compatibility vs Strong Feedback | `0.15` | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | `+0.1000` | `+0.0400` | No |
+| Scenario 4: Strong Compatibility vs Strong Feedback | `0.20` | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | `+0.1000` | `+0.0200` | No |
+| Scenario 4: Strong Compatibility vs Strong Feedback | `0.30` | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | Tutor B (Lower Compatibility, Near-Perfect Rating) (`tutor_4b`) | `+0.1000` | `+0.0200` | **YES [FLIP]** |
+| Scenario 4: Strong Compatibility vs Strong Feedback | `0.40` | Tutor A (Dominant Compatibility, Mediocre Rating) (`tutor_4a`) | Tutor B (Lower Compatibility, Near-Perfect Rating) (`tutor_4b`) | `+0.1000` | `+0.0600` | **YES [FLIP]** |
+| Scenario 5: Similar Compatibility, Different Feedback | `0.00` | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | `+0.0100` | `+0.0100` | No |
+| Scenario 5: Similar Compatibility, Different Feedback | `0.05` | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | `+0.0100` | `+0.0220` | No |
+| Scenario 5: Similar Compatibility, Different Feedback | `0.10` | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | `+0.0100` | `+0.0340` | No |
+| Scenario 5: Similar Compatibility, Different Feedback | `0.15` | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | `+0.0100` | `+0.0460` | No |
+| Scenario 5: Similar Compatibility, Different Feedback | `0.20` | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | `+0.0100` | `+0.0580` | No |
+| Scenario 5: Similar Compatibility, Different Feedback | `0.30` | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | `+0.0100` | `+0.0820` | No |
+| Scenario 5: Similar Compatibility, Different Feedback | `0.40` | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | Tutor A (Top Feedback, High Volume) (`tutor_5a`) | `+0.0100` | `+0.1060` | No |
+| Scenario 6: Same Rating, Different Evidence Strength | `0.00` | Tutor A (1 Review, 5.0 Stars, High Compatibility) (`tutor_6a`) | Tutor A (1 Review, 5.0 Stars, High Compatibility) (`tutor_6a`) | `+0.0100` | `+0.0100` | No |
+| Scenario 6: Same Rating, Different Evidence Strength | `0.05` | Tutor A (1 Review, 5.0 Stars, High Compatibility) (`tutor_6a`) | Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility) (`tutor_6b`) | `+0.0100` | `+0.0040` | **YES [FLIP]** |
+| Scenario 6: Same Rating, Different Evidence Strength | `0.10` | Tutor A (1 Review, 5.0 Stars, High Compatibility) (`tutor_6a`) | Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility) (`tutor_6b`) | `+0.0100` | `+0.0181` | **YES [FLIP]** |
+| Scenario 6: Same Rating, Different Evidence Strength | `0.15` | Tutor A (1 Review, 5.0 Stars, High Compatibility) (`tutor_6a`) | Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility) (`tutor_6b`) | `+0.0100` | `+0.0321` | **YES [FLIP]** |
+| Scenario 6: Same Rating, Different Evidence Strength | `0.20` | Tutor A (1 Review, 5.0 Stars, High Compatibility) (`tutor_6a`) | Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility) (`tutor_6b`) | `+0.0100` | `+0.0462` | **YES [FLIP]** |
+| Scenario 6: Same Rating, Different Evidence Strength | `0.30` | Tutor A (1 Review, 5.0 Stars, High Compatibility) (`tutor_6a`) | Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility) (`tutor_6b`) | `+0.0100` | `+0.0742` | **YES [FLIP]** |
+| Scenario 6: Same Rating, Different Evidence Strength | `0.40` | Tutor A (1 Review, 5.0 Stars, High Compatibility) (`tutor_6a`) | Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility) (`tutor_6b`) | `+0.0100` | `+0.1023` | **YES [FLIP]** |

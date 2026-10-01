@@ -18,8 +18,9 @@ export default function LoginPage() {
     try {
       const { user } = await login(email, password);
       
-      // Check onboarding completion state
-      if (user.onboarding_status === "COMPLETED") {
+      if (user.role === "VERIFICATION_REVIEWER") {
+        navigate("/dashboard/reviewer");
+      } else if (user.onboarding_status === "COMPLETED") {
         if (user.role === "STUDENT") {
           navigate("/dashboard/student");
         } else {

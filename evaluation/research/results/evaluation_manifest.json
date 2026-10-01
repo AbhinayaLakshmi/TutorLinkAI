@@ -1,0 +1,41 @@
+{
+  "pipeline_version": "1.0.0",
+  "dataset_version": "1.0.0",
+  "metrics_version": "1.0.0",
+  "execution_parameters": {
+    "pipeline_version": "1.0.0",
+    "dataset_version": "1.0.0",
+    "metrics_version": "1.0.0",
+    "feedback_weight": 0.1,
+    "smoothing_m": 5.0,
+    "global_prior": 3.5,
+    "relevance_threshold": 2,
+    "models_evaluated": [
+      "legacy_baseline",
+      "dense_semantic",
+      "topic_overlap",
+      "full_hybrid",
+      "full_hybrid_feedback"
+    ]
+  },
+  "dataset_checksums": {
+    "queries_sha256": "6e75682ccceb79db650a91dd8b18cfc8d54558579e2695659120858737f724cb",
+    "tutors_sha256": "cced0bd63d15f5863f6ac9108d0fe2e47478559ad6d4b8dd04d4c3afcea61bee",
+    "qrels_sha256": "878dafedcbf1651b886a16020efe63e55c0e4d6a57f0a6c669e5c394e5825b01",
+    "feedback_scenarios_sha256": "fe9c79bc8040ad074f2175b5ed249665f650ca11b6ae4e57283f8a06525c67fb"
+  },
+  "models_evaluated": [
+    "legacy_baseline",
+    "dense_semantic",
+    "topic_overlap",
+    "full_hybrid",
+    "full_hybrid_feedback"
+  ],
+  "output_artifacts": {
+    "model_comparison_json": "model_comparison.json",
+    "model_comparison_csv": "model_comparison.csv",
+    "model_rankings_json": "model_rankings.json",
+    "metric_summary_json": "metric_summary.json",
+    "evaluation_manifest_json": "evaluation_manifest.json"
+  }
+}

@@ -1,0 +1,43 @@
+scenario_id,scenario_title,feedback_weight,top_tutor_id,top_tutor_name,top_score,score_margin,rank_flipped
+scenario_1_quality_vs_compatibility,Scenario 1: Quality vs Compatibility,0.00,tutor_1b,"Tutor B (Slightly Higher Compatibility, Lower Rating)",0.96,0.02,False
+scenario_1_quality_vs_compatibility,Scenario 1: Quality vs Compatibility,0.05,tutor_1b,"Tutor B (Slightly Higher Compatibility, Lower Rating)",0.940035,0.001855,False
+scenario_1_quality_vs_compatibility,Scenario 1: Quality vs Compatibility,0.10,tutor_1a,"Tutor A (High Quality, High Rating)",0.93636,0.01629,True
+scenario_1_quality_vs_compatibility,Scenario 1: Quality vs Compatibility,0.15,tutor_1a,"Tutor A (High Quality, High Rating)",0.93454,0.034435,True
+scenario_1_quality_vs_compatibility,Scenario 1: Quality vs Compatibility,0.20,tutor_1a,"Tutor A (High Quality, High Rating)",0.93272,0.05258,True
+scenario_1_quality_vs_compatibility,Scenario 1: Quality vs Compatibility,0.30,tutor_1a,"Tutor A (High Quality, High Rating)",0.92908,0.08887,True
+scenario_1_quality_vs_compatibility,Scenario 1: Quality vs Compatibility,0.40,tutor_1a,"Tutor A (High Quality, High Rating)",0.92544,0.12516,True
+scenario_2_cold_start_vs_established,Scenario 2: Cold Start vs Established Tutor,0.00,tutor_2a,"Tutor A (Cold Start, 1 Perfect Review)",0.94,0.01,False
+scenario_2_cold_start_vs_established,Scenario 2: Cold Start vs Established Tutor,0.05,tutor_2b,"Tutor B (Established, 40 High Reviews)",0.928085,0.00071,True
+scenario_2_cold_start_vs_established,Scenario 2: Cold Start vs Established Tutor,0.10,tutor_2b,"Tutor B (Established, 40 High Reviews)",0.92617,0.01142,True
+scenario_2_cold_start_vs_established,Scenario 2: Cold Start vs Established Tutor,0.15,tutor_2b,"Tutor B (Established, 40 High Reviews)",0.924255,0.02213,True
+scenario_2_cold_start_vs_established,Scenario 2: Cold Start vs Established Tutor,0.20,tutor_2b,"Tutor B (Established, 40 High Reviews)",0.92234,0.03284,True
+scenario_2_cold_start_vs_established,Scenario 2: Cold Start vs Established Tutor,0.30,tutor_2b,"Tutor B (Established, 40 High Reviews)",0.91851,0.05426,True
+scenario_2_cold_start_vs_established,Scenario 2: Cold Start vs Established Tutor,0.40,tutor_2b,"Tutor B (Established, 40 High Reviews)",0.91468,0.07568,True
+scenario_3_new_tutor_no_reviews,Scenario 3: New Tutor With No Reviews,0.00,tutor_3a,"Tutor A (New Candidate, 0 Reviews)",0.94,0.02,False
+scenario_3_new_tutor_no_reviews,Scenario 3: New Tutor With No Reviews,0.05,tutor_3a,"Tutor A (New Candidate, 0 Reviews)",0.92425,0.00507,False
+scenario_3_new_tutor_no_reviews,Scenario 3: New Tutor With No Reviews,0.10,tutor_3b,"Tutor B (Established Candidate, 30 Reviews)",0.91836,0.00986,True
+scenario_3_new_tutor_no_reviews,Scenario 3: New Tutor With No Reviews,0.15,tutor_3b,"Tutor B (Established Candidate, 30 Reviews)",0.91754,0.02479,True
+scenario_3_new_tutor_no_reviews,Scenario 3: New Tutor With No Reviews,0.20,tutor_3b,"Tutor B (Established Candidate, 30 Reviews)",0.91672,0.03972,True
+scenario_3_new_tutor_no_reviews,Scenario 3: New Tutor With No Reviews,0.30,tutor_3b,"Tutor B (Established Candidate, 30 Reviews)",0.91508,0.06958,True
+scenario_3_new_tutor_no_reviews,Scenario 3: New Tutor With No Reviews,0.40,tutor_3b,"Tutor B (Established Candidate, 30 Reviews)",0.91344,0.09944,True
+scenario_4_strong_compat_vs_strong_feedback,Scenario 4: Strong Compatibility vs Strong Feedback,0.00,tutor_4a,"Tutor A (Dominant Compatibility, Mediocre Rating)",0.98,0.1,False
+scenario_4_strong_compat_vs_strong_feedback,Scenario 4: Strong Compatibility vs Strong Feedback,0.05,tutor_4a,"Tutor A (Dominant Compatibility, Mediocre Rating)",0.96225,0.08,False
+scenario_4_strong_compat_vs_strong_feedback,Scenario 4: Strong Compatibility vs Strong Feedback,0.10,tutor_4a,"Tutor A (Dominant Compatibility, Mediocre Rating)",0.9445,0.06,False
+scenario_4_strong_compat_vs_strong_feedback,Scenario 4: Strong Compatibility vs Strong Feedback,0.15,tutor_4a,"Tutor A (Dominant Compatibility, Mediocre Rating)",0.92675,0.04,False
+scenario_4_strong_compat_vs_strong_feedback,Scenario 4: Strong Compatibility vs Strong Feedback,0.20,tutor_4a,"Tutor A (Dominant Compatibility, Mediocre Rating)",0.909,0.02,False
+scenario_4_strong_compat_vs_strong_feedback,Scenario 4: Strong Compatibility vs Strong Feedback,0.30,tutor_4b,"Tutor B (Lower Compatibility, Near-Perfect Rating)",0.8935,0.02,True
+scenario_4_strong_compat_vs_strong_feedback,Scenario 4: Strong Compatibility vs Strong Feedback,0.40,tutor_4b,"Tutor B (Lower Compatibility, Near-Perfect Rating)",0.898,0.06,True
+scenario_5_similar_compat_different_feedback,"Scenario 5: Similar Compatibility, Different Feedback",0.00,tutor_5a,"Tutor A (Top Feedback, High Volume)",0.91,0.01,False
+scenario_5_similar_compat_different_feedback,"Scenario 5: Similar Compatibility, Different Feedback",0.05,tutor_5a,"Tutor A (Top Feedback, High Volume)",0.91166,0.022,False
+scenario_5_similar_compat_different_feedback,"Scenario 5: Similar Compatibility, Different Feedback",0.10,tutor_5a,"Tutor A (Top Feedback, High Volume)",0.91332,0.034,False
+scenario_5_similar_compat_different_feedback,"Scenario 5: Similar Compatibility, Different Feedback",0.15,tutor_5a,"Tutor A (Top Feedback, High Volume)",0.91498,0.046,False
+scenario_5_similar_compat_different_feedback,"Scenario 5: Similar Compatibility, Different Feedback",0.20,tutor_5a,"Tutor A (Top Feedback, High Volume)",0.91664,0.058,False
+scenario_5_similar_compat_different_feedback,"Scenario 5: Similar Compatibility, Different Feedback",0.30,tutor_5a,"Tutor A (Top Feedback, High Volume)",0.91996,0.082,False
+scenario_5_similar_compat_different_feedback,"Scenario 5: Similar Compatibility, Different Feedback",0.40,tutor_5a,"Tutor A (Top Feedback, High Volume)",0.92328,0.106,False
+scenario_6_same_rating_different_evidence,"Scenario 6: Same Rating, Different Evidence Strength",0.00,tutor_6a,"Tutor A (1 Review, 5.0 Stars, High Compatibility)",0.93,0.01,False
+scenario_6_same_rating_different_evidence,"Scenario 6: Same Rating, Different Evidence Strength",0.05,tutor_6b,"Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",0.921915,0.00404,True
+scenario_6_same_rating_different_evidence,"Scenario 6: Same Rating, Different Evidence Strength",0.10,tutor_6b,"Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",0.92383,0.01808,True
+scenario_6_same_rating_different_evidence,"Scenario 6: Same Rating, Different Evidence Strength",0.15,tutor_6b,"Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",0.925745,0.03212,True
+scenario_6_same_rating_different_evidence,"Scenario 6: Same Rating, Different Evidence Strength",0.20,tutor_6b,"Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",0.92766,0.04616,True
+scenario_6_same_rating_different_evidence,"Scenario 6: Same Rating, Different Evidence Strength",0.30,tutor_6b,"Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",0.93149,0.07424,True
+scenario_6_same_rating_different_evidence,"Scenario 6: Same Rating, Different Evidence Strength",0.40,tutor_6b,"Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",0.93532,0.10232,True

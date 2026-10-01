@@ -1,0 +1,6 @@
+configuration,valid_queries,total_tutors,precision_at_1,precision_at_3,precision_at_5,recall_at_5,mrr,ndcg_at_3,ndcg_at_5,pairwise_ranking_accuracy
+A_Legacy_Baseline,8,12,0.875,0.375,0.225,1.0,0.9375,0.967,0.967,0.9856
+B_Dense_Semantic,8,12,1.0,0.375,0.225,1.0,1.0,0.9965,0.9965,0.9958
+C_Topic_Overlap,8,12,1.0,0.375,0.225,1.0,1.0,0.9965,0.9965,0.9958
+D_Full_Hybrid,8,12,1.0,0.375,0.225,1.0,1.0,0.9965,0.9965,0.9958
+E_Full_Hybrid_Feedback,8,12,1.0,0.375,0.225,1.0,1.0,0.9965,0.9965,0.9958

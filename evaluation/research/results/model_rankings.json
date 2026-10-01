@@ -1,0 +1,1316 @@
+{
+  "legacy_baseline": {
+    "q1_physics_rotational": [
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 0.8,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 0.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      }
+    ],
+    "q2_cs_deep_learning": [
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 0.8202970245519581,
+        "learning_need_score": 1.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.7142857142857143,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "legacy_baseline"
+      }
+    ],
+    "q3_math_linear_algebra": [
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 0.912420495034254,
+        "learning_need_score": 1.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "legacy_baseline"
+      }
+    ],
+    "q4_chemistry_organic": [
+      {
+        "id": "t_chem_organic_specialist",
+        "name": "Dr. Ananya (Organic Chemist)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_chem_physical_inorganic",
+        "name": "Rajesh V (Inorganic Chemistry)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.6,
+        "model_configuration": "legacy_baseline"
+      }
+    ],
+    "q5_biology_genetics": [
+      {
+        "id": "t_bio_genetics_specialist",
+        "name": "Dr. Meenakshi (Genetics)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_bio_botany_plant_phys",
+        "name": "Geetha M (Plant Biology)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.5,
+        "model_configuration": "legacy_baseline"
+      }
+    ],
+    "q6_physics_quantum_paraphrased": [
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "legacy_baseline"
+      }
+    ],
+    "q7_cs_web_dev": [
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 0.7455717498266832,
+        "learning_need_score": 1.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.34065934065934056,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      }
+    ],
+    "q8_math_calculus_no_topics": [
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "legacy_baseline"
+      },
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 0.912420495034254,
+        "learning_need_score": 1.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "legacy_baseline"
+      }
+    ]
+  },
+  "dense_semantic": {
+    "q1_physics_rotational": [
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 0.859770679473877,
+        "learning_need_score": 0.6883792877197266,
+        "semantic_score": 0.6883792877197266,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 0.6492837972939015,
+        "learning_need_score": 0.22063066065311432,
+        "semantic_score": 0.22063066065311432,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 0.531601981818676,
+        "learning_need_score": 0.29244884848594666,
+        "semantic_score": 0.29244884848594666,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 0.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      }
+    ],
+    "q2_cs_deep_learning": [
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 0.8216210842132569,
+        "learning_need_score": 0.603602409362793,
+        "semantic_score": 0.603602409362793,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 0.5107136973777713,
+        "learning_need_score": 0.31203705072402954,
+        "semantic_score": 0.31203705072402954,
+        "topic_score": 0.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.7142857142857143,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "dense_semantic"
+      }
+    ],
+    "q3_math_linear_algebra": [
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 0.8227464318275451,
+        "learning_need_score": 0.6061031818389893,
+        "semantic_score": 0.6061031818389893,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 0.5555793473432425,
+        "learning_need_score": 0.20701967179775238,
+        "semantic_score": 0.20701967179775238,
+        "topic_score": 0.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "dense_semantic"
+      }
+    ],
+    "q4_chemistry_organic": [
+      {
+        "id": "t_chem_organic_specialist",
+        "name": "Dr. Ananya (Organic Chemist)",
+        "overall_score": 0.8261428862810135,
+        "learning_need_score": 0.6136508584022522,
+        "semantic_score": 0.6136508584022522,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_chem_physical_inorganic",
+        "name": "Rajesh V (Inorganic Chemistry)",
+        "overall_score": 0.6909328505396843,
+        "learning_need_score": 0.31318411231040955,
+        "semantic_score": 0.31318411231040955,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.6,
+        "model_configuration": "dense_semantic"
+      }
+    ],
+    "q5_biology_genetics": [
+      {
+        "id": "t_bio_genetics_specialist",
+        "name": "Dr. Meenakshi (Genetics)",
+        "overall_score": 0.7910450279712677,
+        "learning_need_score": 0.5356556177139282,
+        "semantic_score": 0.5356556177139282,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_bio_botany_plant_phys",
+        "name": "Geetha M (Plant Biology)",
+        "overall_score": 0.6848210349678994,
+        "learning_need_score": 0.29960229992866516,
+        "semantic_score": 0.29960229992866516,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.5,
+        "model_configuration": "dense_semantic"
+      }
+    ],
+    "q6_physics_quantum_paraphrased": [
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 0.8083170324563981,
+        "learning_need_score": 0.5740378499031067,
+        "semantic_score": 0.5740378499031067,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 0.6790182903409004,
+        "learning_need_score": 0.2867073118686676,
+        "semantic_score": 0.2867073118686676,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 0.6774918854236603,
+        "learning_need_score": 0.2833153009414673,
+        "semantic_score": 0.2833153009414673,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      }
+    ],
+    "q7_cs_web_dev": [
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 0.7718722224235536,
+        "learning_need_score": 0.49304938316345215,
+        "semantic_score": 0.49304938316345215,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 0.4297358313405649,
+        "learning_need_score": 0.2981424033641815,
+        "semantic_score": 0.2981424033641815,
+        "topic_score": 0.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.34065934065934056,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      }
+    ],
+    "q8_math_calculus_no_topics": [
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 0.7964285969734192,
+        "learning_need_score": 0.547619104385376,
+        "semantic_score": 0.547619104385376,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "dense_semantic"
+      },
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 0.5728933015773657,
+        "learning_need_score": 0.24549512565135956,
+        "semantic_score": 0.24549512565135956,
+        "topic_score": 0.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "dense_semantic"
+      }
+    ]
+  },
+  "topic_overlap": {
+    "q1_physics_rotational": [
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "semantic_score": 0.0,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 0.55,
+        "learning_need_score": 0.0,
+        "semantic_score": 0.0,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 0.535,
+        "learning_need_score": 0.3,
+        "semantic_score": 0.0,
+        "topic_score": 0.3,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 0.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      }
+    ],
+    "q2_cs_deep_learning": [
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "semantic_score": 0.0,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 0.370297024551958,
+        "learning_need_score": 0.0,
+        "semantic_score": 0.0,
+        "topic_score": 0.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.7142857142857143,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "topic_overlap"
+      }
+    ],
+    "q3_math_linear_algebra": [
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "semantic_score": 0.0,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 0.462420495034254,
+        "learning_need_score": 0.0,
+        "semantic_score": 0.0,
+        "topic_score": 0.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "topic_overlap"
+      }
+    ],
+    "q4_chemistry_organic": [
+      {
+        "id": "t_chem_organic_specialist",
+        "name": "Dr. Ananya (Organic Chemist)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "semantic_score": 0.0,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_chem_physical_inorganic",
+        "name": "Rajesh V (Inorganic Chemistry)",
+        "overall_score": 0.685,
+        "learning_need_score": 0.3,
+        "semantic_score": 0.0,
+        "topic_score": 0.3,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.6,
+        "model_configuration": "topic_overlap"
+      }
+    ],
+    "q5_biology_genetics": [
+      {
+        "id": "t_bio_genetics_specialist",
+        "name": "Dr. Meenakshi (Genetics)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "semantic_score": 0.0,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_bio_botany_plant_phys",
+        "name": "Geetha M (Plant Biology)",
+        "overall_score": 0.55,
+        "learning_need_score": 0.0,
+        "semantic_score": 0.0,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.5,
+        "model_configuration": "topic_overlap"
+      }
+    ],
+    "q6_physics_quantum_paraphrased": [
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 0.85,
+        "learning_need_score": 0.6666666666666666,
+        "semantic_score": 0.0,
+        "topic_score": 0.6666666666666666,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 0.685,
+        "learning_need_score": 0.3,
+        "semantic_score": 0.0,
+        "topic_score": 0.3,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 0.55,
+        "learning_need_score": 0.0,
+        "semantic_score": 0.0,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "topic_overlap"
+      }
+    ],
+    "q7_cs_web_dev": [
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 1.0,
+        "learning_need_score": 1.0,
+        "semantic_score": 0.0,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 0.2955717498266832,
+        "learning_need_score": 0.0,
+        "semantic_score": 0.0,
+        "topic_score": 0.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.34065934065934056,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      }
+    ],
+    "q8_math_calculus_no_topics": [
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 0.55,
+        "learning_need_score": 0.0,
+        "semantic_score": 0.0,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "topic_overlap"
+      },
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 0.462420495034254,
+        "learning_need_score": 0.0,
+        "semantic_score": 0.0,
+        "topic_score": 0.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "topic_overlap"
+      }
+    ]
+  },
+  "full_hybrid": {
+    "q1_physics_rotational": [
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 0.9158624076843261,
+        "learning_need_score": 0.8130275726318359,
+        "semantic_score": 0.6883792877197266,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 0.6095702783763409,
+        "learning_need_score": 0.13237839639186857,
+        "semantic_score": 0.22063066065311432,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 0.5329611890912056,
+        "learning_need_score": 0.295469309091568,
+        "semantic_score": 0.29244884848594666,
+        "topic_score": 0.3,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 0.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      }
+    ],
+    "q2_cs_deep_learning": [
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 0.8929726505279542,
+        "learning_need_score": 0.7621614456176757,
+        "semantic_score": 0.603602409362793,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 0.45454702824744597,
+        "learning_need_score": 0.1872222304344177,
+        "semantic_score": 0.31203705072402954,
+        "topic_score": 0.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.7142857142857143,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "full_hybrid"
+      }
+    ],
+    "q3_math_linear_algebra": [
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 0.8936478590965272,
+        "learning_need_score": 0.7636619091033936,
+        "semantic_score": 0.6061031818389893,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 0.5183158064196471,
+        "learning_need_score": 0.12421180307865143,
+        "semantic_score": 0.20701967179775238,
+        "topic_score": 0.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "full_hybrid"
+      }
+    ],
+    "q4_chemistry_organic": [
+      {
+        "id": "t_chem_organic_specialist",
+        "name": "Dr. Ananya (Organic Chemist)",
+        "overall_score": 0.8956857317686081,
+        "learning_need_score": 0.7681905150413513,
+        "semantic_score": 0.6136508584022522,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_chem_physical_inorganic",
+        "name": "Rajesh V (Inorganic Chemistry)",
+        "overall_score": 0.6885597103238107,
+        "learning_need_score": 0.3079104673862457,
+        "semantic_score": 0.31318411231040955,
+        "topic_score": 0.3,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.6,
+        "model_configuration": "full_hybrid"
+      }
+    ],
+    "q5_biology_genetics": [
+      {
+        "id": "t_bio_genetics_specialist",
+        "name": "Dr. Meenakshi (Genetics)",
+        "overall_score": 0.8746270167827607,
+        "learning_need_score": 0.721393370628357,
+        "semantic_score": 0.5356556177139282,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_bio_botany_plant_phys",
+        "name": "Geetha M (Plant Biology)",
+        "overall_score": 0.6308926209807396,
+        "learning_need_score": 0.1797613799571991,
+        "semantic_score": 0.29960229992866516,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.5,
+        "model_configuration": "full_hybrid"
+      }
+    ],
+    "q6_physics_quantum_paraphrased": [
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 0.8249902194738389,
+        "learning_need_score": 0.6110893766085307,
+        "semantic_score": 0.5740378499031067,
+        "topic_score": 0.6666666666666666,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 0.6804951312541961,
+        "learning_need_score": 0.2899891805648803,
+        "semantic_score": 0.2833153009414673,
+        "topic_score": 0.3,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 0.6274109742045403,
+        "learning_need_score": 0.17202438712120055,
+        "semantic_score": 0.2867073118686676,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "full_hybrid"
+      }
+    ],
+    "q7_cs_web_dev": [
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 0.8631233334541321,
+        "learning_need_score": 0.6958296298980713,
+        "semantic_score": 0.49304938316345215,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 0.37607019873501224,
+        "learning_need_score": 0.1788854420185089,
+        "semantic_score": 0.2981424033641815,
+        "topic_score": 0.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.34065934065934056,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      }
+    ],
+    "q8_math_calculus_no_topics": [
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 0.7964285969734192,
+        "learning_need_score": 0.547619104385376,
+        "semantic_score": 0.547619104385376,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "full_hybrid"
+      },
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 0.5728933015773657,
+        "learning_need_score": 0.24549512565135956,
+        "semantic_score": 0.24549512565135956,
+        "topic_score": 0.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid"
+      }
+    ]
+  },
+  "full_hybrid_feedback": {
+    "q1_physics_rotational": [
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 0.9164761669158936,
+        "learning_need_score": 0.8130275726318359,
+        "semantic_score": 0.6883792877197266,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.9158624076843261,
+        "feedback_score": 0.922,
+        "adjusted_rating": 4.6879,
+        "feedback_confidence": 0.8485,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 0.6350632505387068,
+        "learning_need_score": 0.13237839639186857,
+        "semantic_score": 0.22063066065311432,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.6095702783763409,
+        "feedback_score": 0.8645,
+        "adjusted_rating": 4.4579,
+        "feedback_confidence": 0.7368,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 0.5596650701820851,
+        "learning_need_score": 0.295469309091568,
+        "semantic_score": 0.29244884848594666,
+        "topic_score": 0.3,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 0.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.5329611890912056,
+        "feedback_score": 0.8,
+        "adjusted_rating": 4.2,
+        "feedback_confidence": 0.5,
+        "feedback_weight": 0.1
+      }
+    ],
+    "q2_cs_deep_learning": [
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 0.8964453854751587,
+        "learning_need_score": 0.7621614456176757,
+        "semantic_score": 0.603602409362793,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.8929726505279542,
+        "feedback_score": 0.9277,
+        "adjusted_rating": 4.7108,
+        "feedback_confidence": 0.8649,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 0.48284232542270145,
+        "learning_need_score": 0.1872222304344177,
+        "semantic_score": 0.31203705072402954,
+        "topic_score": 0.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.7142857142857143,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.45454702824744597,
+        "feedback_score": 0.7375,
+        "adjusted_rating": 3.95,
+        "feedback_confidence": 0.375,
+        "feedback_weight": 0.1
+      }
+    ],
+    "q3_math_linear_algebra": [
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 0.8982830731868745,
+        "learning_need_score": 0.7636619091033936,
+        "semantic_score": 0.6061031818389893,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.8936478590965272,
+        "feedback_score": 0.94,
+        "adjusted_rating": 4.76,
+        "feedback_confidence": 0.9,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 0.5547142257776825,
+        "learning_need_score": 0.12421180307865143,
+        "semantic_score": 0.20701967179775238,
+        "topic_score": 0.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.5183158064196471,
+        "feedback_score": 0.8823,
+        "adjusted_rating": 4.5292,
+        "feedback_confidence": 0.7917,
+        "feedback_weight": 0.1
+      }
+    ],
+    "q4_chemistry_organic": [
+      {
+        "id": "t_chem_organic_specialist",
+        "name": "Dr. Ananya (Organic Chemist)",
+        "overall_score": 0.8971371585917473,
+        "learning_need_score": 0.7681905150413513,
+        "semantic_score": 0.6136508584022522,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.8956857317686081,
+        "feedback_score": 0.9102,
+        "adjusted_rating": 4.6407,
+        "feedback_confidence": 0.8148,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_chem_physical_inorganic",
+        "name": "Rajesh V (Inorganic Chemistry)",
+        "overall_score": 0.6867837392914297,
+        "learning_need_score": 0.3079104673862457,
+        "semantic_score": 0.31318411231040955,
+        "topic_score": 0.3,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.6,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.6885597103238107,
+        "feedback_score": 0.6708,
+        "adjusted_rating": 3.6833,
+        "feedback_confidence": 0.1667,
+        "feedback_weight": 0.1
+      }
+    ],
+    "q5_biology_genetics": [
+      {
+        "id": "t_bio_genetics_specialist",
+        "name": "Dr. Meenakshi (Genetics)",
+        "overall_score": 0.8788343151044846,
+        "learning_need_score": 0.721393370628357,
+        "semantic_score": 0.5356556177139282,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.8746270167827607,
+        "feedback_score": 0.9167,
+        "adjusted_rating": 4.6667,
+        "feedback_confidence": 0.8333,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_bio_botany_plant_phys",
+        "name": "Geetha M (Plant Biology)",
+        "overall_score": 0.6303033588826656,
+        "learning_need_score": 0.1797613799571991,
+        "semantic_score": 0.29960229992866516,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.5,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.6308926209807396,
+        "feedback_score": 0.625,
+        "adjusted_rating": 3.5,
+        "feedback_confidence": 0.0,
+        "feedback_weight": 0.1
+      }
+    ],
+    "q6_physics_quantum_paraphrased": [
+      {
+        "id": "t_phys_quantum_theorist",
+        "name": "Dr. Paul (Quantum Physics)",
+        "overall_score": 0.822491197526455,
+        "learning_need_score": 0.6110893766085307,
+        "semantic_score": 0.5740378499031067,
+        "topic_score": 0.6666666666666666,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.8249902194738389,
+        "feedback_score": 0.8,
+        "adjusted_rating": 4.2,
+        "feedback_confidence": 0.5,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_phys_rotational_expert",
+        "name": "Dr. Subhash (Physics)",
+        "overall_score": 0.7046456181287766,
+        "learning_need_score": 0.2899891805648803,
+        "semantic_score": 0.2833153009414673,
+        "topic_score": 0.3,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.6804951312541961,
+        "feedback_score": 0.922,
+        "adjusted_rating": 4.6879,
+        "feedback_confidence": 0.8485,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_phys_astrophysics_specialist",
+        "name": "Prof. Chandrasekhar (Astrophysics)",
+        "overall_score": 0.6511198767840863,
+        "learning_need_score": 0.17202438712120055,
+        "semantic_score": 0.2867073118686676,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.6274109742045403,
+        "feedback_score": 0.8645,
+        "adjusted_rating": 4.4579,
+        "feedback_confidence": 0.7368,
+        "feedback_weight": 0.1
+      }
+    ],
+    "q7_cs_web_dev": [
+      {
+        "id": "t_cs_frontend_web",
+        "name": "Kavitha R (Web Developer)",
+        "overall_score": 0.8505610001087188,
+        "learning_need_score": 0.6958296298980713,
+        "semantic_score": 0.49304938316345215,
+        "topic_score": 1.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.7,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.8631233334541321,
+        "feedback_score": 0.7375,
+        "adjusted_rating": 3.95,
+        "feedback_confidence": 0.375,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_cs_deep_learning_expert",
+        "name": "Arun Kumar (AI/ML Engineer)",
+        "overall_score": 0.431233178861511,
+        "learning_need_score": 0.1788854420185089,
+        "semantic_score": 0.2981424033641815,
+        "topic_score": 0.0,
+        "location_score": 0.38719940847407563,
+        "fee_score": 0.34065934065934056,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.37607019873501224,
+        "feedback_score": 0.9277,
+        "adjusted_rating": 4.7108,
+        "feedback_confidence": 0.8649,
+        "feedback_weight": 0.1
+      }
+    ],
+    "q8_math_calculus_no_topics": [
+      {
+        "id": "t_math_calculus_exam_coach",
+        "name": "Suresh Raman (Calculus Specialist)",
+        "overall_score": 0.8050157372760773,
+        "learning_need_score": 0.547619104385376,
+        "semantic_score": 0.547619104385376,
+        "topic_score": 0.0,
+        "location_score": 1.0,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.8,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.7964285969734192,
+        "feedback_score": 0.8823,
+        "adjusted_rating": 4.5292,
+        "feedback_confidence": 0.7917,
+        "feedback_weight": 0.1
+      },
+      {
+        "id": "t_math_linear_algebra_specialist",
+        "name": "Prof. Strang (Linear Algebra)",
+        "overall_score": 0.6096039714196292,
+        "learning_need_score": 0.24549512565135956,
+        "semantic_score": 0.24549512565135956,
+        "topic_score": 0.0,
+        "location_score": 0.5621024751712698,
+        "fee_score": 1.0,
+        "time_score": 1.0,
+        "rating": 4.9,
+        "model_configuration": "full_hybrid_feedback",
+        "hybrid_base_score": 0.5728933015773657,
+        "feedback_score": 0.94,
+        "adjusted_rating": 4.76,
+        "feedback_confidence": 0.9,
+        "feedback_weight": 0.1
+      }
+    ]
+  }
+}

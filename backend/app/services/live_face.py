@@ -80,6 +80,7 @@ class LiveFaceService:
             return {
                 "face_detected": False,
                 "face_count": 0,
+                "face_crop": None,
                 "face_quality": "POOR",
                 "liveness_status": "FAILED",
                 "suitable_for_matching": False,
@@ -96,6 +97,7 @@ class LiveFaceService:
             return {
                 "face_detected": not is_no_face,
                 "face_count": 0 if is_no_face else (2 if is_multi else 1),
+                "face_crop": None,
                 "face_quality": "POOR",
                 "liveness_status": "FAILED",
                 "suitable_for_matching": False,
@@ -110,6 +112,7 @@ class LiveFaceService:
             return {
                 "face_detected": not is_no_face,
                 "face_count": 0 if is_no_face else (2 if is_multi else 1),
+                "face_crop": None,
                 "face_quality": "POOR",
                 "liveness_status": "FAILED",
                 "suitable_for_matching": False,
@@ -124,6 +127,7 @@ class LiveFaceService:
             return {
                 "face_detected": True,
                 "face_count": 1,
+                "face_crop": None,
                 "face_quality": "POOR",
                 "liveness_status": "FAILED",
                 "suitable_for_matching": False,
@@ -195,6 +199,7 @@ class LiveFaceService:
         return {
             "face_detected": True,
             "face_count": 1,
+            "face_crop": crop_s if liveness_status == "PASSED" else None,
             "face_quality": "GOOD",
             "image_width": int(w_s),
             "image_height": int(h_s),

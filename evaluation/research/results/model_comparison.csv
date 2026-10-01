@@ -1,0 +1,6 @@
+model_id,display_name,subject_gate,semantic_embeddings,topic_overlap,location_scoring,fee_scoring,time_scoring,bayesian_feedback,feedback_weight,precision@1,precision@3,precision@5,recall@5,mrr,ndcg@3,ndcg@5,pairwise_accuracy
+legacy_baseline,Configuration A: Legacy Baseline,True,False,False,True,True,True,False,0.0,0.875,0.375,0.225,1.0,0.9375,0.967,0.967,0.9856
+dense_semantic,Configuration B: Dense Semantic Only,True,True,False,True,True,True,False,0.0,1.0,0.375,0.225,1.0,1.0,1.0,1.0,1.0
+topic_overlap,Configuration C: Topic Overlap Only,True,False,True,True,True,True,False,0.0,1.0,0.375,0.225,1.0,1.0,0.9965,0.9965,0.9958
+full_hybrid,Configuration D: Full Hybrid Matcher (Production),True,True,True,True,True,True,False,0.0,1.0,0.375,0.225,1.0,1.0,0.9965,0.9965,0.9958
+full_hybrid_feedback,Configuration E: Full Hybrid + Feedback (Experimental),True,True,True,True,True,True,True,0.1,1.0,0.375,0.225,1.0,1.0,0.9965,0.9965,0.9958

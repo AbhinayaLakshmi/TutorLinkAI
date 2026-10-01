@@ -1,5 +1,6 @@
 import uuid
-from sqlalchemy import Column, String, Integer, ForeignKey, JSON, Text
+from datetime import datetime
+from sqlalchemy import Column, String, Integer, ForeignKey, JSON, Text, Boolean, DateTime, Numeric
 from sqlalchemy.orm import relationship
 from backend.app.models.base import Base
 
@@ -36,6 +37,7 @@ class StudentProfile(Base):
     # Relationships
     user = relationship("User", back_populates="student_profile")
     requirements = relationship("StudentRequirements", back_populates="student_profile", uselist=False, cascade="all, delete-orphan")
+    learning_needs = relationship("LearningNeed", back_populates="student_profile", cascade="all, delete-orphan")
 
 
 class StudentRequirements(Base):
@@ -52,3 +54,25 @@ class StudentRequirements(Base):
 
     # Relationships
     student_profile = relationship("StudentProfile", back_populates="requirements")
+
+
+class LearningNeed(Base):
+    __tablename__ = "learning_needs"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    student_profile_id = Column(String(36), ForeignKey("student_profiles.id", ondelete="CASCADE"), nullable=False, index=True)
+    title = Column(String(255), nullable=False)
+    subjects = Column(JSON, nullable=False)  # List of subjects
+    topics = Column(JSON, nullable=True)    # List of topics
+    learning_goals = Column(Text, nullable=True)
+    preferred_tutor_characteristics = Column(Text, nullable=True)
+    preferred_availability = Column(Text, nullable=True)
+    budget_min = Column(Numeric(10, 2), nullable=True)
+    budget_max = Column(Numeric(10, 2), nullable=True)
+    is_active = Column(Boolean, nullable=False, default=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationships
+    student_profile = relationship("StudentProfile", back_populates="learning_needs")
+

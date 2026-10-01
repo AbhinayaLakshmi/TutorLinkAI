@@ -177,6 +177,7 @@ class CertificateFaceService:
             return {
                 "face_detected": False,
                 "face_count": 0,
+                "face_crop": None,
                 "quality": "NOT_AVAILABLE",
                 "reason": f"Failed to load certificate file: {str(e)}"
             }
@@ -204,6 +205,7 @@ class CertificateFaceService:
                 # Quality Assessment
                 quality_info = self.analyze_face_quality(crop, bbox)
                 quality_info["source_page"] = page_idx
+                quality_info["face_crop"] = crop
                 all_valid_faces.append(quality_info)
 
         # Handle findings
@@ -211,6 +213,7 @@ class CertificateFaceService:
             return {
                 "face_detected": False,
                 "face_count": 0,
+                "face_crop": None,
                 "quality": "NOT_AVAILABLE",
                 "reason": "No reliable human face detected in certificate."
             }
@@ -220,6 +223,7 @@ class CertificateFaceService:
             return {
                 "face_detected": True,
                 "face_count": len(all_valid_faces),
+                "face_crop": None,
                 "quality": "REQUIRES_REVIEW",
                 "reason": f"Multiple human face candidates ({len(all_valid_faces)}) detected on certificate. Visual review required.",
                 "candidates": all_valid_faces
@@ -237,5 +241,13 @@ class CertificateFaceService:
             "quality": face["quality"],
             "quality_score": face["quality_score"],
             "suitable_for_matching": face["suitable_for_matching"],
+            "face_crop": face.get("face_crop"),
             "reason": face["reason"]
         }
+
+    def extract_certificate_face(self, file_path: str, original_filename: str = None) -> Dict[str, Any]:
+        """
+        Convenience wrapper to extract, validate, and return the single portrait face crop and metadata.
+        """
+        return self.process_certificate(file_path=file_path, original_filename=original_filename)
+

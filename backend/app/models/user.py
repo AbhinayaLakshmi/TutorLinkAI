@@ -12,7 +12,7 @@ class User(Base):
     hashed_password = Column(String(255), nullable=False)
     full_name = Column(String(255), nullable=False)
     phone_number = Column(String(50), nullable=True)
-    role = Column(String(50), nullable=False)  # STUDENT, TUTOR
+    role = Column(String(50), nullable=False)  # STUDENT, TUTOR, VERIFICATION_REVIEWER
     onboarding_status = Column(String(50), nullable=False, default="INCOMPLETE")  # INCOMPLETE, COMPLETED
     email_verified = Column(Boolean, default=False, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -21,6 +21,8 @@ class User(Base):
     student_profile = relationship("StudentProfile", back_populates="user", uselist=False, cascade="all, delete-orphan")
     tutor_profile = relationship("TutorProfile", back_populates="user", uselist=False, cascade="all, delete-orphan")
     otp_verification = relationship("OTPVerification", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    verification_reviews = relationship("VerificationReview", back_populates="reviewer", cascade="all, delete-orphan")
+
 
 
 class OTPVerification(Base):

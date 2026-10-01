@@ -4,6 +4,10 @@ from fastapi.staticfiles import StaticFiles
 from backend.app.core.config import settings
 from backend.app.modules.onboarding.routes import auth_router, onboarding_router
 from backend.app.modules.verification.routes import router as verification_router
+from backend.app.modules.matching import matching_router
+from backend.app.modules.booking import booking_router
+from backend.app.modules.session import session_router
+from backend.app.modules.review import review_router
 
 app = FastAPI(
     title="TutorLinkAI Onboarding API",
@@ -25,6 +29,10 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(onboarding_router)
 app.include_router(verification_router)
+app.include_router(matching_router)
+app.include_router(booking_router)
+app.include_router(session_router)
+app.include_router(review_router)
 
 app.mount("/uploads", StaticFiles(directory=settings.UPLOAD_DIR), name="uploads")
 

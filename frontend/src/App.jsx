@@ -9,6 +9,9 @@ import TutorOnboarding from "./pages/TutorOnboarding";
 import StudentDashboard from "./pages/StudentDashboard";
 import TutorDashboard from "./pages/TutorDashboard";
 import TutorVerificationPage from "./pages/TutorVerificationPage";
+import ReviewerDashboard from "./pages/ReviewerDashboard";
+import DemoRecommendations from "./pages/DemoRecommendations";
+import ResearchEvaluation from "./pages/ResearchEvaluation";
 import { isAuthenticated } from "./services/auth";
 
 // Route protection wrapper for authenticated pages
@@ -18,8 +21,11 @@ function ProtectedRoute({ children, requiredRole }) {
   }
 
   const user = JSON.parse(localStorage.getItem("user"));
-  if (requiredRole && user.role !== requiredRole) {
-    return <Navigate to={user.role === "STUDENT" ? "/dashboard/student" : "/dashboard/tutor"} replace />;
+  if (requiredRole && user?.role !== requiredRole) {
+    if (user?.role === "STUDENT") return <Navigate to="/dashboard/student" replace />;
+    if (user?.role === "TUTOR") return <Navigate to="/dashboard/tutor" replace />;
+    if (user?.role === "VERIFICATION_REVIEWER") return <Navigate to="/dashboard/reviewer" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return children;
@@ -34,6 +40,11 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/verify-otp" element={<OtpVerificationPage />} />
+        <Route path="/research" element={<ResearchEvaluation />} />
+
+        {/* Demo Mode Public Routes (Academic Review) */}
+        <Route path="/demo" element={<Navigate to="/demo/recommendations" replace />} />
+        <Route path="/demo/recommendations" element={<DemoRecommendations />} />
 
         {/* Protected Onboarding Routes */}
         <Route
@@ -75,6 +86,14 @@ export default function App() {
           element={
             <ProtectedRoute requiredRole="TUTOR">
               <TutorVerificationPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/reviewer"
+          element={
+            <ProtectedRoute requiredRole="VERIFICATION_REVIEWER">
+              <ReviewerDashboard />
             </ProtectedRoute>
           }
         />

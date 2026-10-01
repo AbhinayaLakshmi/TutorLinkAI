@@ -36,3 +36,20 @@ class VerificationRecord(Base):
     # Relationships
     tutor_profile = relationship("TutorProfile", backref="verification_record")
     certificate = relationship("Certificate", backref="verification_records")
+    reviews = relationship("VerificationReview", back_populates="verification_record", cascade="all, delete-orphan", order_by="desc(VerificationReview.created_at)")
+
+
+class VerificationReview(Base):
+    __tablename__ = "verification_reviews"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    verification_record_id = Column(String(36), ForeignKey("verification_records.id", ondelete="CASCADE"), nullable=False, index=True)
+    reviewer_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    decision = Column(String(50), nullable=False)  # APPROVED, REJECTED, RESUBMISSION_REQUESTED
+    reason = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
+
+    # Relationships
+    verification_record = relationship("VerificationRecord", back_populates="reviews")
+    reviewer = relationship("User", back_populates="verification_reviews")
+

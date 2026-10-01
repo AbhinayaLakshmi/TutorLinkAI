@@ -1,11 +1,13 @@
 from datetime import datetime
+from typing import List
 from sqlalchemy.orm import Session
 from backend.app.models.user import User
-from backend.app.models.student import StudentProfile, StudentRequirements
+from backend.app.models.student import StudentProfile, StudentRequirements, LearningNeed
 from backend.app.models.tutor import TutorProfile, Education, TutorExpertise, Availability, Certificate
-from backend.app.schemas.student import StudentProfileUpdate
+from backend.app.schemas.student import StudentProfileUpdate, LearningNeedCreate, LearningNeedUpdate
 from backend.app.schemas.tutor import TutorProfileUpdate
 from backend.app.core.exceptions import BadRequestException, ResourceNotFoundException
+
 
 # --- STUDENT SERVICE OPERATIONS ---
 
@@ -91,6 +93,122 @@ def complete_student_onboarding(db: Session, user_id: str) -> User:
     db.commit()
     db.refresh(user)
     return user
+
+
+# --- STUDENT LEARNING NEEDS OPERATIONS ---
+
+def get_learning_needs(db: Session, user_id: str) -> List[LearningNeed]:
+    profile = get_student_profile(db, user_id)
+    return (
+        db.query(LearningNeed)
+        .filter(LearningNeed.student_profile_id == profile.id)
+        .order_by(LearningNeed.is_active.desc(), LearningNeed.updated_at.desc(), LearningNeed.created_at.desc())
+        .all()
+    )
+
+def create_learning_need(db: Session, user_id: str, data: LearningNeedCreate) -> LearningNeed:
+    profile = get_student_profile(db, user_id)
+    if not data.subjects or len(data.subjects) == 0:
+        raise BadRequestException("At least one subject is required.")
+    
+    need = LearningNeed(
+        student_profile_id=profile.id,
+        title=data.title,
+        subjects=data.subjects,
+        topics=data.topics if data.topics is not None else [],
+        learning_goals=data.learning_goals,
+        preferred_tutor_characteristics=data.preferred_tutor_characteristics,
+        preferred_availability=data.preferred_availability,
+        budget_min=data.budget_min,
+        budget_max=data.budget_max,
+        is_active=data.is_active if data.is_active is not None else False,
+    )
+    db.add(need)
+    db.commit()
+    db.refresh(need)
+    return need
+
+def get_learning_need(db: Session, user_id: str, learning_need_id: str) -> LearningNeed:
+    profile = get_student_profile(db, user_id)
+    need = (
+        db.query(LearningNeed)
+        .filter(LearningNeed.id == learning_need_id, LearningNeed.student_profile_id == profile.id)
+        .first()
+    )
+    if not need:
+        raise ResourceNotFoundException("Learning need not found")
+    return need
+
+def update_learning_need(db: Session, user_id: str, learning_need_id: str, data: LearningNeedUpdate) -> LearningNeed:
+    profile = get_student_profile(db, user_id)
+    need = (
+        db.query(LearningNeed)
+        .filter(LearningNeed.id == learning_need_id, LearningNeed.student_profile_id == profile.id)
+        .first()
+    )
+    if not need:
+        raise ResourceNotFoundException("Learning need not found")
+    
+    if data.title is not None:
+        need.title = data.title
+    if data.subjects is not None:
+        if len(data.subjects) == 0:
+            raise BadRequestException("At least one subject is required.")
+        need.subjects = data.subjects
+    if data.topics is not None:
+        need.topics = data.topics
+    if data.learning_goals is not None:
+        need.learning_goals = data.learning_goals
+    if data.preferred_tutor_characteristics is not None:
+        need.preferred_tutor_characteristics = data.preferred_tutor_characteristics
+    if data.preferred_availability is not None:
+        need.preferred_availability = data.preferred_availability
+    if "budget_min" in data.model_fields_set:
+        need.budget_min = data.budget_min
+    elif data.budget_min is not None:
+        need.budget_min = data.budget_min
+    if "budget_max" in data.model_fields_set:
+        need.budget_max = data.budget_max
+    elif data.budget_max is not None:
+        need.budget_max = data.budget_max
+    if data.is_active is not None:
+        need.is_active = data.is_active
+        
+    need.updated_at = datetime.utcnow()
+    db.commit()
+    db.refresh(need)
+    return need
+
+def activate_learning_need(db: Session, user_id: str, learning_need_id: str) -> LearningNeed:
+    profile = get_student_profile(db, user_id)
+    need = (
+        db.query(LearningNeed)
+        .filter(LearningNeed.id == learning_need_id, LearningNeed.student_profile_id == profile.id)
+        .first()
+    )
+    if not need:
+        raise ResourceNotFoundException("Learning need not found")
+    
+    # Activate ONLY this learning need, preserving all other needs' active states
+    need.is_active = True
+    need.updated_at = datetime.utcnow()
+    db.commit()
+    db.refresh(need)
+    return need
+
+def delete_learning_need(db: Session, user_id: str, learning_need_id: str) -> None:
+    profile = get_student_profile(db, user_id)
+    need = (
+        db.query(LearningNeed)
+        .filter(LearningNeed.id == learning_need_id, LearningNeed.student_profile_id == profile.id)
+        .first()
+    )
+    if not need:
+        raise ResourceNotFoundException("Learning need not found")
+    
+    db.delete(need)
+    db.commit()
+
 
 
 # --- TUTOR SERVICE OPERATIONS ---

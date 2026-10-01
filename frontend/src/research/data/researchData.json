@@ -1,0 +1,4999 @@
+{
+  "manifest": {
+    "pipeline_version": "1.0.0",
+    "dataset_version": "1.0.0",
+    "metrics_version": "1.0.0",
+    "execution_parameters": {
+      "pipeline_version": "1.0.0",
+      "dataset_version": "1.0.0",
+      "metrics_version": "1.0.0",
+      "feedback_weight": 0.1,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "relevance_threshold": 2,
+      "models_evaluated": [
+        "legacy_baseline",
+        "dense_semantic",
+        "topic_overlap",
+        "full_hybrid",
+        "full_hybrid_feedback"
+      ]
+    },
+    "dataset_checksums": {
+      "queries_sha256": "6e75682ccceb79db650a91dd8b18cfc8d54558579e2695659120858737f724cb",
+      "tutors_sha256": "cced0bd63d15f5863f6ac9108d0fe2e47478559ad6d4b8dd04d4c3afcea61bee",
+      "qrels_sha256": "878dafedcbf1651b886a16020efe63e55c0e4d6a57f0a6c669e5c394e5825b01",
+      "feedback_scenarios_sha256": "fe9c79bc8040ad074f2175b5ed249665f650ca11b6ae4e57283f8a06525c67fb"
+    },
+    "models_evaluated": [
+      "legacy_baseline",
+      "dense_semantic",
+      "topic_overlap",
+      "full_hybrid",
+      "full_hybrid_feedback"
+    ],
+    "output_artifacts": {
+      "model_comparison_json": "model_comparison.json",
+      "model_comparison_csv": "model_comparison.csv",
+      "model_rankings_json": "model_rankings.json",
+      "metric_summary_json": "metric_summary.json",
+      "evaluation_manifest_json": "evaluation_manifest.json"
+    }
+  },
+  "dataset_summary": {
+    "dataset_version": "1.0.0",
+    "schema_version": "1.0.0",
+    "status": "VALID",
+    "error_count": 0,
+    "checksums": {
+      "queries_sha256": "6e75682ccceb79db650a91dd8b18cfc8d54558579e2695659120858737f724cb",
+      "tutors_sha256": "cced0bd63d15f5863f6ac9108d0fe2e47478559ad6d4b8dd04d4c3afcea61bee",
+      "qrels_sha256": "878dafedcbf1651b886a16020efe63e55c0e4d6a57f0a6c669e5c394e5825b01",
+      "feedback_scenarios_sha256": "fe9c79bc8040ad074f2175b5ed249665f650ca11b6ae4e57283f8a06525c67fb"
+    },
+    "record_counts": {
+      "queries": 8,
+      "tutors": 12,
+      "relevance_judgments": 96,
+      "subjects_count": 5,
+      "unique_topics_count": 52,
+      "verified_tutors_count": 12
+    },
+    "subjects": [
+      "Biology",
+      "Chemistry",
+      "Computer Science",
+      "Mathematics",
+      "Physics"
+    ],
+    "relevance_distribution": {
+      "grade_0_irrelevant": 78,
+      "grade_1_subject_matched": 9,
+      "grade_2_partial_match": 1,
+      "grade_3_strong_match": 8
+    },
+    "tutor_metrics": {
+      "rating_min": 4.5,
+      "rating_max": 4.9,
+      "rating_mean": 4.7917,
+      "review_count_min": 0,
+      "review_count_max": 45,
+      "review_count_mean": 16.8333,
+      "hourly_rate_min": 350.0,
+      "hourly_rate_max": 800.0,
+      "hourly_rate_mean": 545.8333
+    },
+    "student_budget_metrics": {
+      "budget_min_range_min": 300.0,
+      "budget_min_range_max": 500.0,
+      "budget_min_mean": 406.25,
+      "budget_max_range_min": 650.0,
+      "budget_max_range_max": 1200.0,
+      "budget_max_mean": 862.5
+    }
+  },
+  "model_comparison": [
+    {
+      "model_id": "legacy_baseline",
+      "display_name": "Configuration A: Legacy Baseline",
+      "subject_gate": true,
+      "semantic_embeddings": false,
+      "topic_overlap": false,
+      "location_scoring": true,
+      "fee_scoring": true,
+      "time_scoring": true,
+      "bayesian_feedback": false,
+      "feedback_weight": 0.0,
+      "precision@1": 0.875,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 0.9375,
+      "ndcg@3": 0.967,
+      "ndcg@5": 0.967,
+      "pairwise_accuracy": 0.9856
+    },
+    {
+      "model_id": "dense_semantic",
+      "display_name": "Configuration B: Dense Semantic Only",
+      "subject_gate": true,
+      "semantic_embeddings": true,
+      "topic_overlap": false,
+      "location_scoring": true,
+      "fee_scoring": true,
+      "time_scoring": true,
+      "bayesian_feedback": false,
+      "feedback_weight": 0.0,
+      "precision@1": 1.0,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "ndcg@3": 1.0,
+      "ndcg@5": 1.0,
+      "pairwise_accuracy": 1.0
+    },
+    {
+      "model_id": "topic_overlap",
+      "display_name": "Configuration C: Topic Overlap Only",
+      "subject_gate": true,
+      "semantic_embeddings": false,
+      "topic_overlap": true,
+      "location_scoring": true,
+      "fee_scoring": true,
+      "time_scoring": true,
+      "bayesian_feedback": false,
+      "feedback_weight": 0.0,
+      "precision@1": 1.0,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "ndcg@3": 0.9965,
+      "ndcg@5": 0.9965,
+      "pairwise_accuracy": 0.9958
+    },
+    {
+      "model_id": "full_hybrid",
+      "display_name": "Configuration D: Full Hybrid Matcher (Production)",
+      "subject_gate": true,
+      "semantic_embeddings": true,
+      "topic_overlap": true,
+      "location_scoring": true,
+      "fee_scoring": true,
+      "time_scoring": true,
+      "bayesian_feedback": false,
+      "feedback_weight": 0.0,
+      "precision@1": 1.0,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "ndcg@3": 0.9965,
+      "ndcg@5": 0.9965,
+      "pairwise_accuracy": 0.9958
+    },
+    {
+      "model_id": "full_hybrid_feedback",
+      "display_name": "Configuration E: Full Hybrid + Feedback (Experimental)",
+      "subject_gate": true,
+      "semantic_embeddings": true,
+      "topic_overlap": true,
+      "location_scoring": true,
+      "fee_scoring": true,
+      "time_scoring": true,
+      "bayesian_feedback": true,
+      "feedback_weight": 0.1,
+      "precision@1": 1.0,
+      "precision@3": 0.375,
+      "precision@5": 0.225,
+      "recall@5": 1.0,
+      "mrr": 1.0,
+      "ndcg@3": 0.9965,
+      "ndcg@5": 0.9965,
+      "pairwise_accuracy": 0.9958
+    }
+  ],
+  "metric_summary": {
+    "config": {
+      "pipeline_version": "1.0.0",
+      "dataset_version": "1.0.0",
+      "metrics_version": "1.0.0",
+      "feedback_weight": 0.1,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "relevance_threshold": 2,
+      "models_evaluated": [
+        "legacy_baseline",
+        "dense_semantic",
+        "topic_overlap",
+        "full_hybrid",
+        "full_hybrid_feedback"
+      ]
+    },
+    "aggregated_metrics": {
+      "legacy_baseline": {
+        "precision@1": 0.875,
+        "precision@3": 0.375,
+        "precision@5": 0.225,
+        "recall@5": 1.0,
+        "mrr": 0.9375,
+        "ndcg@3": 0.967,
+        "ndcg@5": 0.967,
+        "pairwise_accuracy": 0.9856
+      },
+      "dense_semantic": {
+        "precision@1": 1.0,
+        "precision@3": 0.375,
+        "precision@5": 0.225,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 1.0,
+        "ndcg@5": 1.0,
+        "pairwise_accuracy": 1.0
+      },
+      "topic_overlap": {
+        "precision@1": 1.0,
+        "precision@3": 0.375,
+        "precision@5": 0.225,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 0.9965,
+        "ndcg@5": 0.9965,
+        "pairwise_accuracy": 0.9958
+      },
+      "full_hybrid": {
+        "precision@1": 1.0,
+        "precision@3": 0.375,
+        "precision@5": 0.225,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 0.9965,
+        "ndcg@5": 0.9965,
+        "pairwise_accuracy": 0.9958
+      },
+      "full_hybrid_feedback": {
+        "precision@1": 1.0,
+        "precision@3": 0.375,
+        "precision@5": 0.225,
+        "recall@5": 1.0,
+        "mrr": 1.0,
+        "ndcg@3": 0.9965,
+        "ndcg@5": 0.9965,
+        "pairwise_accuracy": 0.9958
+      }
+    },
+    "per_query_metrics": {
+      "legacy_baseline": [
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 0.9827586206896551,
+          "query_id": "q1_physics_rotational"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q2_cs_deep_learning"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q3_math_linear_algebra"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 0.9761904761904762,
+          "query_id": "q4_chemistry_organic"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 0.9761904761904762,
+          "query_id": "q5_biology_genetics"
+        },
+        {
+          "precision@1": 0.0,
+          "precision@3": 0.6666666666666666,
+          "precision@5": 0.4,
+          "recall@5": 1.0,
+          "mrr": 0.5,
+          "ndcg@3": 0.7363636171343382,
+          "ndcg@5": 0.7363636171343382,
+          "pairwise_accuracy": 0.95,
+          "query_id": "q6_physics_quantum_paraphrased"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q7_cs_web_dev"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q8_math_calculus_no_topics"
+        }
+      ],
+      "dense_semantic": [
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q1_physics_rotational"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q2_cs_deep_learning"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q3_math_linear_algebra"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q4_chemistry_organic"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q5_biology_genetics"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.6666666666666666,
+          "precision@5": 0.4,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q6_physics_quantum_paraphrased"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q7_cs_web_dev"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q8_math_calculus_no_topics"
+        }
+      ],
+      "topic_overlap": [
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q1_physics_rotational"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q2_cs_deep_learning"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q3_math_linear_algebra"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q4_chemistry_organic"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q5_biology_genetics"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.6666666666666666,
+          "precision@5": 0.4,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 0.9721212198129313,
+          "ndcg@5": 0.9721212198129313,
+          "pairwise_accuracy": 0.9666666666666667,
+          "query_id": "q6_physics_quantum_paraphrased"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q7_cs_web_dev"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q8_math_calculus_no_topics"
+        }
+      ],
+      "full_hybrid": [
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q1_physics_rotational"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q2_cs_deep_learning"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q3_math_linear_algebra"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q4_chemistry_organic"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q5_biology_genetics"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.6666666666666666,
+          "precision@5": 0.4,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 0.9721212198129313,
+          "ndcg@5": 0.9721212198129313,
+          "pairwise_accuracy": 0.9666666666666667,
+          "query_id": "q6_physics_quantum_paraphrased"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q7_cs_web_dev"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q8_math_calculus_no_topics"
+        }
+      ],
+      "full_hybrid_feedback": [
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q1_physics_rotational"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q2_cs_deep_learning"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q3_math_linear_algebra"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q4_chemistry_organic"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q5_biology_genetics"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.6666666666666666,
+          "precision@5": 0.4,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 0.9721212198129313,
+          "ndcg@5": 0.9721212198129313,
+          "pairwise_accuracy": 0.9666666666666667,
+          "query_id": "q6_physics_quantum_paraphrased"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q7_cs_web_dev"
+        },
+        {
+          "precision@1": 1.0,
+          "precision@3": 0.3333333333333333,
+          "precision@5": 0.2,
+          "recall@5": 1.0,
+          "mrr": 1.0,
+          "ndcg@3": 1.0,
+          "ndcg@5": 1.0,
+          "pairwise_accuracy": 1.0,
+          "query_id": "q8_math_calculus_no_topics"
+        }
+      ]
+    }
+  },
+  "queries": [
+    {
+      "query_id": "q1_physics_rotational",
+      "subject": "Physics",
+      "subjects_needed": "Physics",
+      "topics": [
+        "Rotational Motion",
+        "Mechanics",
+        "Angular Momentum"
+      ],
+      "learning_goals": "Master rotational dynamics and problem solving for competitive entrance exam",
+      "preferred_tutor_characteristics": "Patient, step-by-step mathematical derivations",
+      "student_level": "High School (Class 12)",
+      "preferred_learning_mode": "Online",
+      "preferred_tutor_languages": [
+        "English"
+      ],
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "budget_min": 400.0,
+      "budget_max": 800.0,
+      "preferred_slots": [
+        {
+          "day": "Monday",
+          "start_time": "16:00",
+          "end_time": "18:00"
+        }
+      ]
+    },
+    {
+      "query_id": "q2_cs_deep_learning",
+      "subject": "Computer Science",
+      "subjects_needed": "Computer Science",
+      "topics": [
+        "Deep Learning",
+        "Neural Networks",
+        "PyTorch"
+      ],
+      "learning_goals": "Implement backpropagation, convolutional networks, and transformer architectures",
+      "preferred_tutor_characteristics": "Hands-on coding mentor with practical debugging experience",
+      "student_level": "Undergraduate (Computer Science)",
+      "preferred_learning_mode": "Online",
+      "preferred_tutor_languages": [
+        "English"
+      ],
+      "latitude": 13.0012,
+      "longitude": 80.2565,
+      "budget_min": 500.0,
+      "budget_max": 1200.0,
+      "preferred_slots": [
+        {
+          "day": "Saturday",
+          "start_time": "10:00",
+          "end_time": "13:00"
+        }
+      ]
+    },
+    {
+      "query_id": "q3_math_linear_algebra",
+      "subject": "Mathematics",
+      "subjects_needed": "Mathematics",
+      "topics": [
+        "Linear Algebra",
+        "Matrix Decompositions",
+        "Eigenvalues"
+      ],
+      "learning_goals": "Understand linear transformations, vector spaces, and theoretical proofs",
+      "preferred_tutor_characteristics": "Proof-based teaching with clear geometric visualization",
+      "student_level": "Undergraduate (Engineering)",
+      "preferred_learning_mode": "Online",
+      "preferred_tutor_languages": [
+        "English"
+      ],
+      "latitude": 13.085,
+      "longitude": 80.2101,
+      "budget_min": 400.0,
+      "budget_max": 900.0,
+      "preferred_slots": [
+        {
+          "day": "Wednesday",
+          "start_time": "18:00",
+          "end_time": "20:00"
+        }
+      ]
+    },
+    {
+      "query_id": "q4_chemistry_organic",
+      "subject": "Chemistry",
+      "subjects_needed": "Chemistry",
+      "topics": [
+        "Organic Reaction Mechanisms",
+        "Stereochemistry",
+        "Name Reactions"
+      ],
+      "learning_goals": "Master reaction mechanisms, synthesis pathways, and resonance structures",
+      "preferred_tutor_characteristics": "Visual reaction mapping and memory mnemonics",
+      "student_level": "High School (Class 11)",
+      "preferred_learning_mode": "Offline",
+      "preferred_tutor_languages": [
+        "English",
+        "Tamil"
+      ],
+      "latitude": 12.9796,
+      "longitude": 80.2196,
+      "budget_min": 350.0,
+      "budget_max": 750.0,
+      "preferred_slots": [
+        {
+          "day": "Sunday",
+          "start_time": "09:00",
+          "end_time": "11:00"
+        }
+      ]
+    },
+    {
+      "query_id": "q5_biology_genetics",
+      "subject": "Biology",
+      "subjects_needed": "Biology",
+      "topics": [
+        "Molecular Genetics",
+        "DNA Replication",
+        "Mendelian Genetics"
+      ],
+      "learning_goals": "Master genetic inheritance patterns and molecular biology for medical entrance",
+      "preferred_tutor_characteristics": "Structured diagrammatic explanations and test series revision",
+      "student_level": "High School (Class 12)",
+      "preferred_learning_mode": "Online",
+      "preferred_tutor_languages": [
+        "English"
+      ],
+      "latitude": 13.0418,
+      "longitude": 80.2337,
+      "budget_min": 400.0,
+      "budget_max": 800.0,
+      "preferred_slots": [
+        {
+          "day": "Friday",
+          "start_time": "17:00",
+          "end_time": "19:00"
+        }
+      ]
+    },
+    {
+      "query_id": "q6_physics_quantum_paraphrased",
+      "subject": "Physics",
+      "subjects_needed": "Physics",
+      "topics": [
+        "wave mechanics",
+        "Schrodinger equation",
+        "quantum state transitions"
+      ],
+      "learning_goals": "Conceptual understanding of foundational quantum principles and operator algebra",
+      "preferred_tutor_characteristics": "Concept-focused theoretical physicist",
+      "student_level": "Undergraduate",
+      "preferred_learning_mode": "Online",
+      "preferred_tutor_languages": [
+        "English"
+      ],
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "budget_min": 500.0,
+      "budget_max": 1000.0,
+      "preferred_slots": []
+    },
+    {
+      "query_id": "q7_cs_web_dev",
+      "subject": "Computer Science",
+      "subjects_needed": "Computer Science",
+      "topics": [
+        "React",
+        "JavaScript",
+        "Frontend Development"
+      ],
+      "learning_goals": "Build interactive responsive web applications and state management",
+      "preferred_tutor_characteristics": "Interactive project-based live coding mentor",
+      "student_level": "Beginner",
+      "preferred_learning_mode": "Online",
+      "preferred_tutor_languages": [
+        "English"
+      ],
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "budget_min": 300.0,
+      "budget_max": 650.0,
+      "preferred_slots": []
+    },
+    {
+      "query_id": "q8_math_calculus_no_topics",
+      "subject": "Mathematics",
+      "subjects_needed": "Mathematics",
+      "topics": [],
+      "learning_goals": "Score top marks in high school board calculus exam",
+      "preferred_tutor_characteristics": "Exam techniques and past paper practice",
+      "student_level": "High School",
+      "preferred_learning_mode": "Online",
+      "preferred_tutor_languages": [
+        "English"
+      ],
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "budget_min": 400.0,
+      "budget_max": 800.0,
+      "preferred_slots": []
+    }
+  ],
+  "tutors": [
+    {
+      "tutor_id": "t_phys_rotational_expert",
+      "name": "Dr. Subhash (Physics)",
+      "subjects": [
+        "Physics"
+      ],
+      "subjects_taught": [
+        "Physics"
+      ],
+      "topics_expertise": [
+        "Rotational Motion",
+        "Mechanics",
+        "Angular Momentum",
+        "Rigid Body Dynamics"
+      ],
+      "skills": [
+        "Mathematical derivations",
+        "Step-by-step problem solving",
+        "Exam preparation"
+      ],
+      "student_levels": [
+        "High School (Class 12)",
+        "Undergraduate"
+      ],
+      "languages_can_teach_in": [
+        "English"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 550.0,
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "location": "Chennai Central",
+      "availability": [
+        {
+          "day": "Monday",
+          "start_time": "15:00",
+          "end_time": "19:00"
+        }
+      ],
+      "rating": 4.9,
+      "review_count": 28,
+      "years_of_experience": 8,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_phys_astrophysics_specialist",
+      "name": "Prof. Chandrasekhar (Astrophysics)",
+      "subjects": [
+        "Physics"
+      ],
+      "subjects_taught": [
+        "Physics"
+      ],
+      "topics_expertise": [
+        "Astrophysics",
+        "General Relativity",
+        "Cosmology",
+        "Stellar Evolution"
+      ],
+      "skills": [
+        "Astronomical data analysis",
+        "Theoretical physics research"
+      ],
+      "student_levels": [
+        "Postgraduate",
+        "Research Scholars"
+      ],
+      "languages_can_teach_in": [
+        "English"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 600.0,
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "location": "Chennai Central",
+      "availability": [
+        {
+          "day": "Monday",
+          "start_time": "16:00",
+          "end_time": "18:00"
+        }
+      ],
+      "rating": 4.8,
+      "review_count": 14,
+      "years_of_experience": 12,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_phys_quantum_theorist",
+      "name": "Dr. Paul (Quantum Physics)",
+      "subjects": [
+        "Physics"
+      ],
+      "subjects_taught": [
+        "Physics"
+      ],
+      "topics_expertise": [
+        "Quantum Mechanics",
+        "Wave Mechanics",
+        "Schrodinger Equation",
+        "Operator Algebra"
+      ],
+      "skills": [
+        "Thought experiments",
+        "Conceptual physics foundations",
+        "Quantum formalism"
+      ],
+      "student_levels": [
+        "Undergraduate",
+        "Postgraduate"
+      ],
+      "languages_can_teach_in": [
+        "English"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 700.0,
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "location": "Adyar",
+      "availability": [
+        {
+          "day": "Monday",
+          "start_time": "10:00",
+          "end_time": "14:00"
+        }
+      ],
+      "rating": 4.9,
+      "review_count": 5,
+      "years_of_experience": 10,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_cs_deep_learning_expert",
+      "name": "Arun Kumar (AI/ML Engineer)",
+      "subjects": [
+        "Computer Science"
+      ],
+      "subjects_taught": [
+        "Computer Science"
+      ],
+      "topics_expertise": [
+        "Deep Learning",
+        "Neural Networks",
+        "PyTorch",
+        "Transformers",
+        "Computer Vision"
+      ],
+      "skills": [
+        "Hands-on coding",
+        "GPU optimization",
+        "PyTorch model debugging",
+        "Architecture design"
+      ],
+      "student_levels": [
+        "Undergraduate (Computer Science)",
+        "Working Professionals"
+      ],
+      "languages_can_teach_in": [
+        "English"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 800.0,
+      "latitude": 13.0012,
+      "longitude": 80.2565,
+      "location": "Adyar",
+      "availability": [
+        {
+          "day": "Saturday",
+          "start_time": "09:00",
+          "end_time": "14:00"
+        }
+      ],
+      "rating": 4.9,
+      "review_count": 32,
+      "years_of_experience": 6,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_cs_frontend_web",
+      "name": "Kavitha R (Web Developer)",
+      "subjects": [
+        "Computer Science"
+      ],
+      "subjects_taught": [
+        "Computer Science"
+      ],
+      "topics_expertise": [
+        "React",
+        "JavaScript",
+        "HTML/CSS",
+        "Frontend Development",
+        "Redux"
+      ],
+      "skills": [
+        "Live coding",
+        "Portfolio building",
+        "UI/UX component design"
+      ],
+      "student_levels": [
+        "Beginner",
+        "High School",
+        "Undergraduate"
+      ],
+      "languages_can_teach_in": [
+        "English"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 450.0,
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "location": "Chennai Central",
+      "availability": [
+        {
+          "day": "Saturday",
+          "start_time": "10:00",
+          "end_time": "13:00"
+        }
+      ],
+      "rating": 4.7,
+      "review_count": 3,
+      "years_of_experience": 4,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_math_linear_algebra_specialist",
+      "name": "Prof. Strang (Linear Algebra)",
+      "subjects": [
+        "Mathematics"
+      ],
+      "subjects_taught": [
+        "Mathematics"
+      ],
+      "topics_expertise": [
+        "Linear Algebra",
+        "Matrix Decompositions",
+        "Eigenvalues",
+        "Vector Spaces"
+      ],
+      "skills": [
+        "Proof-based rigor",
+        "Geometric visualization",
+        "Applied mathematics"
+      ],
+      "student_levels": [
+        "Undergraduate (Engineering)",
+        "Postgraduate"
+      ],
+      "languages_can_teach_in": [
+        "English"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 650.0,
+      "latitude": 13.085,
+      "longitude": 80.2101,
+      "location": "Anna Nagar",
+      "availability": [
+        {
+          "day": "Wednesday",
+          "start_time": "17:00",
+          "end_time": "21:00"
+        }
+      ],
+      "rating": 4.9,
+      "review_count": 45,
+      "years_of_experience": 15,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_math_calculus_exam_coach",
+      "name": "Suresh Raman (Calculus Specialist)",
+      "subjects": [
+        "Mathematics"
+      ],
+      "subjects_taught": [
+        "Mathematics"
+      ],
+      "topics_expertise": [
+        "Calculus",
+        "Differentiation",
+        "Integration",
+        "Board Exam Preparation"
+      ],
+      "skills": [
+        "Exam techniques",
+        "Fast problem solving",
+        "Past paper revision"
+      ],
+      "student_levels": [
+        "High School",
+        "High School (Class 12)"
+      ],
+      "languages_can_teach_in": [
+        "English",
+        "Tamil"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 500.0,
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "location": "Chennai Central",
+      "availability": [
+        {
+          "day": "Wednesday",
+          "start_time": "18:00",
+          "end_time": "20:00"
+        }
+      ],
+      "rating": 4.8,
+      "review_count": 19,
+      "years_of_experience": 7,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_chem_organic_specialist",
+      "name": "Dr. Ananya (Organic Chemist)",
+      "subjects": [
+        "Chemistry"
+      ],
+      "subjects_taught": [
+        "Chemistry"
+      ],
+      "topics_expertise": [
+        "Organic Reaction Mechanisms",
+        "Stereochemistry",
+        "Name Reactions",
+        "Synthesis"
+      ],
+      "skills": [
+        "Reaction maps",
+        "Memory mnemonics",
+        "Entrance exam coaching"
+      ],
+      "student_levels": [
+        "High School (Class 11)",
+        "High School (Class 12)"
+      ],
+      "languages_can_teach_in": [
+        "English",
+        "Tamil"
+      ],
+      "preferred_teaching_mode": "Offline",
+      "hourly_rate": 500.0,
+      "latitude": 12.9796,
+      "longitude": 80.2196,
+      "location": "Velachery",
+      "availability": [
+        {
+          "day": "Sunday",
+          "start_time": "08:30",
+          "end_time": "12:00"
+        }
+      ],
+      "rating": 4.9,
+      "review_count": 22,
+      "years_of_experience": 9,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_chem_physical_inorganic",
+      "name": "Rajesh V (Inorganic Chemistry)",
+      "subjects": [
+        "Chemistry"
+      ],
+      "subjects_taught": [
+        "Chemistry"
+      ],
+      "topics_expertise": [
+        "Inorganic Chemistry",
+        "Coordination Compounds",
+        "Periodic Trends",
+        "Thermodynamics"
+      ],
+      "skills": [
+        "Formula practice",
+        "Periodic table memorization"
+      ],
+      "student_levels": [
+        "High School (Class 11)",
+        "High School (Class 12)"
+      ],
+      "languages_can_teach_in": [
+        "English"
+      ],
+      "preferred_teaching_mode": "Offline",
+      "hourly_rate": 450.0,
+      "latitude": 12.9796,
+      "longitude": 80.2196,
+      "location": "Velachery",
+      "availability": [
+        {
+          "day": "Sunday",
+          "start_time": "09:00",
+          "end_time": "11:00"
+        }
+      ],
+      "rating": 4.6,
+      "review_count": 1,
+      "years_of_experience": 5,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_bio_genetics_specialist",
+      "name": "Dr. Meenakshi (Genetics)",
+      "subjects": [
+        "Biology"
+      ],
+      "subjects_taught": [
+        "Biology"
+      ],
+      "topics_expertise": [
+        "Molecular Genetics",
+        "DNA Replication",
+        "Mendelian Genetics",
+        "Biotechnology"
+      ],
+      "skills": [
+        "Diagrammatic explanations",
+        "NEET question banks",
+        "Active recall quizzes"
+      ],
+      "student_levels": [
+        "High School (Class 12)",
+        "Medical Aspirants"
+      ],
+      "languages_can_teach_in": [
+        "English"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 600.0,
+      "latitude": 13.0418,
+      "longitude": 80.2337,
+      "location": "T Nagar",
+      "availability": [
+        {
+          "day": "Friday",
+          "start_time": "16:00",
+          "end_time": "20:00"
+        }
+      ],
+      "rating": 4.9,
+      "review_count": 25,
+      "years_of_experience": 11,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_bio_botany_plant_phys",
+      "name": "Geetha M (Plant Biology)",
+      "subjects": [
+        "Biology"
+      ],
+      "subjects_taught": [
+        "Biology"
+      ],
+      "topics_expertise": [
+        "Plant Physiology",
+        "Morphology",
+        "Photosynthesis",
+        "Ecology"
+      ],
+      "skills": [
+        "Plant anatomy sketches",
+        "Ecology case studies"
+      ],
+      "student_levels": [
+        "High School (Class 11)",
+        "High School (Class 12)"
+      ],
+      "languages_can_teach_in": [
+        "English"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 400.0,
+      "latitude": 13.0418,
+      "longitude": 80.2337,
+      "location": "T Nagar",
+      "availability": [
+        {
+          "day": "Friday",
+          "start_time": "17:00",
+          "end_time": "19:00"
+        }
+      ],
+      "rating": 4.5,
+      "review_count": 0,
+      "years_of_experience": 4,
+      "is_verified": true
+    },
+    {
+      "tutor_id": "t_hist_cross_subject_irrelevant",
+      "name": "Venkatesh S (History & Civics)",
+      "subjects": [
+        "History",
+        "Social Studies"
+      ],
+      "subjects_taught": [
+        "History",
+        "Social Studies"
+      ],
+      "topics_expertise": [
+        "Indian National Movement",
+        "World History",
+        "Civics"
+      ],
+      "skills": [
+        "Storytelling",
+        "Historical timelines",
+        "Essay writing"
+      ],
+      "student_levels": [
+        "High School",
+        "Middle School"
+      ],
+      "languages_can_teach_in": [
+        "English",
+        "Tamil"
+      ],
+      "preferred_teaching_mode": "Online",
+      "hourly_rate": 350.0,
+      "latitude": 13.0827,
+      "longitude": 80.2707,
+      "location": "Chennai Central",
+      "availability": [
+        {
+          "day": "Monday",
+          "start_time": "16:00",
+          "end_time": "18:00"
+        }
+      ],
+      "rating": 4.7,
+      "review_count": 8,
+      "years_of_experience": 6,
+      "is_verified": true
+    }
+  ],
+  "qrels": {
+    "q1_physics_rotational": {
+      "t_phys_rotational_expert": 3,
+      "t_phys_quantum_theorist": 1,
+      "t_phys_astrophysics_specialist": 1,
+      "t_cs_deep_learning_expert": 0,
+      "t_cs_frontend_web": 0,
+      "t_math_linear_algebra_specialist": 0,
+      "t_math_calculus_exam_coach": 0,
+      "t_chem_organic_specialist": 0,
+      "t_chem_physical_inorganic": 0,
+      "t_bio_genetics_specialist": 0,
+      "t_bio_botany_plant_phys": 0,
+      "t_hist_cross_subject_irrelevant": 0
+    },
+    "q2_cs_deep_learning": {
+      "t_cs_deep_learning_expert": 3,
+      "t_cs_frontend_web": 1,
+      "t_phys_rotational_expert": 0,
+      "t_phys_quantum_theorist": 0,
+      "t_phys_astrophysics_specialist": 0,
+      "t_math_linear_algebra_specialist": 0,
+      "t_math_calculus_exam_coach": 0,
+      "t_chem_organic_specialist": 0,
+      "t_chem_physical_inorganic": 0,
+      "t_bio_genetics_specialist": 0,
+      "t_bio_botany_plant_phys": 0,
+      "t_hist_cross_subject_irrelevant": 0
+    },
+    "q3_math_linear_algebra": {
+      "t_math_linear_algebra_specialist": 3,
+      "t_math_calculus_exam_coach": 1,
+      "t_phys_rotational_expert": 0,
+      "t_phys_quantum_theorist": 0,
+      "t_phys_astrophysics_specialist": 0,
+      "t_cs_deep_learning_expert": 0,
+      "t_cs_frontend_web": 0,
+      "t_chem_organic_specialist": 0,
+      "t_chem_physical_inorganic": 0,
+      "t_bio_genetics_specialist": 0,
+      "t_bio_botany_plant_phys": 0,
+      "t_hist_cross_subject_irrelevant": 0
+    },
+    "q4_chemistry_organic": {
+      "t_chem_organic_specialist": 3,
+      "t_chem_physical_inorganic": 1,
+      "t_phys_rotational_expert": 0,
+      "t_phys_quantum_theorist": 0,
+      "t_phys_astrophysics_specialist": 0,
+      "t_cs_deep_learning_expert": 0,
+      "t_cs_frontend_web": 0,
+      "t_math_linear_algebra_specialist": 0,
+      "t_math_calculus_exam_coach": 0,
+      "t_bio_genetics_specialist": 0,
+      "t_bio_botany_plant_phys": 0,
+      "t_hist_cross_subject_irrelevant": 0
+    },
+    "q5_biology_genetics": {
+      "t_bio_genetics_specialist": 3,
+      "t_bio_botany_plant_phys": 1,
+      "t_phys_rotational_expert": 0,
+      "t_phys_quantum_theorist": 0,
+      "t_phys_astrophysics_specialist": 0,
+      "t_cs_deep_learning_expert": 0,
+      "t_cs_frontend_web": 0,
+      "t_math_linear_algebra_specialist": 0,
+      "t_math_calculus_exam_coach": 0,
+      "t_chem_organic_specialist": 0,
+      "t_chem_physical_inorganic": 0,
+      "t_hist_cross_subject_irrelevant": 0
+    },
+    "q6_physics_quantum_paraphrased": {
+      "t_phys_quantum_theorist": 3,
+      "t_phys_astrophysics_specialist": 2,
+      "t_phys_rotational_expert": 1,
+      "t_cs_deep_learning_expert": 0,
+      "t_cs_frontend_web": 0,
+      "t_math_linear_algebra_specialist": 0,
+      "t_math_calculus_exam_coach": 0,
+      "t_chem_organic_specialist": 0,
+      "t_chem_physical_inorganic": 0,
+      "t_bio_genetics_specialist": 0,
+      "t_bio_botany_plant_phys": 0,
+      "t_hist_cross_subject_irrelevant": 0
+    },
+    "q7_cs_web_dev": {
+      "t_cs_frontend_web": 3,
+      "t_cs_deep_learning_expert": 1,
+      "t_phys_rotational_expert": 0,
+      "t_phys_quantum_theorist": 0,
+      "t_phys_astrophysics_specialist": 0,
+      "t_math_linear_algebra_specialist": 0,
+      "t_math_calculus_exam_coach": 0,
+      "t_chem_organic_specialist": 0,
+      "t_chem_physical_inorganic": 0,
+      "t_bio_genetics_specialist": 0,
+      "t_bio_botany_plant_phys": 0,
+      "t_hist_cross_subject_irrelevant": 0
+    },
+    "q8_math_calculus_no_topics": {
+      "t_math_calculus_exam_coach": 3,
+      "t_math_linear_algebra_specialist": 1,
+      "t_phys_rotational_expert": 0,
+      "t_phys_quantum_theorist": 0,
+      "t_phys_astrophysics_specialist": 0,
+      "t_cs_deep_learning_expert": 0,
+      "t_cs_frontend_web": 0,
+      "t_chem_organic_specialist": 0,
+      "t_chem_physical_inorganic": 0,
+      "t_bio_genetics_specialist": 0,
+      "t_bio_botany_plant_phys": 0,
+      "t_hist_cross_subject_irrelevant": 0
+    }
+  },
+  "scenarios": [
+    {
+      "scenario_id": "scenario_1_quality_vs_compatibility",
+      "title": "Scenario 1: Quality vs Compatibility",
+      "category": "Quality vs Compatibility Trade-off",
+      "purpose": "Test whether a small compatibility advantage (0.96 vs 0.94) competes with a substantial feedback-quality difference (3.2 vs 4.8 stars with 30 reviews).",
+      "candidates": [
+        {
+          "tutor_id": "tutor_1a",
+          "name": "Tutor A (High Quality, High Rating)",
+          "hybrid_score": 0.94,
+          "rating": 4.8,
+          "review_count": 30
+        },
+        {
+          "tutor_id": "tutor_1b",
+          "name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+          "hybrid_score": 0.96,
+          "rating": 3.2,
+          "review_count": 30
+        }
+      ]
+    },
+    {
+      "scenario_id": "scenario_2_cold_start_vs_established",
+      "title": "Scenario 2: Cold Start vs Established Tutor",
+      "category": "Cold Start vs Established Evidence",
+      "purpose": "Test whether a single 5.0 rating (n=1) is appropriately shrunk toward the prior rather than overpowering established 4.7 evidence (n=40).",
+      "candidates": [
+        {
+          "tutor_id": "tutor_2a",
+          "name": "Tutor A (Cold Start, 1 Perfect Review)",
+          "hybrid_score": 0.94,
+          "rating": 5.0,
+          "review_count": 1
+        },
+        {
+          "tutor_id": "tutor_2b",
+          "name": "Tutor B (Established, 40 High Reviews)",
+          "hybrid_score": 0.93,
+          "rating": 4.7,
+          "review_count": 40
+        }
+      ]
+    },
+    {
+      "scenario_id": "scenario_3_new_tutor_no_reviews",
+      "title": "Scenario 3: New Tutor With No Reviews",
+      "category": "Zero-Review Cold Start Behavior",
+      "purpose": "Test cold-start behavior when no feedback exists. The new tutor must receive neutral prior treatment and not suffer an unfair penalty.",
+      "candidates": [
+        {
+          "tutor_id": "tutor_3a",
+          "name": "Tutor A (New Candidate, 0 Reviews)",
+          "hybrid_score": 0.94,
+          "rating": null,
+          "review_count": 0
+        },
+        {
+          "tutor_id": "tutor_3b",
+          "name": "Tutor B (Established Candidate, 30 Reviews)",
+          "hybrid_score": 0.92,
+          "rating": 4.8,
+          "review_count": 30
+        }
+      ]
+    },
+    {
+      "scenario_id": "scenario_4_strong_compat_vs_strong_feedback",
+      "title": "Scenario 4: Strong Compatibility vs Strong Feedback",
+      "category": "Large Compatibility Discrepancy",
+      "purpose": "Test whether feedback can overwhelm a large compatibility advantage (0.98 vs 0.88) when feedback weight increases from moderate to aggressive levels.",
+      "candidates": [
+        {
+          "tutor_id": "tutor_4a",
+          "name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+          "hybrid_score": 0.98,
+          "rating": 3.5,
+          "review_count": 30
+        },
+        {
+          "tutor_id": "tutor_4b",
+          "name": "Tutor B (Lower Compatibility, Near-Perfect Rating)",
+          "hybrid_score": 0.88,
+          "rating": 4.9,
+          "review_count": 30
+        }
+      ]
+    },
+    {
+      "scenario_id": "scenario_5_similar_compat_different_feedback",
+      "title": "Scenario 5: Similar Compatibility, Different Feedback",
+      "category": "Tie-Breaking Under Similar Compatibility",
+      "purpose": "Test whether feedback meaningfully distinguishes candidates when recommendation compatibility is nearly identical (0.91 vs 0.90).",
+      "candidates": [
+        {
+          "tutor_id": "tutor_5a",
+          "name": "Tutor A (Top Feedback, High Volume)",
+          "hybrid_score": 0.91,
+          "rating": 4.9,
+          "review_count": 50
+        },
+        {
+          "tutor_id": "tutor_5b",
+          "name": "Tutor B (Mediocre Feedback, High Volume)",
+          "hybrid_score": 0.9,
+          "rating": 3.8,
+          "review_count": 50
+        }
+      ]
+    },
+    {
+      "scenario_id": "scenario_6_same_rating_different_evidence",
+      "title": "Scenario 6: Same Rating, Different Evidence Strength",
+      "category": "Bayesian Evidence Volume Differentiation",
+      "purpose": "Demonstrate Bayesian shrinkage and evidence confidence when empirical ratings are identical (5.0 stars) but review counts differ vastly (n=1 vs n=40).",
+      "candidates": [
+        {
+          "tutor_id": "tutor_6a",
+          "name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+          "hybrid_score": 0.93,
+          "rating": 5.0,
+          "review_count": 1
+        },
+        {
+          "tutor_id": "tutor_6b",
+          "name": "Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",
+          "hybrid_score": 0.92,
+          "rating": 5.0,
+          "review_count": 40
+        }
+      ]
+    }
+  ],
+  "ranking_flips": [
+    {
+      "scenario_id": "scenario_1_quality_vs_compatibility",
+      "scenario_title": "Scenario 1: Quality vs Compatibility",
+      "feedback_weight": 0.0,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_1b",
+      "baseline_top_name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+      "baseline_hybrid_score": 0.96,
+      "experimental_top_id": "tutor_1b",
+      "experimental_top_name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+      "experimental_score": 0.96,
+      "rank_flipped": false,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.02
+    },
+    {
+      "scenario_id": "scenario_1_quality_vs_compatibility",
+      "scenario_title": "Scenario 1: Quality vs Compatibility",
+      "feedback_weight": 0.05,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_1b",
+      "baseline_top_name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+      "baseline_hybrid_score": 0.96,
+      "experimental_top_id": "tutor_1b",
+      "experimental_top_name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+      "experimental_score": 0.940035,
+      "rank_flipped": false,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.001855
+    },
+    {
+      "scenario_id": "scenario_1_quality_vs_compatibility",
+      "scenario_title": "Scenario 1: Quality vs Compatibility",
+      "feedback_weight": 0.1,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_1b",
+      "baseline_top_name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+      "baseline_hybrid_score": 0.96,
+      "experimental_top_id": "tutor_1a",
+      "experimental_top_name": "Tutor A (High Quality, High Rating)",
+      "experimental_score": 0.93636,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.01629
+    },
+    {
+      "scenario_id": "scenario_1_quality_vs_compatibility",
+      "scenario_title": "Scenario 1: Quality vs Compatibility",
+      "feedback_weight": 0.15,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_1b",
+      "baseline_top_name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+      "baseline_hybrid_score": 0.96,
+      "experimental_top_id": "tutor_1a",
+      "experimental_top_name": "Tutor A (High Quality, High Rating)",
+      "experimental_score": 0.93454,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.034435
+    },
+    {
+      "scenario_id": "scenario_1_quality_vs_compatibility",
+      "scenario_title": "Scenario 1: Quality vs Compatibility",
+      "feedback_weight": 0.2,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_1b",
+      "baseline_top_name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+      "baseline_hybrid_score": 0.96,
+      "experimental_top_id": "tutor_1a",
+      "experimental_top_name": "Tutor A (High Quality, High Rating)",
+      "experimental_score": 0.93272,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.05258
+    },
+    {
+      "scenario_id": "scenario_1_quality_vs_compatibility",
+      "scenario_title": "Scenario 1: Quality vs Compatibility",
+      "feedback_weight": 0.3,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_1b",
+      "baseline_top_name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+      "baseline_hybrid_score": 0.96,
+      "experimental_top_id": "tutor_1a",
+      "experimental_top_name": "Tutor A (High Quality, High Rating)",
+      "experimental_score": 0.92908,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.08887
+    },
+    {
+      "scenario_id": "scenario_1_quality_vs_compatibility",
+      "scenario_title": "Scenario 1: Quality vs Compatibility",
+      "feedback_weight": 0.4,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_1b",
+      "baseline_top_name": "Tutor B (Slightly Higher Compatibility, Lower Rating)",
+      "baseline_hybrid_score": 0.96,
+      "experimental_top_id": "tutor_1a",
+      "experimental_top_name": "Tutor A (High Quality, High Rating)",
+      "experimental_score": 0.92544,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.12516
+    },
+    {
+      "scenario_id": "scenario_2_cold_start_vs_established",
+      "scenario_title": "Scenario 2: Cold Start vs Established Tutor",
+      "feedback_weight": 0.0,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_2a",
+      "baseline_top_name": "Tutor A (Cold Start, 1 Perfect Review)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_2a",
+      "experimental_top_name": "Tutor A (Cold Start, 1 Perfect Review)",
+      "experimental_score": 0.94,
+      "rank_flipped": false,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.01
+    },
+    {
+      "scenario_id": "scenario_2_cold_start_vs_established",
+      "scenario_title": "Scenario 2: Cold Start vs Established Tutor",
+      "feedback_weight": 0.05,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_2a",
+      "baseline_top_name": "Tutor A (Cold Start, 1 Perfect Review)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_2b",
+      "experimental_top_name": "Tutor B (Established, 40 High Reviews)",
+      "experimental_score": 0.928085,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.00071
+    },
+    {
+      "scenario_id": "scenario_2_cold_start_vs_established",
+      "scenario_title": "Scenario 2: Cold Start vs Established Tutor",
+      "feedback_weight": 0.1,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_2a",
+      "baseline_top_name": "Tutor A (Cold Start, 1 Perfect Review)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_2b",
+      "experimental_top_name": "Tutor B (Established, 40 High Reviews)",
+      "experimental_score": 0.92617,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.01142
+    },
+    {
+      "scenario_id": "scenario_2_cold_start_vs_established",
+      "scenario_title": "Scenario 2: Cold Start vs Established Tutor",
+      "feedback_weight": 0.15,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_2a",
+      "baseline_top_name": "Tutor A (Cold Start, 1 Perfect Review)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_2b",
+      "experimental_top_name": "Tutor B (Established, 40 High Reviews)",
+      "experimental_score": 0.924255,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.02213
+    },
+    {
+      "scenario_id": "scenario_2_cold_start_vs_established",
+      "scenario_title": "Scenario 2: Cold Start vs Established Tutor",
+      "feedback_weight": 0.2,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_2a",
+      "baseline_top_name": "Tutor A (Cold Start, 1 Perfect Review)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_2b",
+      "experimental_top_name": "Tutor B (Established, 40 High Reviews)",
+      "experimental_score": 0.92234,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.03284
+    },
+    {
+      "scenario_id": "scenario_2_cold_start_vs_established",
+      "scenario_title": "Scenario 2: Cold Start vs Established Tutor",
+      "feedback_weight": 0.3,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_2a",
+      "baseline_top_name": "Tutor A (Cold Start, 1 Perfect Review)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_2b",
+      "experimental_top_name": "Tutor B (Established, 40 High Reviews)",
+      "experimental_score": 0.91851,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.05426
+    },
+    {
+      "scenario_id": "scenario_2_cold_start_vs_established",
+      "scenario_title": "Scenario 2: Cold Start vs Established Tutor",
+      "feedback_weight": 0.4,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_2a",
+      "baseline_top_name": "Tutor A (Cold Start, 1 Perfect Review)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_2b",
+      "experimental_top_name": "Tutor B (Established, 40 High Reviews)",
+      "experimental_score": 0.91468,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.07568
+    },
+    {
+      "scenario_id": "scenario_3_new_tutor_no_reviews",
+      "scenario_title": "Scenario 3: New Tutor With No Reviews",
+      "feedback_weight": 0.0,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_3a",
+      "baseline_top_name": "Tutor A (New Candidate, 0 Reviews)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_3a",
+      "experimental_top_name": "Tutor A (New Candidate, 0 Reviews)",
+      "experimental_score": 0.94,
+      "rank_flipped": false,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.02
+    },
+    {
+      "scenario_id": "scenario_3_new_tutor_no_reviews",
+      "scenario_title": "Scenario 3: New Tutor With No Reviews",
+      "feedback_weight": 0.05,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_3a",
+      "baseline_top_name": "Tutor A (New Candidate, 0 Reviews)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_3a",
+      "experimental_top_name": "Tutor A (New Candidate, 0 Reviews)",
+      "experimental_score": 0.92425,
+      "rank_flipped": false,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.00507
+    },
+    {
+      "scenario_id": "scenario_3_new_tutor_no_reviews",
+      "scenario_title": "Scenario 3: New Tutor With No Reviews",
+      "feedback_weight": 0.1,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_3a",
+      "baseline_top_name": "Tutor A (New Candidate, 0 Reviews)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_3b",
+      "experimental_top_name": "Tutor B (Established Candidate, 30 Reviews)",
+      "experimental_score": 0.91836,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.00986
+    },
+    {
+      "scenario_id": "scenario_3_new_tutor_no_reviews",
+      "scenario_title": "Scenario 3: New Tutor With No Reviews",
+      "feedback_weight": 0.15,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_3a",
+      "baseline_top_name": "Tutor A (New Candidate, 0 Reviews)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_3b",
+      "experimental_top_name": "Tutor B (Established Candidate, 30 Reviews)",
+      "experimental_score": 0.91754,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.02479
+    },
+    {
+      "scenario_id": "scenario_3_new_tutor_no_reviews",
+      "scenario_title": "Scenario 3: New Tutor With No Reviews",
+      "feedback_weight": 0.2,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_3a",
+      "baseline_top_name": "Tutor A (New Candidate, 0 Reviews)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_3b",
+      "experimental_top_name": "Tutor B (Established Candidate, 30 Reviews)",
+      "experimental_score": 0.91672,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.03972
+    },
+    {
+      "scenario_id": "scenario_3_new_tutor_no_reviews",
+      "scenario_title": "Scenario 3: New Tutor With No Reviews",
+      "feedback_weight": 0.3,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_3a",
+      "baseline_top_name": "Tutor A (New Candidate, 0 Reviews)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_3b",
+      "experimental_top_name": "Tutor B (Established Candidate, 30 Reviews)",
+      "experimental_score": 0.91508,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.06958
+    },
+    {
+      "scenario_id": "scenario_3_new_tutor_no_reviews",
+      "scenario_title": "Scenario 3: New Tutor With No Reviews",
+      "feedback_weight": 0.4,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_3a",
+      "baseline_top_name": "Tutor A (New Candidate, 0 Reviews)",
+      "baseline_hybrid_score": 0.94,
+      "experimental_top_id": "tutor_3b",
+      "experimental_top_name": "Tutor B (Established Candidate, 30 Reviews)",
+      "experimental_score": 0.91344,
+      "rank_flipped": true,
+      "baseline_margin": 0.02,
+      "experimental_margin": 0.09944
+    },
+    {
+      "scenario_id": "scenario_4_strong_compat_vs_strong_feedback",
+      "scenario_title": "Scenario 4: Strong Compatibility vs Strong Feedback",
+      "feedback_weight": 0.0,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_4a",
+      "baseline_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "baseline_hybrid_score": 0.98,
+      "experimental_top_id": "tutor_4a",
+      "experimental_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "experimental_score": 0.98,
+      "rank_flipped": false,
+      "baseline_margin": 0.1,
+      "experimental_margin": 0.1
+    },
+    {
+      "scenario_id": "scenario_4_strong_compat_vs_strong_feedback",
+      "scenario_title": "Scenario 4: Strong Compatibility vs Strong Feedback",
+      "feedback_weight": 0.05,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_4a",
+      "baseline_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "baseline_hybrid_score": 0.98,
+      "experimental_top_id": "tutor_4a",
+      "experimental_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "experimental_score": 0.96225,
+      "rank_flipped": false,
+      "baseline_margin": 0.1,
+      "experimental_margin": 0.08
+    },
+    {
+      "scenario_id": "scenario_4_strong_compat_vs_strong_feedback",
+      "scenario_title": "Scenario 4: Strong Compatibility vs Strong Feedback",
+      "feedback_weight": 0.1,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_4a",
+      "baseline_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "baseline_hybrid_score": 0.98,
+      "experimental_top_id": "tutor_4a",
+      "experimental_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "experimental_score": 0.9445,
+      "rank_flipped": false,
+      "baseline_margin": 0.1,
+      "experimental_margin": 0.06
+    },
+    {
+      "scenario_id": "scenario_4_strong_compat_vs_strong_feedback",
+      "scenario_title": "Scenario 4: Strong Compatibility vs Strong Feedback",
+      "feedback_weight": 0.15,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_4a",
+      "baseline_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "baseline_hybrid_score": 0.98,
+      "experimental_top_id": "tutor_4a",
+      "experimental_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "experimental_score": 0.92675,
+      "rank_flipped": false,
+      "baseline_margin": 0.1,
+      "experimental_margin": 0.04
+    },
+    {
+      "scenario_id": "scenario_4_strong_compat_vs_strong_feedback",
+      "scenario_title": "Scenario 4: Strong Compatibility vs Strong Feedback",
+      "feedback_weight": 0.2,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_4a",
+      "baseline_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "baseline_hybrid_score": 0.98,
+      "experimental_top_id": "tutor_4a",
+      "experimental_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "experimental_score": 0.909,
+      "rank_flipped": false,
+      "baseline_margin": 0.1,
+      "experimental_margin": 0.02
+    },
+    {
+      "scenario_id": "scenario_4_strong_compat_vs_strong_feedback",
+      "scenario_title": "Scenario 4: Strong Compatibility vs Strong Feedback",
+      "feedback_weight": 0.3,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_4a",
+      "baseline_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "baseline_hybrid_score": 0.98,
+      "experimental_top_id": "tutor_4b",
+      "experimental_top_name": "Tutor B (Lower Compatibility, Near-Perfect Rating)",
+      "experimental_score": 0.8935,
+      "rank_flipped": true,
+      "baseline_margin": 0.1,
+      "experimental_margin": 0.02
+    },
+    {
+      "scenario_id": "scenario_4_strong_compat_vs_strong_feedback",
+      "scenario_title": "Scenario 4: Strong Compatibility vs Strong Feedback",
+      "feedback_weight": 0.4,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_4a",
+      "baseline_top_name": "Tutor A (Dominant Compatibility, Mediocre Rating)",
+      "baseline_hybrid_score": 0.98,
+      "experimental_top_id": "tutor_4b",
+      "experimental_top_name": "Tutor B (Lower Compatibility, Near-Perfect Rating)",
+      "experimental_score": 0.898,
+      "rank_flipped": true,
+      "baseline_margin": 0.1,
+      "experimental_margin": 0.06
+    },
+    {
+      "scenario_id": "scenario_5_similar_compat_different_feedback",
+      "scenario_title": "Scenario 5: Similar Compatibility, Different Feedback",
+      "feedback_weight": 0.0,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_5a",
+      "baseline_top_name": "Tutor A (Top Feedback, High Volume)",
+      "baseline_hybrid_score": 0.91,
+      "experimental_top_id": "tutor_5a",
+      "experimental_top_name": "Tutor A (Top Feedback, High Volume)",
+      "experimental_score": 0.91,
+      "rank_flipped": false,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.01
+    },
+    {
+      "scenario_id": "scenario_5_similar_compat_different_feedback",
+      "scenario_title": "Scenario 5: Similar Compatibility, Different Feedback",
+      "feedback_weight": 0.05,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_5a",
+      "baseline_top_name": "Tutor A (Top Feedback, High Volume)",
+      "baseline_hybrid_score": 0.91,
+      "experimental_top_id": "tutor_5a",
+      "experimental_top_name": "Tutor A (Top Feedback, High Volume)",
+      "experimental_score": 0.91166,
+      "rank_flipped": false,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.022
+    },
+    {
+      "scenario_id": "scenario_5_similar_compat_different_feedback",
+      "scenario_title": "Scenario 5: Similar Compatibility, Different Feedback",
+      "feedback_weight": 0.1,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_5a",
+      "baseline_top_name": "Tutor A (Top Feedback, High Volume)",
+      "baseline_hybrid_score": 0.91,
+      "experimental_top_id": "tutor_5a",
+      "experimental_top_name": "Tutor A (Top Feedback, High Volume)",
+      "experimental_score": 0.91332,
+      "rank_flipped": false,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.034
+    },
+    {
+      "scenario_id": "scenario_5_similar_compat_different_feedback",
+      "scenario_title": "Scenario 5: Similar Compatibility, Different Feedback",
+      "feedback_weight": 0.15,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_5a",
+      "baseline_top_name": "Tutor A (Top Feedback, High Volume)",
+      "baseline_hybrid_score": 0.91,
+      "experimental_top_id": "tutor_5a",
+      "experimental_top_name": "Tutor A (Top Feedback, High Volume)",
+      "experimental_score": 0.91498,
+      "rank_flipped": false,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.046
+    },
+    {
+      "scenario_id": "scenario_5_similar_compat_different_feedback",
+      "scenario_title": "Scenario 5: Similar Compatibility, Different Feedback",
+      "feedback_weight": 0.2,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_5a",
+      "baseline_top_name": "Tutor A (Top Feedback, High Volume)",
+      "baseline_hybrid_score": 0.91,
+      "experimental_top_id": "tutor_5a",
+      "experimental_top_name": "Tutor A (Top Feedback, High Volume)",
+      "experimental_score": 0.91664,
+      "rank_flipped": false,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.058
+    },
+    {
+      "scenario_id": "scenario_5_similar_compat_different_feedback",
+      "scenario_title": "Scenario 5: Similar Compatibility, Different Feedback",
+      "feedback_weight": 0.3,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_5a",
+      "baseline_top_name": "Tutor A (Top Feedback, High Volume)",
+      "baseline_hybrid_score": 0.91,
+      "experimental_top_id": "tutor_5a",
+      "experimental_top_name": "Tutor A (Top Feedback, High Volume)",
+      "experimental_score": 0.91996,
+      "rank_flipped": false,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.082
+    },
+    {
+      "scenario_id": "scenario_5_similar_compat_different_feedback",
+      "scenario_title": "Scenario 5: Similar Compatibility, Different Feedback",
+      "feedback_weight": 0.4,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_5a",
+      "baseline_top_name": "Tutor A (Top Feedback, High Volume)",
+      "baseline_hybrid_score": 0.91,
+      "experimental_top_id": "tutor_5a",
+      "experimental_top_name": "Tutor A (Top Feedback, High Volume)",
+      "experimental_score": 0.92328,
+      "rank_flipped": false,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.106
+    },
+    {
+      "scenario_id": "scenario_6_same_rating_different_evidence",
+      "scenario_title": "Scenario 6: Same Rating, Different Evidence Strength",
+      "feedback_weight": 0.0,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_6a",
+      "baseline_top_name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+      "baseline_hybrid_score": 0.93,
+      "experimental_top_id": "tutor_6a",
+      "experimental_top_name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+      "experimental_score": 0.93,
+      "rank_flipped": false,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.01
+    },
+    {
+      "scenario_id": "scenario_6_same_rating_different_evidence",
+      "scenario_title": "Scenario 6: Same Rating, Different Evidence Strength",
+      "feedback_weight": 0.05,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_6a",
+      "baseline_top_name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+      "baseline_hybrid_score": 0.93,
+      "experimental_top_id": "tutor_6b",
+      "experimental_top_name": "Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",
+      "experimental_score": 0.921915,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.00404
+    },
+    {
+      "scenario_id": "scenario_6_same_rating_different_evidence",
+      "scenario_title": "Scenario 6: Same Rating, Different Evidence Strength",
+      "feedback_weight": 0.1,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_6a",
+      "baseline_top_name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+      "baseline_hybrid_score": 0.93,
+      "experimental_top_id": "tutor_6b",
+      "experimental_top_name": "Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",
+      "experimental_score": 0.92383,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.01808
+    },
+    {
+      "scenario_id": "scenario_6_same_rating_different_evidence",
+      "scenario_title": "Scenario 6: Same Rating, Different Evidence Strength",
+      "feedback_weight": 0.15,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_6a",
+      "baseline_top_name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+      "baseline_hybrid_score": 0.93,
+      "experimental_top_id": "tutor_6b",
+      "experimental_top_name": "Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",
+      "experimental_score": 0.925745,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.03212
+    },
+    {
+      "scenario_id": "scenario_6_same_rating_different_evidence",
+      "scenario_title": "Scenario 6: Same Rating, Different Evidence Strength",
+      "feedback_weight": 0.2,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_6a",
+      "baseline_top_name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+      "baseline_hybrid_score": 0.93,
+      "experimental_top_id": "tutor_6b",
+      "experimental_top_name": "Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",
+      "experimental_score": 0.92766,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.04616
+    },
+    {
+      "scenario_id": "scenario_6_same_rating_different_evidence",
+      "scenario_title": "Scenario 6: Same Rating, Different Evidence Strength",
+      "feedback_weight": 0.3,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_6a",
+      "baseline_top_name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+      "baseline_hybrid_score": 0.93,
+      "experimental_top_id": "tutor_6b",
+      "experimental_top_name": "Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",
+      "experimental_score": 0.93149,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.07424
+    },
+    {
+      "scenario_id": "scenario_6_same_rating_different_evidence",
+      "scenario_title": "Scenario 6: Same Rating, Different Evidence Strength",
+      "feedback_weight": 0.4,
+      "smoothing_m": 5.0,
+      "baseline_top_id": "tutor_6a",
+      "baseline_top_name": "Tutor A (1 Review, 5.0 Stars, High Compatibility)",
+      "baseline_hybrid_score": 0.93,
+      "experimental_top_id": "tutor_6b",
+      "experimental_top_name": "Tutor B (40 Reviews, 5.0 Stars, Slightly Lower Compatibility)",
+      "experimental_score": 0.93532,
+      "rank_flipped": true,
+      "baseline_margin": 0.01,
+      "experimental_margin": 0.10232
+    }
+  ],
+  "cold_start": [
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 5.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.25,
+      "feedback_score": 0.8125,
+      "confidence": 0.5,
+      "distance_from_raw": 0.75,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 5.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.5,
+      "feedback_score": 0.875,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 5.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.75,
+      "feedback_score": 0.9375,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 5.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.8636,
+      "feedback_score": 0.9659,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.1364,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 5.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.9062,
+      "feedback_score": 0.9766,
+      "confidence": 0.9375,
+      "distance_from_raw": 0.0938,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 5.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.9286,
+      "feedback_score": 0.9821,
+      "confidence": 0.9524,
+      "distance_from_raw": 0.0714,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 5.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.9516,
+      "feedback_score": 0.9879,
+      "confidence": 0.9677,
+      "distance_from_raw": 0.0484,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 5.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.9634,
+      "feedback_score": 0.9909,
+      "confidence": 0.9756,
+      "distance_from_raw": 0.0366,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 5.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.9706,
+      "feedback_score": 0.9926,
+      "confidence": 0.9804,
+      "distance_from_raw": 0.0294,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 4.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.0,
+      "feedback_score": 0.75,
+      "confidence": 0.5,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 4.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.1667,
+      "feedback_score": 0.7917,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.3333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 4.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.3333,
+      "feedback_score": 0.8333,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 4.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.4091,
+      "feedback_score": 0.8523,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.0909,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 4.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.4375,
+      "feedback_score": 0.8594,
+      "confidence": 0.9375,
+      "distance_from_raw": 0.0625,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 4.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.4524,
+      "feedback_score": 0.8631,
+      "confidence": 0.9524,
+      "distance_from_raw": 0.0476,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 4.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.4677,
+      "feedback_score": 0.8669,
+      "confidence": 0.9677,
+      "distance_from_raw": 0.0323,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 4.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.4756,
+      "feedback_score": 0.8689,
+      "confidence": 0.9756,
+      "distance_from_raw": 0.0244,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 4.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.4804,
+      "feedback_score": 0.8701,
+      "confidence": 0.9804,
+      "distance_from_raw": 0.0196,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 4.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.75,
+      "feedback_score": 0.6875,
+      "confidence": 0.5,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 4.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8333,
+      "feedback_score": 0.7083,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 4.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9167,
+      "feedback_score": 0.7292,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.0833,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 4.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9545,
+      "feedback_score": 0.7386,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.0455,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 4.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9688,
+      "feedback_score": 0.7422,
+      "confidence": 0.9375,
+      "distance_from_raw": 0.0312,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 4.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9762,
+      "feedback_score": 0.744,
+      "confidence": 0.9524,
+      "distance_from_raw": 0.0238,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 4.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9839,
+      "feedback_score": 0.746,
+      "confidence": 0.9677,
+      "distance_from_raw": 0.0161,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 4.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9878,
+      "feedback_score": 0.747,
+      "confidence": 0.9756,
+      "distance_from_raw": 0.0122,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 4.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9902,
+      "feedback_score": 0.7475,
+      "confidence": 0.9804,
+      "distance_from_raw": 0.0098,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 3.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.5,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 3.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 3.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 3.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 3.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.9375,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 3.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.9524,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 3.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.9677,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 3.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.9756,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 3.5,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.9804,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 3.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.25,
+      "feedback_score": 0.5625,
+      "confidence": 0.5,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 3.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.1667,
+      "feedback_score": 0.5417,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 3.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0833,
+      "feedback_score": 0.5208,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.0833,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 3.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0455,
+      "feedback_score": 0.5114,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.0455,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 3.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0312,
+      "feedback_score": 0.5078,
+      "confidence": 0.9375,
+      "distance_from_raw": 0.0312,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 3.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0238,
+      "feedback_score": 0.506,
+      "confidence": 0.9524,
+      "distance_from_raw": 0.0238,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 3.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0161,
+      "feedback_score": 0.504,
+      "confidence": 0.9677,
+      "distance_from_raw": 0.0161,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 3.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0122,
+      "feedback_score": 0.503,
+      "confidence": 0.9756,
+      "distance_from_raw": 0.0122,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 3.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0098,
+      "feedback_score": 0.5025,
+      "confidence": 0.9804,
+      "distance_from_raw": 0.0098,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 2.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.75,
+      "feedback_score": 0.4375,
+      "confidence": 0.5,
+      "distance_from_raw": 0.75,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 2.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.5,
+      "feedback_score": 0.375,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 2.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.25,
+      "feedback_score": 0.3125,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 2.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.1364,
+      "feedback_score": 0.2841,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.1364,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 2.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.0938,
+      "feedback_score": 0.2734,
+      "confidence": 0.9375,
+      "distance_from_raw": 0.0938,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 2.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.0714,
+      "feedback_score": 0.2679,
+      "confidence": 0.9524,
+      "distance_from_raw": 0.0714,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 2.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.0484,
+      "feedback_score": 0.2621,
+      "confidence": 0.9677,
+      "distance_from_raw": 0.0484,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 2.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.0366,
+      "feedback_score": 0.2591,
+      "confidence": 0.9756,
+      "distance_from_raw": 0.0366,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 2.0,
+      "smoothing_m": 1.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.0294,
+      "feedback_score": 0.2574,
+      "confidence": 0.9804,
+      "distance_from_raw": 0.0294,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 5.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.75,
+      "feedback_score": 0.6875,
+      "confidence": 0.1667,
+      "distance_from_raw": 1.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 5.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9286,
+      "feedback_score": 0.7321,
+      "confidence": 0.2857,
+      "distance_from_raw": 1.0714,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 5.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.25,
+      "feedback_score": 0.8125,
+      "confidence": 0.5,
+      "distance_from_raw": 0.75,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 5.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.5,
+      "feedback_score": 0.875,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 5.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.625,
+      "feedback_score": 0.9062,
+      "confidence": 0.75,
+      "distance_from_raw": 0.375,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 5.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.7,
+      "feedback_score": 0.925,
+      "confidence": 0.8,
+      "distance_from_raw": 0.3,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 5.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.7857,
+      "feedback_score": 0.9464,
+      "confidence": 0.8571,
+      "distance_from_raw": 0.2143,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 5.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.8333,
+      "feedback_score": 0.9583,
+      "confidence": 0.8889,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 5.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.8636,
+      "feedback_score": 0.9659,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.1364,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 4.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.6667,
+      "feedback_score": 0.6667,
+      "confidence": 0.1667,
+      "distance_from_raw": 0.8333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 4.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.7857,
+      "feedback_score": 0.6964,
+      "confidence": 0.2857,
+      "distance_from_raw": 0.7143,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 4.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.0,
+      "feedback_score": 0.75,
+      "confidence": 0.5,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 4.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.1667,
+      "feedback_score": 0.7917,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.3333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 4.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.25,
+      "feedback_score": 0.8125,
+      "confidence": 0.75,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 4.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.3,
+      "feedback_score": 0.825,
+      "confidence": 0.8,
+      "distance_from_raw": 0.2,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 4.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.3571,
+      "feedback_score": 0.8393,
+      "confidence": 0.8571,
+      "distance_from_raw": 0.1429,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 4.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.3889,
+      "feedback_score": 0.8472,
+      "confidence": 0.8889,
+      "distance_from_raw": 0.1111,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 4.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.4091,
+      "feedback_score": 0.8523,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.0909,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 4.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5833,
+      "feedback_score": 0.6458,
+      "confidence": 0.1667,
+      "distance_from_raw": 0.4167,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 4.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.6429,
+      "feedback_score": 0.6607,
+      "confidence": 0.2857,
+      "distance_from_raw": 0.3571,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 4.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.75,
+      "feedback_score": 0.6875,
+      "confidence": 0.5,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 4.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8333,
+      "feedback_score": 0.7083,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 4.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.875,
+      "feedback_score": 0.7188,
+      "confidence": 0.75,
+      "distance_from_raw": 0.125,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 4.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9,
+      "feedback_score": 0.725,
+      "confidence": 0.8,
+      "distance_from_raw": 0.1,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 4.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9286,
+      "feedback_score": 0.7321,
+      "confidence": 0.8571,
+      "distance_from_raw": 0.0714,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 4.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9444,
+      "feedback_score": 0.7361,
+      "confidence": 0.8889,
+      "distance_from_raw": 0.0556,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 4.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9545,
+      "feedback_score": 0.7386,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.0455,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 3.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.1667,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 3.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.2857,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 3.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.5,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 3.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 3.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.75,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 3.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.8,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 3.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.8571,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 3.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.8889,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 3.5,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 3.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.4167,
+      "feedback_score": 0.6042,
+      "confidence": 0.1667,
+      "distance_from_raw": 0.4167,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 3.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.3571,
+      "feedback_score": 0.5893,
+      "confidence": 0.2857,
+      "distance_from_raw": 0.3571,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 3.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.25,
+      "feedback_score": 0.5625,
+      "confidence": 0.5,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 3.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.1667,
+      "feedback_score": 0.5417,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 3.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.125,
+      "feedback_score": 0.5312,
+      "confidence": 0.75,
+      "distance_from_raw": 0.125,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 3.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.1,
+      "feedback_score": 0.525,
+      "confidence": 0.8,
+      "distance_from_raw": 0.1,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 3.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0714,
+      "feedback_score": 0.5179,
+      "confidence": 0.8571,
+      "distance_from_raw": 0.0714,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 3.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0556,
+      "feedback_score": 0.5139,
+      "confidence": 0.8889,
+      "distance_from_raw": 0.0556,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 3.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0455,
+      "feedback_score": 0.5114,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.0455,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 2.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.25,
+      "feedback_score": 0.5625,
+      "confidence": 0.1667,
+      "distance_from_raw": 1.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 2.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0714,
+      "feedback_score": 0.5179,
+      "confidence": 0.2857,
+      "distance_from_raw": 1.0714,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 2.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.75,
+      "feedback_score": 0.4375,
+      "confidence": 0.5,
+      "distance_from_raw": 0.75,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 2.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.5,
+      "feedback_score": 0.375,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 2.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.375,
+      "feedback_score": 0.3438,
+      "confidence": 0.75,
+      "distance_from_raw": 0.375,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 2.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.3,
+      "feedback_score": 0.325,
+      "confidence": 0.8,
+      "distance_from_raw": 0.3,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 2.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.2143,
+      "feedback_score": 0.3036,
+      "confidence": 0.8571,
+      "distance_from_raw": 0.2143,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 2.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.1667,
+      "feedback_score": 0.2917,
+      "confidence": 0.8889,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 2.0,
+      "smoothing_m": 5.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.1364,
+      "feedback_score": 0.2841,
+      "confidence": 0.9091,
+      "distance_from_raw": 0.1364,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 5.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.6364,
+      "feedback_score": 0.6591,
+      "confidence": 0.0909,
+      "distance_from_raw": 1.3636,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 5.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.75,
+      "feedback_score": 0.6875,
+      "confidence": 0.1667,
+      "distance_from_raw": 1.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 5.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.0,
+      "feedback_score": 0.75,
+      "confidence": 0.3333,
+      "distance_from_raw": 1.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 5.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.25,
+      "feedback_score": 0.8125,
+      "confidence": 0.5,
+      "distance_from_raw": 0.75,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 5.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.4,
+      "feedback_score": 0.85,
+      "confidence": 0.6,
+      "distance_from_raw": 0.6,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 5.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.5,
+      "feedback_score": 0.875,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 5.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.625,
+      "feedback_score": 0.9062,
+      "confidence": 0.75,
+      "distance_from_raw": 0.375,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 5.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.7,
+      "feedback_score": 0.925,
+      "confidence": 0.8,
+      "distance_from_raw": 0.3,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 5.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.75,
+      "feedback_score": 0.9375,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 4.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5909,
+      "feedback_score": 0.6477,
+      "confidence": 0.0909,
+      "distance_from_raw": 0.9091,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 4.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.6667,
+      "feedback_score": 0.6667,
+      "confidence": 0.1667,
+      "distance_from_raw": 0.8333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 4.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8333,
+      "feedback_score": 0.7083,
+      "confidence": 0.3333,
+      "distance_from_raw": 0.6667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 4.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.0,
+      "feedback_score": 0.75,
+      "confidence": 0.5,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 4.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.1,
+      "feedback_score": 0.775,
+      "confidence": 0.6,
+      "distance_from_raw": 0.4,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 4.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.1667,
+      "feedback_score": 0.7917,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.3333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 4.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.25,
+      "feedback_score": 0.8125,
+      "confidence": 0.75,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 4.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.3,
+      "feedback_score": 0.825,
+      "confidence": 0.8,
+      "distance_from_raw": 0.2,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 4.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.3333,
+      "feedback_score": 0.8333,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 4.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5455,
+      "feedback_score": 0.6364,
+      "confidence": 0.0909,
+      "distance_from_raw": 0.4545,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 4.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5833,
+      "feedback_score": 0.6458,
+      "confidence": 0.1667,
+      "distance_from_raw": 0.4167,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 4.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.6667,
+      "feedback_score": 0.6667,
+      "confidence": 0.3333,
+      "distance_from_raw": 0.3333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 4.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.75,
+      "feedback_score": 0.6875,
+      "confidence": 0.5,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 4.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8,
+      "feedback_score": 0.7,
+      "confidence": 0.6,
+      "distance_from_raw": 0.2,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 4.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8333,
+      "feedback_score": 0.7083,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 4.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.875,
+      "feedback_score": 0.7188,
+      "confidence": 0.75,
+      "distance_from_raw": 0.125,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 4.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9,
+      "feedback_score": 0.725,
+      "confidence": 0.8,
+      "distance_from_raw": 0.1,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 4.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9167,
+      "feedback_score": 0.7292,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.0833,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 3.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0909,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 3.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.1667,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 3.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.3333,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 3.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.5,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 3.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.6,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 3.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 3.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.75,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 3.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.8,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 3.5,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 3.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.4545,
+      "feedback_score": 0.6136,
+      "confidence": 0.0909,
+      "distance_from_raw": 0.4545,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 3.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.4167,
+      "feedback_score": 0.6042,
+      "confidence": 0.1667,
+      "distance_from_raw": 0.4167,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 3.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.3333,
+      "feedback_score": 0.5833,
+      "confidence": 0.3333,
+      "distance_from_raw": 0.3333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 3.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.25,
+      "feedback_score": 0.5625,
+      "confidence": 0.5,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 3.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.2,
+      "feedback_score": 0.55,
+      "confidence": 0.6,
+      "distance_from_raw": 0.2,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 3.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.1667,
+      "feedback_score": 0.5417,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 3.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.125,
+      "feedback_score": 0.5312,
+      "confidence": 0.75,
+      "distance_from_raw": 0.125,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 3.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.1,
+      "feedback_score": 0.525,
+      "confidence": 0.8,
+      "distance_from_raw": 0.1,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 3.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0833,
+      "feedback_score": 0.5208,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.0833,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 2.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.3636,
+      "feedback_score": 0.5909,
+      "confidence": 0.0909,
+      "distance_from_raw": 1.3636,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 2.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.25,
+      "feedback_score": 0.5625,
+      "confidence": 0.1667,
+      "distance_from_raw": 1.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 2.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0,
+      "feedback_score": 0.5,
+      "confidence": 0.3333,
+      "distance_from_raw": 1.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 2.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.75,
+      "feedback_score": 0.4375,
+      "confidence": 0.5,
+      "distance_from_raw": 0.75,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 2.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.6,
+      "feedback_score": 0.4,
+      "confidence": 0.6,
+      "distance_from_raw": 0.6,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 2.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.5,
+      "feedback_score": 0.375,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 2.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.375,
+      "feedback_score": 0.3438,
+      "confidence": 0.75,
+      "distance_from_raw": 0.375,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 2.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.3,
+      "feedback_score": 0.325,
+      "confidence": 0.8,
+      "distance_from_raw": 0.3,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 2.0,
+      "smoothing_m": 10.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.25,
+      "feedback_score": 0.3125,
+      "confidence": 0.8333,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 5.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5714,
+      "feedback_score": 0.6429,
+      "confidence": 0.0476,
+      "distance_from_raw": 1.4286,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 5.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.6364,
+      "feedback_score": 0.6591,
+      "confidence": 0.0909,
+      "distance_from_raw": 1.3636,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 5.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8,
+      "feedback_score": 0.7,
+      "confidence": 0.2,
+      "distance_from_raw": 1.2,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 5.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.0,
+      "feedback_score": 0.75,
+      "confidence": 0.3333,
+      "distance_from_raw": 1.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 5.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.1429,
+      "feedback_score": 0.7857,
+      "confidence": 0.4286,
+      "distance_from_raw": 0.8571,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 5.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.25,
+      "feedback_score": 0.8125,
+      "confidence": 0.5,
+      "distance_from_raw": 0.75,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 5.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.4,
+      "feedback_score": 0.85,
+      "confidence": 0.6,
+      "distance_from_raw": 0.6,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 5.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.5,
+      "feedback_score": 0.875,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 5.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.5714,
+      "feedback_score": 0.8929,
+      "confidence": 0.7143,
+      "distance_from_raw": 0.4286,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 4.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5476,
+      "feedback_score": 0.6369,
+      "confidence": 0.0476,
+      "distance_from_raw": 0.9524,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 4.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5909,
+      "feedback_score": 0.6477,
+      "confidence": 0.0909,
+      "distance_from_raw": 0.9091,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 4.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.7,
+      "feedback_score": 0.675,
+      "confidence": 0.2,
+      "distance_from_raw": 0.8,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 4.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8333,
+      "feedback_score": 0.7083,
+      "confidence": 0.3333,
+      "distance_from_raw": 0.6667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 4.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.9286,
+      "feedback_score": 0.7321,
+      "confidence": 0.4286,
+      "distance_from_raw": 0.5714,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 4.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.0,
+      "feedback_score": 0.75,
+      "confidence": 0.5,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 4.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.1,
+      "feedback_score": 0.775,
+      "confidence": 0.6,
+      "distance_from_raw": 0.4,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 4.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.1667,
+      "feedback_score": 0.7917,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.3333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 4.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 4.2143,
+      "feedback_score": 0.8036,
+      "confidence": 0.7143,
+      "distance_from_raw": 0.2857,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 4.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5238,
+      "feedback_score": 0.631,
+      "confidence": 0.0476,
+      "distance_from_raw": 0.4762,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 4.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5455,
+      "feedback_score": 0.6364,
+      "confidence": 0.0909,
+      "distance_from_raw": 0.4545,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 4.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.6,
+      "feedback_score": 0.65,
+      "confidence": 0.2,
+      "distance_from_raw": 0.4,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 4.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.6667,
+      "feedback_score": 0.6667,
+      "confidence": 0.3333,
+      "distance_from_raw": 0.3333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 4.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.7143,
+      "feedback_score": 0.6786,
+      "confidence": 0.4286,
+      "distance_from_raw": 0.2857,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 4.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.75,
+      "feedback_score": 0.6875,
+      "confidence": 0.5,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 4.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8,
+      "feedback_score": 0.7,
+      "confidence": 0.6,
+      "distance_from_raw": 0.2,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 4.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8333,
+      "feedback_score": 0.7083,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 4.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.8571,
+      "feedback_score": 0.7143,
+      "confidence": 0.7143,
+      "distance_from_raw": 0.1429,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 3.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0476,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 3.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0909,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 3.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.2,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 3.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.3333,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 3.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.4286,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 3.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.5,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 3.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.6,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 3.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 3.5,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.7143,
+      "distance_from_raw": 0.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 3.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.4762,
+      "feedback_score": 0.619,
+      "confidence": 0.0476,
+      "distance_from_raw": 0.4762,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 3.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.4545,
+      "feedback_score": 0.6136,
+      "confidence": 0.0909,
+      "distance_from_raw": 0.4545,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 3.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.4,
+      "feedback_score": 0.6,
+      "confidence": 0.2,
+      "distance_from_raw": 0.4,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 3.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.3333,
+      "feedback_score": 0.5833,
+      "confidence": 0.3333,
+      "distance_from_raw": 0.3333,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 3.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.2857,
+      "feedback_score": 0.5714,
+      "confidence": 0.4286,
+      "distance_from_raw": 0.2857,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 3.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.25,
+      "feedback_score": 0.5625,
+      "confidence": 0.5,
+      "distance_from_raw": 0.25,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 3.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.2,
+      "feedback_score": 0.55,
+      "confidence": 0.6,
+      "distance_from_raw": 0.2,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 3.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.1667,
+      "feedback_score": 0.5417,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.1667,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 3.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.1429,
+      "feedback_score": 0.5357,
+      "confidence": 0.7143,
+      "distance_from_raw": 0.1429,
+      "has_reviews": true
+    },
+    {
+      "review_count": 0,
+      "raw_rating": "None (Cold Start)",
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.5,
+      "feedback_score": 0.625,
+      "confidence": 0.0,
+      "distance_from_raw": 0.0,
+      "has_reviews": false
+    },
+    {
+      "review_count": 1,
+      "raw_rating": 2.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.4286,
+      "feedback_score": 0.6071,
+      "confidence": 0.0476,
+      "distance_from_raw": 1.4286,
+      "has_reviews": true
+    },
+    {
+      "review_count": 2,
+      "raw_rating": 2.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.3636,
+      "feedback_score": 0.5909,
+      "confidence": 0.0909,
+      "distance_from_raw": 1.3636,
+      "has_reviews": true
+    },
+    {
+      "review_count": 5,
+      "raw_rating": 2.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.2,
+      "feedback_score": 0.55,
+      "confidence": 0.2,
+      "distance_from_raw": 1.2,
+      "has_reviews": true
+    },
+    {
+      "review_count": 10,
+      "raw_rating": 2.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 3.0,
+      "feedback_score": 0.5,
+      "confidence": 0.3333,
+      "distance_from_raw": 1.0,
+      "has_reviews": true
+    },
+    {
+      "review_count": 15,
+      "raw_rating": 2.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.8571,
+      "feedback_score": 0.4643,
+      "confidence": 0.4286,
+      "distance_from_raw": 0.8571,
+      "has_reviews": true
+    },
+    {
+      "review_count": 20,
+      "raw_rating": 2.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.75,
+      "feedback_score": 0.4375,
+      "confidence": 0.5,
+      "distance_from_raw": 0.75,
+      "has_reviews": true
+    },
+    {
+      "review_count": 30,
+      "raw_rating": 2.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.6,
+      "feedback_score": 0.4,
+      "confidence": 0.6,
+      "distance_from_raw": 0.6,
+      "has_reviews": true
+    },
+    {
+      "review_count": 40,
+      "raw_rating": 2.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.5,
+      "feedback_score": 0.375,
+      "confidence": 0.6667,
+      "distance_from_raw": 0.5,
+      "has_reviews": true
+    },
+    {
+      "review_count": 50,
+      "raw_rating": 2.0,
+      "smoothing_m": 20.0,
+      "global_prior": 3.5,
+      "adjusted_rating": 2.4286,
+      "feedback_score": 0.3571,
+      "confidence": 0.7143,
+      "distance_from_raw": 0.4286,
+      "has_reviews": true
+    }
+  ],
+  "limitations": [
+    {
+      "category": "Controlled Synthetic Benchmark",
+      "description": "The dataset contains 8 curated queries and 12 candidate tutors designed to rigorously isolate mathematical properties of dense semantic retrieval, topic overlap, and Bayesian shrinkage. It does not represent uncurated production logs or a generalized tutor population."
+    },
+    {
+      "category": "Static Feedback Representation",
+      "description": "Ratings and review counts represent static snapshots rather than sequential temporal event streams. User behavioral dynamics such as position bias and rating submission latency are not simulated."
+    },
+    {
+      "category": "Offline Research Isolation",
+      "description": "The feedback-aware scoring mechanism (Configuration E) is strictly an offline research experiment. The active production matching engine does not currently incorporate historical ratings into candidate ranking."
+    },
+    {
+      "category": "Relevance Annotation Curated by Domain Standards",
+      "description": "Ground truth relevance judgments were systematically assigned against formal CBSE/State Board and university curricula standards. Online user satisfaction may vary based on subjective interpersonal fit."
+    }
+  ]
+}
